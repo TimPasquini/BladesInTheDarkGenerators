@@ -31,8 +31,7 @@ infastructure_type = json_retreiver("infastructure_type.json")
 # Details - random supporting details
 details = json_retreiver("details.json")
 
-print(f"This street is {random.choice(moods)}.")
-print(f"{random.choice(sights).capitalize()} catches your eye.")
-print(f"You hear {random.choice(sounds)} and smell {random.choice(smells)}.")
-print(f"The {random.choice(infastructure_type)} is primarily used for {random.choice(use)}.")
+print(f"This {random.choice(moods)} {random.choice(infastructure_type)} is primarily used for {random.choice(use)}.")
+print(f"(A/An) {random.choice(sights).capitalize()} catch(es) your eye.")
+print(f"You hear {random.choice(sounds)} and smell {random.choice(smells)} on the air.")
 print(f"You can't help but notice {random.choice(details)} and {random.choice(details)}.")
