@@ -16,3 +16,10 @@ the terminal to decide which table to roll from.
 People:
 Get a random NPC from the data on pages 302 and 303. Use the arguments "rare" or "common" in the terminal to 
 decide which profession table to roll from.
+
+Demons:
+Creates a random demon out of the data on page 304. 
+
+Ghosts:
+Creates a random ghost using the ghost tables on page 304. Also uses the names/aliases from page 303 to give
+a name to the ghost.
