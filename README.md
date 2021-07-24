@@ -12,3 +12,7 @@ Get a random street description using the information from page 300 of the Blade
 Buildings:
 Get a random building description using the information from page 301. Use the arguments "rare" or "common" in
 the terminal to decide which table to roll from.
+
+People:
+Get a random NPC from the data on pages 302 and 303. Use the arguments "rare" or "common" in the terminal to 
+decide which profession table to roll from.
