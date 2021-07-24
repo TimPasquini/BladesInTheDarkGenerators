@@ -14,6 +14,12 @@ def json_retreiver(json_filename):
         return json.load(f)
 
 
+def rc(variable):
+    """rc = random choice. Picks a random item from the list and returns
+    it. This is mostly to shorten up the variables in the print command"""
+    return random.choice(variable)
+
+
 # Establish lists from json dumps
 moods = json_retreiver("moods.json")
 sights = json_retreiver("sights.json")
@@ -24,10 +30,10 @@ infastructure_type = json_retreiver("infastructure_type.json")
 details = json_retreiver("details.json")
 
 print(
-    f"This {random.choice(moods)} {random.choice(infastructure_type)} is primarily used for {random.choice(use)}."
+    f"This {rc(moods)} {rc(infastructure_type)} is primarily used for {rc(use)}."
 )
-print(f"(A/An) {random.choice(sights).capitalize()} catch(es) your eye.")
-print(f"You hear {random.choice(sounds)} and smell {random.choice(smells)} on the air.")
+print(f"(A/An) {rc(sights).capitalize()} catch(es) your eye.")
+print(f"You hear {rc(sounds)} and smell {rc(smells)} on the air.")
 print(
-    f"You can't help but notice {random.choice(details)} and {random.choice(details)}."
+    f"You can't help but notice {rc(details)} and {rc(details)}."
 )

@@ -14,6 +14,12 @@ def json_retreiver(json_filename):
         return json.load(f)
 
 
+def rc(variable):
+    """rc = random choice. Picks a random item from the list and returns
+    it. This is mostly to shorten up the variables in the print command"""
+    return random.choice(variable)
+
+
 demon_name = json_retreiver('demon_names.json')
 demon_features = json_retreiver('demon_features.json')
 demonic_aspect = json_retreiver('demonic_aspect.json')
@@ -22,8 +28,8 @@ demon_desire = json_retreiver('demon_desire.json')
 
 print(
     f"""
-    Tremble at the sight of {random.choice(demon_name)}!
-    Behold their {random.choice(demon_features)} and {random.choice(demon_features)}.
-    This {random.choice(demonic_affinity)} demon has a {random.choice(demonic_aspect)} aspect.
-    This demon desires {random.choice(demon_desire)} above all else!
+    Tremble at the sight of {rc(demon_name)}!
+    Behold their {rc(demon_features)} and {rc(demon_features)}.
+    This {rc(demonic_affinity)} demon has a {rc(demonic_aspect)} aspect.
+    This demon desires {rc(demon_desire)} above all else!
     """)

@@ -15,6 +15,12 @@ def json_retreiver(json_filename):
         return json.load(f)
 
 
+def rc(variable):
+    """rc = random choice. Picks a random item from the list and returns
+    it. This is mostly to shorten up the variables in the print command"""
+    return random.choice(variable)
+
+
 heritage = json_retreiver("heritage.json")
 gender = json_retreiver("gender.json")
 appearance = json_retreiver("appearance.json")
@@ -36,19 +42,19 @@ chosen_person = sys.argv[1]
 if chosen_person == "rare":
     print(
         f"""
-        {random.choice(first_name)} '{random.choice(aliases)}' {random.choice(family_name)}.
-        A/An {random.choice(appearance)} {random.choice(gender)} {random.choices(heritage, weights=[50, 10, 5, 5, 5, 5])[0]} wearing/using a/an {random.choice(style)}.
-        They work as a {random.choice(rare_profession)} and use {random.choice(methods)} to try and gain/cause {random.choice(goals)}.
-        Overall, they seem {random.choice(traits)} but are also {random.choice(quirks)} They are interested in {random.choice(interests)}.
+        {rc(first_name)} '{rc(aliases)}' {rc(family_name)}.
+        A/An {rc(appearance)} {rc(gender)} {random.choices(heritage, weights=[50, 10, 5, 5, 5, 5])[0]} wearing/using a/an {rc(style)}.
+        They work as a {rc(rare_profession)} and use {rc(methods)} to try and gain/cause {rc(goals)}.
+        Overall, they seem {rc(traits)} but are also {rc(quirks)} They are interested in {rc(interests)}.
         """
     )
 elif chosen_person == "common":
     print(
         f"""
-        {random.choice(first_name)} '{random.choice(aliases)}' {random.choice(family_name)}.
-        A {random.choice(appearance)} {random.choice(gender)} {random.choices(heritage, weights=[50, 10, 5, 5, 5, 5])[0]} wearing/using a/an {random.choice(style)}.
-        They work as a {random.choice(common_profession)} and use {random.choice(methods)} to try and gain/cause {random.choice(goals)}.
-        Overall, they seem {random.choice(traits)} but are also {random.choice(quirks)} They are interested in {random.choice(interests)}.
+        {rc(first_name)} '{rc(aliases)}' {rc(family_name)}.
+        A {rc(appearance)} {rc(gender)} {random.choices(heritage, weights=[50, 10, 5, 5, 5, 5])[0]} wearing/using a/an {rc(style)}.
+        They work as a {rc(common_profession)} and use {rc(methods)} to try and gain/cause {rc(goals)}.
+        Overall, they seem {rc(traits)} but are also {rc(quirks)} They are interested in {rc(interests)}.
         """
     )
 else:
