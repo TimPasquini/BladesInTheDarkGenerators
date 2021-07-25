@@ -2,9 +2,19 @@
 A couple of generators I built for Blades in the Dark using the tables 
 in the back of the book. 
 
-Double-click the doskvolMasterGenerator.py to launch. Enter the number
-associated with the desired option to get an automatically generated
-description.
+Stand-alone Instructions:
+You only need the "executable" folder and it's contents to run the 
+generator. Just double-click the .exe to run.
+
+Python instructions:
+This project was built in python and can be run from the .py files in
+the "src" folder if you have python installed. Double-click the 
+doskvolMasterGenerator.py to launch. 
+
+General operation info:
+
+Enter the number associated with the desired option to get an 
+automatically generated description.
 
 
 Each generator exists as individual module that can be run from a
