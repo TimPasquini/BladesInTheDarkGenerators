@@ -40,11 +40,11 @@ def print_building(quality):
         print("Please enter 'rare' or 'common' as an argument")
 
 
-common_use = json_retreiver("common_use.json")
-rare_use = json_retreiver("rare_use.json")
-material = json_retreiver("material.json")
-exterior_details = json_retreiver("exterior_details.json")
-interior_details = json_retreiver("interior_details.json")
+common_use = json_retreiver("Buildings/common_use.json")
+rare_use = json_retreiver("Buildings/rare_use.json")
+material = json_retreiver("Buildings/material.json")
+exterior_details = json_retreiver("Buildings/exterior_details.json")
+interior_details = json_retreiver("Buildings/interior_details.json")
 
 
 if __name__ == "__main__":

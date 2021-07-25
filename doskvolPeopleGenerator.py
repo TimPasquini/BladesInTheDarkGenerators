@@ -46,21 +46,21 @@ def print_person(quality):
         print("Please enter 'rare' or 'common' as an argument")
 
 
-heritage = json_retreiver("heritage.json")
-gender = json_retreiver("gender.json")
-appearance = json_retreiver("appearance.json")
-goals = json_retreiver("goals.json")
-methods = json_retreiver("methods.json")
-common_profession = json_retreiver("common_profession.json")
-rare_profession = json_retreiver("rare_profession.json")
-style = json_retreiver("style.json")
-traits = json_retreiver("traits.json")
-interests = json_retreiver("interests.json")
-quirks = json_retreiver("quirks.json")
+heritage = json_retreiver("People/heritage.json")
+gender = json_retreiver("People/gender.json")
+appearance = json_retreiver("People/appearance.json")
+goals = json_retreiver("People/goals.json")
+methods = json_retreiver("People/methods.json")
+common_profession = json_retreiver("People/common_profession.json")
+rare_profession = json_retreiver("People/rare_profession.json")
+style = json_retreiver("People/style.json")
+traits = json_retreiver("People/traits.json")
+interests = json_retreiver("People/interests.json")
+quirks = json_retreiver("People/quirks.json")
 
-first_name = json_retreiver("first_names.json")
-family_name = json_retreiver("family_names.json")
-aliases = json_retreiver("aliases.json")
+first_name = json_retreiver("People/first_names.json")
+family_name = json_retreiver("People/family_names.json")
+aliases = json_retreiver("People/aliases.json")
 
 
 if __name__ == "__main__":

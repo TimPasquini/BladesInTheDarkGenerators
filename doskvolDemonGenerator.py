@@ -32,11 +32,11 @@ def print_demon():
     )
 
 
-demon_name = json_retreiver("demon_names.json")
-demon_features = json_retreiver("demon_features.json")
-demonic_aspect = json_retreiver("demonic_aspect.json")
-demonic_affinity = json_retreiver("demonic_affinity.json")
-demon_desire = json_retreiver("demon_desire.json")
+demon_name = json_retreiver("Demons/demon_names.json")
+demon_features = json_retreiver("Demons/demon_features.json")
+demonic_aspect = json_retreiver("Demons/demonic_aspect.json")
+demonic_affinity = json_retreiver("Demons/demonic_affinity.json")
+demon_desire = json_retreiver("Demons/demon_desire.json")
 
 if __name__ == "__main__":
     print_demon()

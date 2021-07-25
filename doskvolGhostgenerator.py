@@ -30,11 +30,11 @@ def print_ghost():
     )
 
 
-first_name = json_retreiver("first_names.json")
-family_name = json_retreiver("family_names.json")
-aliases = json_retreiver("aliases.json")
-ghost_trait = json_retreiver("ghost_traits.json")
-ghostly_effect = json_retreiver("ghostly_effect.json")
+first_name = json_retreiver("Ghosts/first_names.json")
+family_name = json_retreiver("Ghosts/family_names.json")
+aliases = json_retreiver("Ghosts/aliases.json")
+ghost_trait = json_retreiver("Ghosts/ghost_traits.json")
+ghostly_effect = json_retreiver("Ghosts/ghostly_effect.json")
 
 if __name__ == "__main__":
     print_ghost()

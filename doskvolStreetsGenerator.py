@@ -32,13 +32,13 @@ def print_street():
 
 
 # Establish lists from json dumps
-moods = json_retreiver("moods.json")
-sights = json_retreiver("sights.json")
-sounds = json_retreiver("sounds.json")
-smells = json_retreiver("smells.json")
-use = json_retreiver("use.json")
-infastructure_type = json_retreiver("infastructure_type.json")
-details = json_retreiver("details.json")
+moods = json_retreiver("Streets/moods.json")
+sights = json_retreiver("Streets/sights.json")
+sounds = json_retreiver("Streets/sounds.json")
+smells = json_retreiver("Streets/smells.json")
+use = json_retreiver("Streets/use.json")
+infastructure_type = json_retreiver("Streets/infastructure_type.json")
+details = json_retreiver("Streets/details.json")
 
 if __name__ == "__main__":
     print_street()
