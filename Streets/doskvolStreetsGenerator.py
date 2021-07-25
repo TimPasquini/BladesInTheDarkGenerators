@@ -20,6 +20,17 @@ def rc(variable):
     return random.choice(variable)
 
 
+def print_street():
+    """This will print text describing a random street"""
+    print(
+        f"""
+    This {rc(moods)} {rc(infastructure_type)} is primarily used for {rc(use)}.
+    (A/An) {rc(sights).capitalize()} catch(es) your eye. You hear {rc(sounds)} 
+    and smell {rc(smells)} on the air. You can't help but notice 
+    {rc(details)} and {rc(details)}."""
+    )
+
+
 # Establish lists from json dumps
 moods = json_retreiver("moods.json")
 sights = json_retreiver("sights.json")
@@ -29,11 +40,5 @@ use = json_retreiver("use.json")
 infastructure_type = json_retreiver("infastructure_type.json")
 details = json_retreiver("details.json")
 
-print(
-    f"This {rc(moods)} {rc(infastructure_type)} is primarily used for {rc(use)}."
-)
-print(f"(A/An) {rc(sights).capitalize()} catch(es) your eye.")
-print(f"You hear {rc(sounds)} and smell {rc(smells)} on the air.")
-print(
-    f"You can't help but notice {rc(details)} and {rc(details)}."
-)
+if __name__ == "__main__":
+    print_street()

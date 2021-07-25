@@ -20,15 +20,21 @@ def rc(variable):
     return random.choice(variable)
 
 
+def print_ghost():
+    """This will print text that describes a new ghost"""
+    print(
+        f"""
+    This is the ghost of {rc(first_name)} '{rc(aliases)}' {rc(family_name)}.
+    There is/are (a/an) {rc(ghostly_effect)} when this {rc(ghost_trait)} spirit appears!
+    """
+    )
+
+
 first_name = json_retreiver("first_names.json")
 family_name = json_retreiver("family_names.json")
 aliases = json_retreiver("aliases.json")
 ghost_trait = json_retreiver("ghost_traits.json")
 ghostly_effect = json_retreiver("ghostly_effect.json")
 
-print(
-    f"""
-    This is the ghost of {rc(first_name)} '{rc(aliases)}' {rc(family_name)}.
-    There is/are (a/an) {rc(ghostly_effect)} when this {rc(ghost_trait)} spirit appears!
-    """
-)
+if __name__ == "__main__":
+    print_ghost()
