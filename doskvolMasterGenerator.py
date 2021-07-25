@@ -2,10 +2,10 @@
 # A menu interface capable of calling the individual Doskvol generators
 
 import doskvolBuildingGenerator as building
-import doskvolDemonGenerator    as demon
-import doskvolGhostgenerator    as ghost
-import doskvolPeopleGenerator   as npc
-import doskvolStreetsGenerator  as street
+import doskvolDemonGenerator as demon
+import doskvolGhostgenerator as ghost
+import doskvolPeopleGenerator as npc
+import doskvolStreetsGenerator as street
 
 
 def main():
