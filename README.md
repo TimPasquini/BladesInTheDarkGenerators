@@ -6,6 +6,8 @@ Stand-alone Instructions:
 You only need the "executable" folder and it's contents to run the 
 generator. Just double-click the .exe to run.
 
+![generator_screenshot](https://user-images.githubusercontent.com/70915299/126913351-a50b0d98-91db-48f0-881f-d1063ef5a674.PNG)
+
 Python instructions:
 This project was built in python and can be run from the .py files in
 the "src" folder if you have python installed. Double-click the 
@@ -51,4 +53,4 @@ Ghosts:
 Creates a random ghost using the ghost tables on page 304. 
 Also uses the names/aliases from page 303 to give a name to the ghost.
 
-![generator_screenshot](https://user-images.githubusercontent.com/70915299/126913351-a50b0d98-91db-48f0-881f-d1063ef5a674.PNG)
+
