@@ -1,6 +1,6 @@
 # BladesInTheDarkGenerators
 A couple of generators I built for Blades in the Dark using the tables 
-in the back of the book. 
+in the back of the book. Feel free to make suggestions or report errors!
 
 Stand-alone Instructions:
 You only need the "executable" folder and it's contents to run the 
