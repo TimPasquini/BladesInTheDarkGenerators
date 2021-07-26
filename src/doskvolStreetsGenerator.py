@@ -22,13 +22,13 @@ def rc(variable):
 
 def print_street():
     """This will print text describing a random street"""
-    print(
-        f"""
+    output = f"""
     This {rc(moods)} {rc(infastructure_type)} is primarily used for {rc(use)}.
     (A/An) {rc(sights).capitalize()} catch(es) your eye. You hear {rc(sounds)} 
     and smell {rc(smells)} on the air. You can't help but notice 
     {rc(details)} and {rc(details)}."""
-    )
+    print(output)
+    return output
 
 
 # Establish lists from json dumps

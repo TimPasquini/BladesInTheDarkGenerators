@@ -22,12 +22,12 @@ def rc(variable):
 
 def print_ghost():
     """This will print text that describes a new ghost"""
-    print(
-        f"""
+    output = f"""
     This is the ghost of {rc(first_name)} '{rc(aliases)}' {rc(family_name)}.
     There is/are (a/an) {rc(ghostly_effect)} when this {rc(ghost_trait)} spirit appears!
     """
-    )
+    print(output)
+    return output
 
 
 first_name = json_retreiver("Ghosts/first_names.json")

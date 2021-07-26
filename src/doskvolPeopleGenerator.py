@@ -25,23 +25,24 @@ def print_person(quality):
     """This prints a random description of a person, the "quality" argument
     needs to be "rare" or "common"""
     if quality == "rare":
-        print(
-            f"""
+        output = f"""
         {rc(first_name)} '{rc(aliases)}' {rc(family_name)}:
         A/An {rc(appearance)} {rc(gender)} {random.choices(heritage, weights=[50, 10, 5, 5, 5, 5])[0]} wearing/using a/an {rc(style)}.
         They work as a {rc(rare_profession)} and use {rc(methods)} to try and gain/cause {rc(goals)}.
         Overall, they seem {rc(traits)} but are also {rc(quirks)} They are interested in {rc(interests)}.
         """
-        )
+        print(output)
+        return output
+
     elif quality == "common":
-        print(
-            f"""
+        output = f"""
         {rc(first_name)} '{rc(aliases)}' {rc(family_name)}:
         A {rc(appearance)} {rc(gender)} {random.choices(heritage, weights=[50, 10, 5, 5, 5, 5])[0]} wearing/using a/an {rc(style)}.
         They work as a {rc(common_profession)} and use {rc(methods)} to try and gain/cause {rc(goals)}.
         Overall, they seem {rc(traits)} but are also {rc(quirks)} They are interested in {rc(interests)}.
         """
-        )
+        print(output)
+        return output
     else:
         print("Please enter 'rare' or 'common' as an argument")
 

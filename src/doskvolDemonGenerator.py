@@ -22,14 +22,14 @@ def rc(variable):
 
 def print_demon():
     """This will print text describing a new demon"""
-    print(
-        f"""
+    output = f"""
     Tremble at the sight of {rc(demon_name)}!
     Behold, {rc(demon_features)} and {rc(demon_features)}.
     This {rc(demonic_affinity)} demon has a {rc(demonic_aspect)} aspect.
     This demon desires {rc(demon_desire)} above all else!
     """
-    )
+    print(output)
+    return output
 
 
 demon_name = json_retreiver("Demons/demon_names.json")

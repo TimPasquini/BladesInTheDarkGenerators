@@ -6,6 +6,7 @@ import doskvolDemonGenerator as demon
 import doskvolGhostgenerator as ghost
 import doskvolPeopleGenerator as npc
 import doskvolStreetsGenerator as street
+import pyperclip
 
 
 def main():
@@ -25,25 +26,25 @@ Select generator:
 """
         )
         if generator == "1":
-            npc.print_person("common")
+            pyperclip.copy(npc.print_person("common"))
 
         elif generator == "2":
-            npc.print_person("rare")
+            pyperclip.copy(npc.print_person("rare"))
 
         elif generator == "3":
-            street.print_street()
+            pyperclip.copy(street.print_street())
 
         elif generator == "4":
-            building.print_building("common")
+            pyperclip.copy(building.print_building("common"))
 
         elif generator == "5":
-            building.print_building("rare")
+            pyperclip.copy(building.print_building("rare"))
 
         elif generator == "6":
-            demon.print_demon()
+            pyperclip.copy(demon.print_demon())
 
         elif generator == "7":
-            ghost.print_ghost()
+            pyperclip.copy(ghost.print_ghost())
 
         elif generator == "8":
             break
