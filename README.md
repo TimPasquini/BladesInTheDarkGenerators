@@ -1,6 +1,16 @@
 # BladesInTheDarkGenerators
 A couple of generators I built for Blades in the Dark using the tables 
-in the back of the book. Feel free to make suggestions or report errors!
+in the back of the book. The primary intent is speed of use and simplicity
+of operation in order to minimize narrative disruptions caused by complex 
+rolls across multiple tables. Ideally this makes your narrative seamless
+during the occasions where a GM needs something on the fly. 
+
+The generator outputs are partially inspired from Dwarf Fortress's 
+presentation when describing procedurally generated content. Due to tense, 
+plurality, and other issues of language, sentences may sometimes still 
+require a bit of creative interpreation. 
+
+Feel free to make suggestions or report errors!
 
 Stand-alone Instructions:
 You only need the "executable" folder and it's contents to run the 
