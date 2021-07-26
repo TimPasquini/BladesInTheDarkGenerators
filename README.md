@@ -5,7 +5,7 @@ of operation in order to minimize narrative disruptions caused by complex
 rolls across multiple tables. Ideally this makes your narrative seamless
 during the occasions where a GM needs something on the fly. 
 
-The generator outputs are partially inspired from Dwarf Fortress's 
+The generator outputs are loosly inspired from Dwarf Fortress's 
 presentation when describing procedurally generated content. Due to tense, 
 plurality, and other issues of language, sentences may sometimes still 
 require a bit of creative interpreation. 
