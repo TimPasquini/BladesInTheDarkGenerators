@@ -5,15 +5,15 @@ of operation in order to minimize narrative disruptions caused by complex
 rolls across multiple tables. Ideally this makes your narrative seamless
 during the occasions where a GM needs something on the fly. 
 
-The generator outputs are loosly inspired from Dwarf Fortress's 
+The generator outputs are loosely inspired from Dwarf Fortress's 
 presentation when describing procedurally generated content. Due to tense, 
 plurality, and other issues of language, sentences may sometimes still 
-require a bit of creative interpreation. 
+require a bit of creative interpretation. 
 
 Feel free to make suggestions or report errors!
 
 Stand-alone Instructions:
-You only need the "executable" folder and it's contents to run the 
+You only need the "executable" folder and its contents to run the 
 generator. Just double-click the .exe to run.
 
 ![generator_screenshot](https://user-images.githubusercontent.com/70915299/126913351-a50b0d98-91db-48f0-881f-d1063ef5a674.PNG)
