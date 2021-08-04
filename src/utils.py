@@ -1,6 +1,7 @@
 import json
 import random
 
+
 def json_retreiver(json_filename):
     """Call this from a variable with a filename string to populate
     with json content"""

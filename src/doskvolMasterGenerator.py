@@ -52,7 +52,7 @@ Select generator:
 
         elif generator == "9":
             break
-            
+           
         else:
             print("Invalid choice. Please try again.")
 
