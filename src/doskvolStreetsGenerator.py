@@ -2,33 +2,18 @@
 # Uses the tables at the end of Blades in the Dark to generate a description
 # for a random city street.
 
-import random
-import json
-
-
-def json_retreiver(json_filename):
-    """Call this from a variable with a filename string to populate
-    with json content"""
-    filename = json_filename
-    with open(filename) as f:
-        return json.load(f)
-
-
-def rc(variable):
-    """rc = random choice. Picks a random item from the list and returns
-    it. This is mostly to shorten up the variables in the print command"""
-    return random.choice(variable)
+from utils import rc, json_retreiver
 
 
 def print_street():
     """This will print text describing a random street"""
-    print(
-        f"""
+    output = f"""
     This {rc(moods)} {rc(infastructure_type)} is primarily used for {rc(use)}.
     (A/An) {rc(sights).capitalize()} catch(es) your eye. You hear {rc(sounds)} 
     and smell {rc(smells)} on the air. You can't help but notice 
     {rc(details)} and {rc(details)}."""
-    )
+    print(output)
+    return output
 
 
 # Establish lists from json dumps
