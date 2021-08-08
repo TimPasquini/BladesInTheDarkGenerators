@@ -7,6 +7,7 @@ import doskvolGhostgenerator as ghost
 import doskvolPeopleGenerator as npc
 import doskvolStreetsGenerator as street
 import doskvolCultGenerator as cult
+import doskvolScoresGenerator as score
 
 
 def main():
@@ -22,7 +23,8 @@ Select generator:
 [6] Create a demon
 [7] Create a ghost
 [8] Create a cult
-[9] Quit
+[9] Create a score
+[0] Quit
 
 """
         )
@@ -51,8 +53,10 @@ Select generator:
             cult.print_cult()
 
         elif generator == "9":
+            random_score = score.build_score()
+            score.print_score(random_score)
+        elif generator == "0":
             break
-           
         else:
             print("Invalid choice. Please try again.")
 

@@ -13,7 +13,6 @@ def print_score(score_dict):
     if score_dict['client'] and score_dict['target'] == 'Ghost of':
         score_dict['c_ghost'] = rc(json_retreiver('Scores/client_target.json'))
         score_dict['t_ghost'] = rc(json_retreiver('Scores/client_target.json'))
-        # Below seems to freeze terminal, will have to figure out
         while score_dict['c_ghost'] == 'Ghost of' or score_dict['t_ghost'] == 'Ghost of':
             score_dict['c_ghost'] = rc(json_retreiver('Scores/client_target.json'))
             score_dict['t_ghost'] = rc(json_retreiver('Scores/client_target.json'))
