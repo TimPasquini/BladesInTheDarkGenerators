@@ -7,6 +7,7 @@ import random
 
 from utils import rc, json_retreiver
 
+
 def print_person(quality):
     """This prints a random description of a person, the "quality" argument
     needs to be "rare" or "common"""

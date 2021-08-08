@@ -54,7 +54,8 @@ def print_score(score_dict):
 
 def _ghostbuster(score_dict):
     """This function checks for ghosts in the score_dict and will assign them
-    a profession/role that they held in life."""
+    a profession/role that they held in life. It will reroll if it pulls 'Ghost of'
+    a second time"""
     if score_dict["client"] and score_dict["target"] == "Ghost of":
         score_dict["c_ghost"] = rc(json_retreiver("Scores/client_target.json"))
         score_dict["t_ghost"] = rc(json_retreiver("Scores/client_target.json"))
@@ -77,8 +78,8 @@ def _ghostbuster(score_dict):
 def build_score():
     """Call the function by assigning to a variable that gets passed
     to print_score(). This function is what pulls lists from the .json files
-    and then selects a random entry, then assigns it to a dict. 
-    You need to re-call this function if you want a new set of random variables."""
+    and then selects a random entry, then assigns it to a dict. You need to
+    re-call this function if you want a new set of random variables."""
     score_dict = {}
     score_dict["client"] = rc(json_retreiver("Scores/client_target.json"))
     score_dict["target"] = rc(json_retreiver("Scores/client_target.json"))

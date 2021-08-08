@@ -44,10 +44,12 @@ Select generator:
             building.print_building("rare")
 
         elif generator == "6":
-            demon.print_demon()
+            random_demon = demon.build_demon()
+            demon.print_demon(random_demon)
 
         elif generator == "7":
-            ghost.print_ghost()
+            random_ghost = ghost.build_ghost()
+            ghost.print_ghost(random_ghost)
 
         elif generator == "8":
             random_cult = cult.build_cult()
