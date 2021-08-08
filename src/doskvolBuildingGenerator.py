@@ -7,30 +7,37 @@ import sys
 from utils import rc, json_retreiver
 
 
-def print_building(quality):
+def print_building(quality, building_dict):
     """This prints a random description of a building, the "quality" argument
     needs to be "rare" or "common"""
     if quality == "rare":
         output = f"""
-        This {rc(material)} {rc(rare_use)} building is decorated with {rc(exterior_details)}.
-        It is notable for it's {rc(interior_details)} and {rc(interior_details)}"""
+        This {building_dict["material"]} {building_dict["rare_use"]} building is decorated with {building_dict["exterior_details"]}.
+        It is notable for it's {building_dict["interior_details"]} and {building_dict["interior_details"]}"""
         print(output)
         return output
     elif quality == "common":
         output = f"""
-        This {rc(material)} {rc(common_use)} building is decorated with {rc(exterior_details)}.
-        It is notable for it's {rc(interior_details)} and {rc(interior_details)}"""
+        This {building_dict["material"]} {building_dict["common_use"]} building is decorated with {building_dict["exterior_details"]}.
+        It is notable for it's {building_dict["interior_details"]} and {building_dict["interior_details"]}"""
         print(output)
         return output
     else:
         print("Please enter 'rare' or 'common' as an argument")
 
 
-common_use = json_retreiver("Buildings/common_use.json")
-rare_use = json_retreiver("Buildings/rare_use.json")
-material = json_retreiver("Buildings/material.json")
-exterior_details = json_retreiver("Buildings/exterior_details.json")
-interior_details = json_retreiver("Buildings/interior_details.json")
+def build_building():
+    """Call the function by assigning to a variable that gets passed to
+    print_building(). This function pulls lists from the .json files and then
+    selects a random entry from that, then assigns to a dict. You need to
+    re-call this function if you want a new set of random variables."""
+    building_dict = {}
+    building_dict["common_use"] = rc(json_retreiver("Buildings/common_use.json"))
+    building_dict["rare_use"] = rc(json_retreiver("Buildings/rare_use.json"))
+    building_dict["material"] = rc(json_retreiver("Buildings/material.json"))
+    building_dict["exterior_details"] = rc(json_retreiver("Buildings/exterior_details.json"))
+    building_dict["interior_details"] = rc(json_retreiver("Buildings/interior_details.json"))
+    return building_dict
 
 
 if __name__ == "__main__":
