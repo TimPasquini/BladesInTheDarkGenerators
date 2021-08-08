@@ -39,10 +39,10 @@ terminal instance. Buildings and People require "common" or "rare" as
 a terminal argument to work correctly.
 
 For ease of modification of the various table contents, each table from 
-the book is it's own .json file which gets imported as a python list.
+the book is its own .json file which gets imported as a python list.
 
 If the table options had more than one option for a given roll, they 
-were split out so each is it's own entry.
+were split out so each is its own entry.
 
 Due to inconsistency on the tables, sometimes the output is imperfect in
 terms of case/tense/pronoun/etc.
