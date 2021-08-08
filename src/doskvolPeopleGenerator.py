@@ -8,24 +8,24 @@ import random
 from utils import rc, json_retreiver
 
 
-def print_person(quality):
+def print_person(quality, person_dict):
     """This prints a random description of a person, the "quality" argument
     needs to be "rare" or "common"""
     if quality == "rare":
         output = f"""
-        {rc(first_name)} '{rc(aliases)}' {rc(family_name)}:
-        A/An {rc(appearance)} {rc(gender)} {random.choices(heritage, weights=[50, 10, 5, 5, 5, 5])[0]} wearing/using a/an {rc(style)}.
-        They work as a {rc(rare_profession)} and use {rc(methods)} to try and gain/cause {rc(goals)}.
-        Overall, they seem {rc(traits)} but are also {rc(quirks)} They are interested in {rc(interests)}.
+        {person_dict["first_name"]} '{person_dict["aliases"]}' {person_dict["family_name"]}:
+        A/An {person_dict["appearance"]} {person_dict["gender"]} {person_dict["heritage"]} wearing/using a/an {person_dict["style"]}.
+        They work as a {person_dict["rare_profession"]} and use {person_dict["methods"]} to try and gain/cause {person_dict["goals"]}.
+        Overall, they seem {person_dict["traits"]} but are also {person_dict["quirks"]} They are interested in {person_dict["interests"]}.
         """
         print(output)
         return output
     elif quality == "common":
         output = f"""
-        {rc(first_name)} '{rc(aliases)}' {rc(family_name)}:
-        A {rc(appearance)} {rc(gender)} {random.choices(heritage, weights=[50, 10, 5, 5, 5, 5])[0]} wearing/using a/an {rc(style)}.
-        They work as a {rc(common_profession)} and use {rc(methods)} to try and gain/cause {rc(goals)}.
-        Overall, they seem {rc(traits)} but are also {rc(quirks)} They are interested in {rc(interests)}.
+        {person_dict["first_name"]} '{person_dict["aliases"]}' {person_dict["family_name"]}:
+        A {person_dict["appearance"]} {person_dict["gender"]} {person_dict["heritage"]} wearing/using a/an {person_dict["style"]}.
+        They work as a {person_dict["common_profession"]} and use {person_dict["methods"]} to try and gain/cause {person_dict["goals"]}.
+        Overall, they seem {person_dict["traits"]} but are also {person_dict["quirks"]} They are interested in {person_dict["interests"]}.
         """
         print(output)
         return output
@@ -33,21 +33,27 @@ def print_person(quality):
         print("Please enter 'rare' or 'common' as an argument")
 
 
-heritage = json_retreiver("People/heritage.json")
-gender = json_retreiver("People/gender.json")
-appearance = json_retreiver("People/appearance.json")
-goals = json_retreiver("People/goals.json")
-methods = json_retreiver("People/methods.json")
-common_profession = json_retreiver("People/common_profession.json")
-rare_profession = json_retreiver("People/rare_profession.json")
-style = json_retreiver("People/style.json")
-traits = json_retreiver("People/traits.json")
-interests = json_retreiver("People/interests.json")
-quirks = json_retreiver("People/quirks.json")
-
-first_name = json_retreiver("People/first_names.json")
-family_name = json_retreiver("People/family_names.json")
-aliases = json_retreiver("People/aliases.json")
+def build_person():
+    """Call the function by assigning to a variable that gets passed to
+    print_person(). This function pulls lists from the .json files and then
+    selects a random entry from that, then assigns to a dict. You need to
+    re-call this function if you want a new set of random variables."""
+    person_dict = {}
+    person_dict["heritage"] = random.choices(json_retreiver("People/heritage.json"), weights=[50, 10, 5, 5, 5, 5])[0]
+    person_dict["gender"] = rc(json_retreiver("People/gender.json"))
+    person_dict["appearance"] = rc(json_retreiver("People/appearance.json"))
+    person_dict["goals"] = rc(json_retreiver("People/goals.json"))
+    person_dict["methods"] = rc(json_retreiver("People/methods.json"))
+    person_dict["common_profession"] = rc(json_retreiver("People/common_profession.json"))
+    person_dict["rare_profession"] = rc(json_retreiver("People/rare_profession.json"))
+    person_dict["style"] = rc(json_retreiver("People/style.json"))
+    person_dict["traits"] = rc(json_retreiver("People/traits.json"))
+    person_dict["interests"] = rc(json_retreiver("People/interests.json"))
+    person_dict["quirks"] = rc(json_retreiver("People/quirks.json"))
+    person_dict["first_name"] = rc(json_retreiver("People/first_names.json"))
+    person_dict["family_name"] = rc(json_retreiver("People/family_names.json"))
+    person_dict["aliases"] = rc(json_retreiver("People/aliases.json"))
+    return person_dict
 
 
 if __name__ == "__main__":
