@@ -13,8 +13,13 @@ require a bit of creative interpretation.
 Feel free to make suggestions or report errors!
 
 Stand-alone Instructions:
-You only need the "executable" folder and its contents to run the 
-generator. Just double-click the .exe to run.
+The executable has been removed due to it throwing anti-virus warnings. 
+I used PyInstaller to compile and googling shows, it's a common false-flag that
+occurs with this compiler. Since I cannot verify what happens inside of PyInstaller
+so out of an abundance of caution the .exe will be removed. If you really want it you 
+can find it in older commits, but it is missing features and use at your own risk. 
+I will investigate a new way to compile the code to an executable, but for 
+now you'll need python or you can see if one of the forks has a solution for you.
 
 ![generator_screenshot](https://user-images.githubusercontent.com/70915299/126913351-a50b0d98-91db-48f0-881f-d1063ef5a674.PNG)
 
@@ -62,5 +67,11 @@ Creates a random demon out of the data on page 304.
 Ghosts:
 Creates a random ghost using the ghost tables on page 304. 
 Also uses the names/aliases from page 303 to give a name to the ghost.
+
+Cults:
+Create a cult to a random forgotten god and assign a random religious practice to it using data on page 305.
+
+Scores:
+Create a random score using the data for pages 306 and 307.
 
 
