@@ -50,7 +50,8 @@ Select generator:
             ghost.print_ghost()
 
         elif generator == "8":
-            cult.print_cult()
+            random_cult = cult.build_cult()
+            cult.print_cult(random_cult)
 
         elif generator == "9":
             random_score = score.build_score()
