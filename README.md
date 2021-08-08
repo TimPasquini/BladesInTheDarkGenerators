@@ -31,7 +31,9 @@ doskvolMasterGenerator.py to launch.
 General operation info:
 
 If you're running the Master Generator, just enter the number associated with the 
-desired option to get an automatically generated description for that menu item.
+desired option to get an automatically generated description for that menu item. The
+description will automatically be copied to your clipboard for easy pasting into
+a VTT, chat, or your notes.
 
 Each generator exists as individual module that can be run from a
 terminal instance. Buildings and People require "common" or "rare" as
