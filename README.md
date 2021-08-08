@@ -14,10 +14,10 @@ Feel free to make suggestions or report errors!
 
 Stand-alone Instructions:
 The executable has been removed due to it throwing anti-virus warnings. 
-I used PyInstaller to compile and googling shows, it's a common false-flag that
-occurs with this compiler. Since I cannot verify what happens inside of PyInstaller
+I used PyInstaller to compile and googling shows it's a common false-positive that
+occurs with this compiler. I cannot verify what happens inside of PyInstaller
 so out of an abundance of caution the .exe will be removed. If you really want it you 
-can find it in older commits, but it is missing features and use at your own risk. 
+can find it in older commits, but it is missing features and you use at your own risk. 
 I will investigate a new way to compile the code to an executable, but for 
 now you'll need python or you can see if one of the forks has a solution for you.
 
@@ -30,9 +30,8 @@ doskvolMasterGenerator.py to launch.
 
 General operation info:
 
-Enter the number associated with the desired option to get an 
-automatically generated description.
-
+If you're running the Master Generator, just enter the number associated with the 
+desired option to get an automatically generated description for that menu item.
 
 Each generator exists as individual module that can be run from a
 terminal instance. Buildings and People require "common" or "rare" as
@@ -73,5 +72,3 @@ Create a cult to a random forgotten god and assign a random religious practice t
 
 Scores:
 Create a random score using the data for pages 306 and 307.
-
-
