@@ -21,7 +21,7 @@ can find it in older commits, but it is missing features and you use at your own
 I will investigate a new way to compile the code to an executable, but for 
 now you'll need python or you can see if one of the forks has a solution for you.
 
-![generator_screenshot](https://user-images.githubusercontent.com/70915299/126913351-a50b0d98-91db-48f0-881f-d1063ef5a674.PNG)
+![generator_screenshot](https://github.com/TimPasquini/BladesInTheDarkGenerators/blob/e4f40e531f6341412f7e761d7e853b4066cb4349/generator_screenshot.PNG)
 
 Python instructions:
 This project was built in python and can be run from the .py files in
