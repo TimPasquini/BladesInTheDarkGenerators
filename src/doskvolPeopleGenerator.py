@@ -2,23 +2,10 @@
 # Uses the tables at the end of Blades in the Dark to generate a description
 # for a random person. Use an argument of "rare" or "common" in the terminal
 
-import random
-import json
 import sys
+import random
 
-
-def json_retreiver(json_filename):
-    """Call this from a variable with a filename string to populate
-    with json content"""
-    filename = json_filename
-    with open(filename) as f:
-        return json.load(f)
-
-
-def rc(variable):
-    """rc = random choice. Picks a random item from the list and returns
-    it. This is mostly to shorten up the variables in the print command"""
-    return random.choice(variable)
+from utils import rc, json_retreiver
 
 
 def print_person(quality):
@@ -33,7 +20,6 @@ def print_person(quality):
         """
         print(output)
         return output
-
     elif quality == "common":
         output = f"""
         {rc(first_name)} '{rc(aliases)}' {rc(family_name)}:
