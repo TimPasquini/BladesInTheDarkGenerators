@@ -12,14 +12,14 @@ def print_building(quality, building_dict):
     needs to be "rare" or "common"""
     if quality == "rare":
         output = f"""
-        This {building_dict["material"]} {building_dict["rare_use"]} building is decorated with {building_dict["exterior_details"]}.
-        It is notable for it's {building_dict["interior_details"]} and {building_dict["interior_details"]}"""
+        This {building_dict["material"].lower()} {building_dict["rare_use"].lower()} building is decorated with {building_dict["exterior_details"].lower()}.
+        It is notable for it's {building_dict["interior_details_1"].lower()} and {building_dict["interior_details_2"].lower()}"""
         print(output)
         return output
     elif quality == "common":
         output = f"""
-        This {building_dict["material"]} {building_dict["common_use"]} building is decorated with {building_dict["exterior_details"]}.
-        It is notable for it's {building_dict["interior_details"]} and {building_dict["interior_details"]}"""
+        This {building_dict["material"].lower()} {building_dict["common_use"].lower()} building is decorated with {building_dict["exterior_details"].lower()}.
+        It is notable for it's {building_dict["interior_details_1"].lower()} and {building_dict["interior_details_2"].lower()}"""
         print(output)
         return output
     else:
@@ -36,7 +36,8 @@ def build_building():
     building_dict["rare_use"] = rc(json_retreiver("Buildings/rare_use.json"))
     building_dict["material"] = rc(json_retreiver("Buildings/material.json"))
     building_dict["exterior_details"] = rc(json_retreiver("Buildings/exterior_details.json"))
-    building_dict["interior_details"] = rc(json_retreiver("Buildings/interior_details.json"))
+    building_dict["interior_details_1"] = rc(json_retreiver("Buildings/interior_details.json"))
+    building_dict["interior_details_2"] = rc(json_retreiver("Buildings/interior_details.json"))
     return building_dict
 
 

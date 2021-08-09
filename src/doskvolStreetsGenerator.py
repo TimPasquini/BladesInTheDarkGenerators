@@ -9,7 +9,7 @@ def print_street(street_dict):
     """This will print text describing a random street"""
     output = f"""
     This {street_dict["moods"]} {street_dict["infastructure_type"]} is primarily used for {street_dict["use"]} purposes.
-    (A/An) {street_dict["sights"].capitalize()} catch(es) your eye. 
+    (A/An) {street_dict["sights"]} catch(es) your eye. 
     You hear {street_dict["sounds"]} and smell {street_dict["smells"]} on the air. 
     You can't help but notice {street_dict["details_1"]} and {street_dict["details_2"]}."""
     print(output)

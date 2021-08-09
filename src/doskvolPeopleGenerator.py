@@ -13,24 +13,35 @@ def print_person(quality, person_dict):
     needs to be "rare" or "common"""
     if quality == "rare":
         output = f"""
-        {person_dict["first_name"]} '{person_dict["aliases"]}' {person_dict["family_name"]}:
-        A/An {person_dict["appearance"]} {person_dict["gender"]} {person_dict["heritage"]} wearing/using a/an {person_dict["style"]}.
-        They work as a {person_dict["rare_profession"]} and use {person_dict["methods"]} to try and gain/cause {person_dict["goals"]}.
-        Overall, they seem {person_dict["traits"]} but are also {person_dict["quirks"]} They are interested in {person_dict["interests"]}.
+        {person_dict["first_name"].capitalize()} '{person_dict["aliases"].capitalize()}' {person_dict["family_name"].capitalize()}:
+        A/An {person_dict["appearance"].lower()} {person_dict["gender"].lower()} {person_dict["heritage"].capitalize()} wearing/using a/an {person_dict["style"].lower()}.
+        They work as a {person_dict["rare_profession"]} and use {person_dict["methods"].lower()} to try and gain/cause {person_dict["goals"].lower()}.
+        Overall, they seem {person_dict["traits"].lower()} but are also {person_dict["quirks"].lower()} They are interested in {person_dict["interests"].lower()}.
         """
         print(output)
         return output
     elif quality == "common":
         output = f"""
         {person_dict["first_name"]} '{person_dict["aliases"]}' {person_dict["family_name"]}:
-        A {person_dict["appearance"]} {person_dict["gender"]} {person_dict["heritage"]} wearing/using a/an {person_dict["style"]}.
-        They work as a {person_dict["common_profession"]} and use {person_dict["methods"]} to try and gain/cause {person_dict["goals"]}.
-        Overall, they seem {person_dict["traits"]} but are also {person_dict["quirks"]} They are interested in {person_dict["interests"]}.
+        A {person_dict["appearance"].lower()} {person_dict["gender"].lower()} {person_dict["heritage"].capitalize()} wearing/using a/an {person_dict["style"].lower()}.
+        They work as a {person_dict["common_profession"]} and use {person_dict["methods"].lower()} to try and gain/cause {person_dict["goals"].lower()}.
+        Overall, they seem {person_dict["traits"].lower()} but are also {person_dict["quirks"].lower()} They are interested in {person_dict["interests"].lower()}.
         """
         print(output)
         return output
     else:
         print("Please enter 'rare' or 'common' as an argument")
+
+
+def _tycherosi_heritage_check(person_dict):
+    """Tycherosi have tend to have a characteristic that makes them stand out
+    due to the demonic blood in their veins, this function will check
+    if for the heritage and add a demonic trait from the demon generator"""
+    if person_dict['heritage'].lower() == "Tycherosi":
+        person_dict['demonic'] = rc(json_retreiver("Demons/demon_features.json"))
+        return person_dict
+    else:
+        return person_dict
 
 
 def build_person():
