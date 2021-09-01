@@ -27,7 +27,9 @@ def build_street():
     street_dict["sounds"] = rc(json_retreiver("Streets/sounds.json"))
     street_dict["smells"] = rc(json_retreiver("Streets/smells.json"))
     street_dict["use"] = rc(json_retreiver("Streets/use.json"))
-    street_dict["infastructure_type"] = rc(json_retreiver("Streets/infastructure_type.json"))
+    street_dict["infastructure_type"] = rc(
+        json_retreiver("Streets/infastructure_type.json")
+    )
     street_dict["details_1"] = rc(json_retreiver("Streets/details.json"))
     street_dict["details_2"] = rc(json_retreiver("Streets/details.json"))
     return street_dict

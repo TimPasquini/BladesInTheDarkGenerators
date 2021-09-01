@@ -11,22 +11,26 @@ from utils import rc, json_retreiver
 def print_person(quality, person_dict):
     """This prints a random description of a person, the "quality" argument
     needs to be "rare" or "common"""
+    person_dict = _tycherosi_heritage_check(person_dict)
+    name = f"{person_dict['first_name'].capitalize()} '{person_dict['aliases'].capitalize()}' {person_dict['family_name'].capitalize()}:\n"
+    heritage = f"A/An {person_dict['appearance'].lower()} {person_dict['gender'].lower()} {person_dict['heritage'].capitalize()} wearing/using a/an {person_dict['style'].lower()}.\n"
+    quirk = f"Overall, they seem {person_dict['traits'].lower()} but are also {person_dict['quirks'].lower()} They are interested in {person_dict['interests'].lower()}.\n"
     if quality == "rare":
-        output = f"""
-        {person_dict["first_name"].capitalize()} '{person_dict["aliases"].capitalize()}' {person_dict["family_name"].capitalize()}:
-        A/An {person_dict["appearance"].lower()} {person_dict["gender"].lower()} {person_dict["heritage"].capitalize()} wearing/using a/an {person_dict["style"].lower()}.
-        They work as a {person_dict["rare_profession"]} and use {person_dict["methods"].lower()} to try and gain/cause {person_dict["goals"].lower()}.
-        Overall, they seem {person_dict["traits"].lower()} but are also {person_dict["quirks"].lower()} They are interested in {person_dict["interests"].lower()}.
-        """
+        profession = f"They work as a {person_dict['rare_profession']} and use {person_dict['methods'].lower()} to try and gain/cause {person_dict['goals'].lower()}.\n"
+        if "demonic" in person_dict:
+            demonic_trait = f"Their Tycherosi heritage manifests as (a/an) {person_dict['demonic'].lower()}.\n"
+            output = name + heritage + demonic_trait + profession + quirk
+        else:
+            output = name + heritage + profession + quirk
         print(output)
         return output
     elif quality == "common":
-        output = f"""
-        {person_dict["first_name"]} '{person_dict["aliases"]}' {person_dict["family_name"]}:
-        A {person_dict["appearance"].lower()} {person_dict["gender"].lower()} {person_dict["heritage"].capitalize()} wearing/using a/an {person_dict["style"].lower()}.
-        They work as a {person_dict["common_profession"]} and use {person_dict["methods"].lower()} to try and gain/cause {person_dict["goals"].lower()}.
-        Overall, they seem {person_dict["traits"].lower()} but are also {person_dict["quirks"].lower()} They are interested in {person_dict["interests"].lower()}.
-        """
+        profession = f"They work as a {person_dict['common_profession']} and use {person_dict['methods'].lower()} to try and gain/cause {person_dict['goals'].lower()}.\n"
+        if "demonic" in person_dict:
+            demonic_trait = f"Their Tycherosi heritage manifests as (a/an) {person_dict['demonic'].lower()}.\n"
+            output = name + heritage + demonic_trait + profession + quirk
+        else:
+            output = name + heritage + profession + quirk
         print(output)
         return output
     else:
@@ -37,8 +41,8 @@ def _tycherosi_heritage_check(person_dict):
     """Tycherosi have tend to have a characteristic that makes them stand out
     due to the demonic blood in their veins, this function will check
     if for the heritage and add a demonic trait from the demon generator"""
-    if person_dict['heritage'].lower() == "Tycherosi":
-        person_dict['demonic'] = rc(json_retreiver("Demons/demon_features.json"))
+    if person_dict["heritage"].lower() == "tycherosi":
+        person_dict["demonic"] = rc(json_retreiver("Demons/demon_features.json"))
         return person_dict
     else:
         return person_dict
@@ -50,12 +54,16 @@ def build_person():
     selects a random entry from that, then assigns to a dict. You need to
     re-call this function if you want a new set of random variables."""
     person_dict = {}
-    person_dict["heritage"] = random.choices(json_retreiver("People/heritage.json"), weights=[50, 10, 5, 5, 5, 5])[0]
+    person_dict["heritage"] = random.choices(
+        json_retreiver("People/heritage.json"), weights=[50, 10, 5, 5, 5, 5]
+    )[0]
     person_dict["gender"] = rc(json_retreiver("People/gender.json"))
     person_dict["appearance"] = rc(json_retreiver("People/appearance.json"))
     person_dict["goals"] = rc(json_retreiver("People/goals.json"))
     person_dict["methods"] = rc(json_retreiver("People/methods.json"))
-    person_dict["common_profession"] = rc(json_retreiver("People/common_profession.json"))
+    person_dict["common_profession"] = rc(
+        json_retreiver("People/common_profession.json")
+    )
     person_dict["rare_profession"] = rc(json_retreiver("People/rare_profession.json"))
     person_dict["style"] = rc(json_retreiver("People/style.json"))
     person_dict["traits"] = rc(json_retreiver("People/traits.json"))

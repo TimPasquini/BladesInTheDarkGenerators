@@ -35,9 +35,15 @@ def build_building():
     building_dict["common_use"] = rc(json_retreiver("Buildings/common_use.json"))
     building_dict["rare_use"] = rc(json_retreiver("Buildings/rare_use.json"))
     building_dict["material"] = rc(json_retreiver("Buildings/material.json"))
-    building_dict["exterior_details"] = rc(json_retreiver("Buildings/exterior_details.json"))
-    building_dict["interior_details_1"] = rc(json_retreiver("Buildings/interior_details.json"))
-    building_dict["interior_details_2"] = rc(json_retreiver("Buildings/interior_details.json"))
+    building_dict["exterior_details"] = rc(
+        json_retreiver("Buildings/exterior_details.json")
+    )
+    building_dict["interior_details_1"] = rc(
+        json_retreiver("Buildings/interior_details.json")
+    )
+    building_dict["interior_details_2"] = rc(
+        json_retreiver("Buildings/interior_details.json")
+    )
     return building_dict
 
 
