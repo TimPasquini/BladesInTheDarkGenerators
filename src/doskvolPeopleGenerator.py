@@ -77,4 +77,5 @@ def build_person():
 
 if __name__ == "__main__":
     chosen_person = sys.argv[1]
-    print_person(chosen_person)
+    person_dict = build_person()
+    print_person(chosen_person, person_dict)
