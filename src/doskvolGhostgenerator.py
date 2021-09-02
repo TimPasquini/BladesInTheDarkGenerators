@@ -8,8 +8,8 @@ from utils import rc, json_retreiver
 def print_ghost(ghost_dict):
     """This will print text that describes a new ghost"""
     output = f"""
-    This is the ghost of {ghost_dict["first_name"].capitalize()} '{ghost_dict["aliases"].capitalize()}' {ghost_dict["family_name"].capitalize()}.
-    There is/are (a/an) {ghost_dict["ghostly_effect"].lower()} when this {ghost_dict["ghost_trait"].lower()} spirit appears!
+This is the ghost of {ghost_dict["first_name"].capitalize()} '{ghost_dict["aliases"].capitalize()}' {ghost_dict["family_name"].capitalize()}.
+There is/are (a/an) {ghost_dict["ghostly_effect"].lower()} when this {ghost_dict["ghost_trait"].lower()} spirit appears!
     """
     print(output)
     return output

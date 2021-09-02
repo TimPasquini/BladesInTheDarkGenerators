@@ -12,14 +12,14 @@ def print_building(quality, building_dict):
     needs to be "rare" or "common"""
     if quality == "rare":
         output = f"""
-        This {building_dict["material"].lower()} {building_dict["rare_use"].lower()} building is decorated with {building_dict["exterior_details"].lower()}.
-        It is notable for it's {building_dict["interior_details_1"].lower()} and {building_dict["interior_details_2"].lower()}"""
+This {building_dict["material"].lower()} {building_dict["rare_use"].lower()} building is decorated with {building_dict["exterior_details"].lower()}.
+It is notable for it's {building_dict["interior_details_1"].lower()} and {building_dict["interior_details_2"].lower()}"""
         print(output)
         return output
     elif quality == "common":
         output = f"""
-        This {building_dict["material"].lower()} {building_dict["common_use"].lower()} building is decorated with {building_dict["exterior_details"].lower()}.
-        It is notable for it's {building_dict["interior_details_1"].lower()} and {building_dict["interior_details_2"].lower()}"""
+This {building_dict["material"].lower()} {building_dict["common_use"].lower()} building is decorated with {building_dict["exterior_details"].lower()}.
+It is notable for it's {building_dict["interior_details_1"].lower()} and {building_dict["interior_details_2"].lower()}"""
         print(output)
         return output
     else:

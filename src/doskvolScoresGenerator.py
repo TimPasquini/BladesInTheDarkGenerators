@@ -12,41 +12,41 @@ def print_score(score_dict):
     score_dict = _ghostbuster(score_dict)
     if score_dict.get("c_ghost", False) and score_dict.get("t_ghost", False):
         output = f"""
-        A {score_dict['client']} a {score_dict['c_ghost']} wants the crew to {score_dict['job']} a {score_dict['target']} a {score_dict['t_ghost']}.
-        It's more complex because...
-        {score_dict['twist']}. 
-        A {score_dict['connection']} has some further insights into the bigger picture, 
-        but {score_dict['faction']} are also involved.
+A {score_dict['client']} a {score_dict['c_ghost']} wants the crew to {score_dict['job']} a {score_dict['target']} a {score_dict['t_ghost']}.
+It's more complex because...
+    {score_dict['twist']}. 
+A {score_dict['connection']} has some further insights into the bigger picture, 
+    but {score_dict['faction']} are also involved.
         """
         print(output)
         return output
     elif score_dict.get("c_ghost", False):
         output = f"""
-        A {score_dict['client']} a {score_dict['c_ghost']} wants the crew to {score_dict['job']} a {score_dict['target']}.
-        It's more complex because...
-        {score_dict['twist']}.
-        A {score_dict['connection']} has some further insights into the bigger picture, 
-        but {score_dict['faction']} are also involved.
+A {score_dict['client']} a {score_dict['c_ghost']} wants the crew to {score_dict['job']} a {score_dict['target']}.
+It's more complex because...
+    {score_dict['twist']}.
+A {score_dict['connection']} has some further insights into the bigger picture, 
+    but {score_dict['faction']} are also involved.
         """
         print(output)
         return output
     elif score_dict.get("t_ghost", False):
         output = f"""
-        A {score_dict['client']} wants the crew to {score_dict['job']} a {score_dict['target']} a {score_dict['t_ghost']}.
-        It's more complex because...
-        {score_dict['twist']}. 
-        A {score_dict['connection']} has some further insights into the bigger picture, 
-        but {score_dict['faction']} are also involved.
+A {score_dict['client']} wants the crew to {score_dict['job']} a {score_dict['target']} a {score_dict['t_ghost']}.
+It's more complex because...
+    {score_dict['twist']}. 
+A {score_dict['connection']} has some further insights into the bigger picture, 
+    but {score_dict['faction']} are also involved.
         """
         print(output)
         return output
     else:
         output = f"""
-        A {score_dict['client']} wants the crew to {score_dict['job']} a {score_dict['target']}.
-        It's more complex because...
-        {score_dict['twist']}. 
-        A {score_dict['connection']} has some further insights into the bigger picture, 
-        but {score_dict['faction']} are also involved.
+A {score_dict['client']} wants the crew to {score_dict['job']} a {score_dict['target']}.
+It's more complex because...
+    {score_dict['twist']}. 
+A {score_dict['connection']} has some further insights into the bigger picture, 
+    but {score_dict['faction']} are also involved.
         """
         print(output)
         return output

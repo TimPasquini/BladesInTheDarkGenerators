@@ -8,10 +8,10 @@ from utils import rc, json_retreiver
 def print_demon(demon_dict):
     """This will print text describing a new demon"""
     output = f"""
-    Tremble at the sight of {demon_dict["name"].capitalize()}!
-    Behold, {demon_dict["feature_1"].lower()} and {demon_dict["feature_2"].lower()}.
-    This {demon_dict["affinity"].lower()} demon has a {demon_dict["aspect"].lower()} aspect.
-    This demon desires {demon_dict["desire"].lower()} above all else!
+Tremble at the sight of {demon_dict["name"].capitalize()}!
+Behold, {demon_dict["feature_1"].lower()} and {demon_dict["feature_2"].lower()}.
+This {demon_dict["affinity"].lower()} demon has a {demon_dict["aspect"].lower()} aspect.
+This demon desires {demon_dict["desire"].lower()} above all else!
     """
     print(output)
     return output

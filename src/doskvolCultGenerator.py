@@ -10,9 +10,9 @@ def print_cult(cult_dict):
     it will select a random Forgotten God for the cult and assign them
     a random practice."""
     output = f"""
-        This is the cult of {cult_dict["god"].title()}. 
-        Their cultists follow an edict of:
-            {cult_dict["practice"].capitalize()}
+This is the cult of {cult_dict["god"].title()}. 
+Their cultists follow an edict of:
+    {cult_dict["practice"].capitalize()}
         """
     print(output)
     return output

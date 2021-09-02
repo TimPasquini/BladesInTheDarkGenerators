@@ -10,6 +10,7 @@ import doskvolPeopleGenerator as npc
 import doskvolStreetsGenerator as street
 import doskvolCultGenerator as cult
 import doskvolScoresGenerator as score
+import utils
 
 
 def main():
@@ -32,48 +33,61 @@ Select generator:
         )
         if generator == "1":
             common_person = npc.build_person()
-            pyperclip.copy(npc.print_person("common", common_person))
+            person_description = npc.print_person("common", common_person)
+            pyperclip.copy(person_description)
+            utils.history_log(person_description)
 
         elif generator == "2":
             rare_person = npc.build_person()
-            pyperclip.copy(npc.print_person("rare", rare_person))
+            person_description = npc.print_person("rare", rare_person)
+            pyperclip.copy(person_description)
+            utils.history_log(person_description)
 
         elif generator == "3":
             random_street = street.build_street()
-            pyperclip.copy(street.print_street(random_street))
+            street_description = street.print_street(random_street)
+            pyperclip.copy(street_description)
+            utils.history_log(street_description)
 
         elif generator == "4":
             common_building = building.build_building()
-            pyperclip.copy(building.print_building("common", common_building))
+            building_description = building.print_building("common", common_building)
+            pyperclip.copy(building_description)
+            utils.history_log(building_description)
 
         elif generator == "5":
             rare_building = building.build_building()
-            pyperclip.copy(building.print_building("rare", rare_building))
+            building_description = building.print_building("rare", rare_building)
+            pyperclip.copy(building_description)
+            utils.history_log(building_description)
 
         elif generator == "6":
             random_demon = demon.build_demon()
-            pyperclip.copy(demon.print_demon(random_demon))
+            demon_description = demon.print_demon(random_demon)
+            pyperclip.copy(demon_description)
+            utils.history_log(demon_description)
 
         elif generator == "7":
             random_ghost = ghost.build_ghost()
-            pyperclip.copy(ghost.print_ghost(random_ghost))
+            ghost_description = ghost.print_ghost(random_ghost)
+            pyperclip.copy(ghost_description)
+            utils.history_log(ghost_description)
 
         elif generator == "8":
             random_cult = cult.build_cult()
-            pyperclip.copy(cult.print_cult(random_cult))
+            cult_description = cult.print_cult(random_cult)
+            pyperclip.copy(cult_description)
+            utils.history_log(cult_description)
 
         elif generator == "9":
             random_score = score.build_score()
-            pyperclip.copy(score.print_score(random_score))
+            score_description = score.print_score(random_score)
+            pyperclip.copy(score_description)
+            utils.history_log(score_description)
 
         elif generator == "0":
             break
 
-        elif generator == "9":
-            random_score = score.build_score()
-            score.print_score(random_score)
-        elif generator == "0":
-            break
         else:
             print("Invalid choice. Please try again.")
 
