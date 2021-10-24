@@ -4,37 +4,49 @@
 
 import sys
 import random
+from random import choice as rc
 
-from utils import rc, json_retreiver
+from utils import json_retreiver
 
 
 def print_person(quality, person_dict):
     """This prints a random description of a person, the "quality" argument
     needs to be "rare" or "common"""
     person_dict = _tycherosi_heritage_check(person_dict)
-    name = f"{person_dict['first_name'].capitalize()} '{person_dict['aliases'].capitalize()}' {person_dict['family_name'].capitalize()}:\n"
-    heritage = f"A/An {person_dict['appearance'].lower()} {person_dict['gender'].lower()} {person_dict['heritage'].capitalize()} wearing/using a/an {person_dict['style'].lower()}.\n"
-    quirk = f"Overall, they seem {person_dict['traits'].lower()} but are also {person_dict['quirks'].lower()} They are interested in {person_dict['interests'].lower()}.\n"
-    if quality == "rare":
-        profession = f"They work as a {person_dict['rare_profession']} and use {person_dict['methods'].lower()} to try and gain/cause {person_dict['goals'].lower()}.\n"
-        if "demonic" in person_dict:
-            demonic_trait = f"Their Tycherosi heritage manifests as (a/an) {person_dict['demonic'].lower()}.\n"
-            output = name + heritage + demonic_trait + profession + quirk
-        else:
-            output = name + heritage + profession + quirk
-        print(output)
-        return output
-    elif quality == "common":
-        profession = f"They work as a {person_dict['common_profession']} and use {person_dict['methods'].lower()} to try and gain/cause {person_dict['goals'].lower()}.\n"
-        if "demonic" in person_dict:
-            demonic_trait = f"Their Tycherosi heritage manifests as (a/an) {person_dict['demonic'].lower()}.\n"
-            output = name + heritage + demonic_trait + profession + quirk
-        else:
-            output = name + heritage + profession + quirk
-        print(output)
-        return output
+    name = (f"{person_dict['first_name'].capitalize()} "
+            f"'{person_dict['aliases'].capitalize()}' "
+            f"{person_dict['family_name'].capitalize()}:\n")
+    heritage = (f"A/An {person_dict['appearance'].lower()} " 
+                f"{person_dict['gender'].lower()} "
+                f"{person_dict['heritage'].capitalize()} "
+                f"wearing/using a/an {person_dict['style'].lower()}.\n")
+    quirk = (f"Overall, they seem {person_dict['traits'].lower()} "
+             f"but are also {person_dict['quirks'].lower()}.\n" 
+             f"They are interested in {person_dict['interests'].lower()}.\n")
+
+    common_profession = person_dict['common_profession']
+    rare_profession = person_dict['rare_profession']
+    if quality == "common":
+        profession_t = common_profession
+    elif quality == "rare":
+        profession_t = rare_profession
+    elif quality == "both":
+        profession_t = f"{common_profession}/{rare_profession}"
     else:
-        print("Please enter 'rare' or 'common' as an argument")
+        print("Please enter 'rare', 'common', or 'both' as an argument.")
+        return
+
+    profession = (f"They work as a {profession_t} and use "
+                  f"{person_dict['methods'].lower()} to try and "
+                  f"gain/cause {person_dict['goals'].lower()}.\n")  # TODO: Dynamic gain/cause
+
+    if "demonic" in person_dict:
+        demonic_trait = (f"Their Tycherosi heritage manifests as "  # TODO: Dynamic a/an
+                         f"(a/an) {person_dict['demonic'].lower()}.\n")
+        output = name + heritage + demonic_trait + profession + quirk
+    else:
+        output = name + heritage + profession + quirk
+    return output
 
 
 def _tycherosi_heritage_check(person_dict):
@@ -76,6 +88,9 @@ def build_person():
 
 
 if __name__ == "__main__":
-    chosen_person = sys.argv[1]
+    try:
+        chosen_person = sys.argv[1]
+    except IndexError:
+        chosen_person = 'both'
     person_dict = build_person()
-    print_person(chosen_person, person_dict)
+    print(print_person(chosen_person, person_dict))
