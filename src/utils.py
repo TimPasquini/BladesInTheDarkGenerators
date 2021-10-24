@@ -10,12 +10,6 @@ def json_retreiver(json_filename):
         return json.load(f)
 
 
-def rc(variable):
-    """rc = random choice. Picks a random item from the list and returns
-    it. This is mostly to shorten up the variables in the print command"""
-    return random.choice(variable)
-
-
 def history_log(output):
     """Writes each generator call to an text file so that it's not lost
     when the program is closed or crashes."""

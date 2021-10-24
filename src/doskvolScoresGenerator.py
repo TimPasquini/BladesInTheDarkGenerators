@@ -2,7 +2,8 @@
 # Uses the tables at the end of Blades in the Dark to generate a random
 # score.
 
-from utils import rc, json_retreiver
+from random import choice as rc
+from utils import json_retreiver
 
 
 def print_score(score_dict):
@@ -18,7 +19,6 @@ It's more complex because...
 A {score_dict['connection']} has some further insights into the bigger picture, 
     but {score_dict['faction']} are also involved.
         """
-        print(output)
         return output
     elif score_dict.get("c_ghost", False):
         output = f"""
@@ -28,7 +28,6 @@ It's more complex because...
 A {score_dict['connection']} has some further insights into the bigger picture, 
     but {score_dict['faction']} are also involved.
         """
-        print(output)
         return output
     elif score_dict.get("t_ghost", False):
         output = f"""
@@ -38,7 +37,6 @@ It's more complex because...
 A {score_dict['connection']} has some further insights into the bigger picture, 
     but {score_dict['faction']} are also involved.
         """
-        print(output)
         return output
     else:
         output = f"""
@@ -48,7 +46,6 @@ It's more complex because...
 A {score_dict['connection']} has some further insights into the bigger picture, 
     but {score_dict['faction']} are also involved.
         """
-        print(output)
         return output
 
 
@@ -92,4 +89,4 @@ def build_score():
 
 if __name__ == "__main__":
     new_score = build_score()
-    print_score(new_score)
+    print(print_score(new_score))

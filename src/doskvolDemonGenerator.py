@@ -2,7 +2,8 @@
 # Uses the tables at the end of Blades in the Dark to generate a description
 # for a random demon.
 
-from utils import rc, json_retreiver
+from random import choice as rc
+from utils import json_retreiver
 
 
 def print_demon(demon_dict):
@@ -13,7 +14,6 @@ Behold, {demon_dict["feature_1"].lower()} and {demon_dict["feature_2"].lower()}.
 This {demon_dict["affinity"].lower()} demon has a {demon_dict["aspect"].lower()} aspect.
 This demon desires {demon_dict["desire"].lower()} above all else!
     """
-    print(output)
     return output
 
 
@@ -34,4 +34,4 @@ def build_demon():
 
 if __name__ == "__main__":
     random_demon = build_demon()
-    print_demon(random_demon)
+    print(print_demon(random_demon))

@@ -3,27 +3,30 @@
 # for a random building. Use an argument of "rare" or "common" in the terminal
 
 import sys
+from random import choice as rc
 
-from utils import rc, json_retreiver
+from utils import json_retreiver
 
 
 def print_building(quality, building_dict):
     """This prints a random description of a building, the "quality" argument
     needs to be "rare" or "common"""
+    rare = building_dict['rare_use'].lower()
+    common = building_dict['common_use'].lower()
     if quality == "rare":
-        output = f"""
-This {building_dict["material"].lower()} {building_dict["rare_use"].lower()} building is decorated with {building_dict["exterior_details"].lower()}.
-It is notable for it's {building_dict["interior_details_1"].lower()} and {building_dict["interior_details_2"].lower()}"""
-        print(output)
-        return output
+        building_kind = rare
     elif quality == "common":
-        output = f"""
-This {building_dict["material"].lower()} {building_dict["common_use"].lower()} building is decorated with {building_dict["exterior_details"].lower()}.
-It is notable for it's {building_dict["interior_details_1"].lower()} and {building_dict["interior_details_2"].lower()}"""
-        print(output)
-        return output
+        building_kind = common
+    elif quality == "both":
+        building_kind = f"{common}/{rare}"
     else:
-        print("Please enter 'rare' or 'common' as an argument")
+        print("Please enter 'rare', 'common', or 'both' as an argument")
+        return
+    output = (f"This {building_dict['material'].lower()} {building_kind} "
+              f"building is decorated with {building_dict['exterior_details'].lower()}.\n"
+              f"It is notable for it's {building_dict['interior_details_1'].lower()} "
+              f"and {building_dict['interior_details_2'].lower()}")
+    return output
 
 
 def build_building():
@@ -48,5 +51,9 @@ def build_building():
 
 
 if __name__ == "__main__":
-    chosen_building = sys.argv[1]
-    print_building(chosen_building)
+    try:
+        chosen_building = sys.argv[1]
+    except IndexError:  # no building type specified
+        chosen_building = "both"
+    b = build_building()
+    print(print_building(chosen_building, b))

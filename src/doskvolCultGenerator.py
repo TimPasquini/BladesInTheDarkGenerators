@@ -2,7 +2,8 @@
 # Uses the tables at the end of Blades in the Dark to generate a cult to
 # Forgotten God and assign a random practice to their cultists.
 
-from utils import rc, json_retreiver
+from random import choice as rc
+from utils import json_retreiver
 
 
 def print_cult(cult_dict):
@@ -14,7 +15,6 @@ This is the cult of {cult_dict["god"].title()}.
 Their cultists follow an edict of:
     {cult_dict["practice"].capitalize()}
         """
-    print(output)
     return output
 
 
@@ -31,4 +31,4 @@ def build_cult():
 
 if __name__ == "__main__":
     random_cult = build_cult()
-    print_cult(random_cult)
+    print(print_cult(random_cult))

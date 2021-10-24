@@ -2,7 +2,8 @@
 # Uses the tables at the end of Blades in the Dark to generate a description
 # for a random ghost.
 
-from utils import rc, json_retreiver
+from random import choice as rc
+from utils import json_retreiver
 
 
 def print_ghost(ghost_dict):
@@ -11,7 +12,6 @@ def print_ghost(ghost_dict):
 This is the ghost of {ghost_dict["first_name"].capitalize()} '{ghost_dict["aliases"].capitalize()}' {ghost_dict["family_name"].capitalize()}.
 There is/are (a/an) {ghost_dict["ghostly_effect"].lower()} when this {ghost_dict["ghost_trait"].lower()} spirit appears!
     """
-    print(output)
     return output
 
 
@@ -31,4 +31,4 @@ def build_ghost():
 
 if __name__ == "__main__":
     random_ghost = build_ghost()
-    print_ghost(random_ghost)
+    print(print_ghost(random_ghost))

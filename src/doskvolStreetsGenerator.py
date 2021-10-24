@@ -2,7 +2,8 @@
 # Uses the tables at the end of Blades in the Dark to generate a description
 # for a random city street.
 
-from utils import rc, json_retreiver
+from random import choice as rc
+from utils import json_retreiver
 
 
 def print_street(street_dict):
@@ -12,7 +13,6 @@ This {street_dict["moods"]} {street_dict["infastructure_type"]} is primarily use
 (A/An) {street_dict["sights"]} catch(es) your eye. 
 You hear {street_dict["sounds"]} and smell {street_dict["smells"]} on the air. 
 You can't help but notice {street_dict["details_1"]} and {street_dict["details_2"]}."""
-    print(output)
     return output
 
 
@@ -36,4 +36,4 @@ def build_street():
 
 
 if __name__ == "__main__":
-    print_street()
+    print(print_street(build_street()))
