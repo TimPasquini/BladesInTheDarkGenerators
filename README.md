@@ -13,7 +13,7 @@ require a bit of creative interpretation.
 Feel free to make suggestions or report errors!
 
 Stand-alone Instructions:
-The easiest way to use these generators is via it's discord bot implementation, ![Sparkwright](https://discord.com/oauth2/authorize?client_id=896105913960788029&permissions=59456&scope=bot). Type "!help" to get started. 
+The easiest way to use these generators is via it's discord bot implementation, [Sparkwright](https://discord.com/oauth2/authorize?client_id=896105913960788029&permissions=59456&scope=bot). Type "!help" to get started. 
 There are several forks that use their own implementations like a web interface 
 or .exe with gui. If you want to use this program as-is you'll need python. See
 instructions below. 
@@ -73,5 +73,5 @@ Scores:
 Create a random score using the data for pages 306 and 307.
 
 Leviathans:
-Uses the Leviathan Song supplement, ![available free here](https://bladesinthedark.com/blades-supplements), to create leviathans and spawn.
+Uses the Leviathan Song supplement, [available free here](https://bladesinthedark.com/blades-supplements), to create leviathans and spawn.
 Requires the arguments "banal" or "surreal" to decide the leviathan's initial activity.
