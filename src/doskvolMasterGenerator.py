@@ -3,6 +3,7 @@
 
 try:
     import pyperclip
+
     clipboard_support = True
 except ImportError:
     clipboard_support = False

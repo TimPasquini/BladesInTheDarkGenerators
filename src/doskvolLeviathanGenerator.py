@@ -37,8 +37,11 @@ def print_leviathan(quality, leviathan_dict):
         treasure_description = f"{active_treasure}.\n"
         treasure_list.append(treasure_description)
     # concatenate string peices and return it
-    output_string = intro + form + size + "".join(region_list) + "".join(treasure_list) +spawn
+    output_string = (
+        intro + form + size + "".join(region_list) + "".join(treasure_list) + spawn
+    )
     return output_string
+
 
 def print_spawn():
     """call this function when you want to generate a new or additional spawn
@@ -46,10 +49,11 @@ def print_spawn():
     output = f"The leviathan releases new spawn, it emits (a/an) {spawner().lower()}"
     return output
 
+
 def spawner():
     """The spawner will select a spawn from the spawn.json and check if it is
     one of the variable type spawns it will generate a spawn from the appropriate
-    criteria. Spawner can be called independently but will only return the 
+    criteria. Spawner can be called independently but will only return the
     actual spawn. Use the print_spawn() function to get flavor text."""
     spawn = rc(json_retreiver("Leviathan/leviathan_spawn.json"))
     if spawn == "trigger three shapes":
@@ -63,7 +67,7 @@ def spawner():
     elif spawn == "trigger ghosts":
         intro = "multitude of ghosts. There is/are (a/an) "
         outro = "dead sailors and other spectral eminations appear"
-        spawn =  intro + str(_grab_ghost()) + outro
+        spawn = intro + str(_grab_ghost()) + outro
     elif spawn == "trigger demon":
         spawn = str(_grab_demon())
     return spawn
@@ -94,8 +98,8 @@ def build_leviathan():
     """Based on the generation criteria laid out by Leviathan Song, a leviathan
     needs a name or epithet, 2-3 shapes, a size expressed a number representing
     distinct "areas" on the leviathan, each area gets a demon trait, some
-    percentage of areas should have a treasure, and each leviathan should have 
-    a spawn. For now, all leviathans will have 3 shapes and 25% of areas with 
+    percentage of areas should have a treasure, and each leviathan should have
+    a spawn. For now, all leviathans will have 3 shapes and 25% of areas with
     have treasure with a minimum of 1."""
     leviathan_dict = {}
     leviathan_dict["banal"] = rc(json_retreiver("Leviathan/banal_activity.json"))
@@ -105,22 +109,23 @@ def build_leviathan():
     leviathan_dict["shape_1"] = _grab_shape()
     leviathan_dict["shape_2"] = _grab_shape()
     leviathan_dict["shape_3"] = _grab_shape()
-    leviathan_dict["size"] = (random.randint(1, 6) + 4)
+    leviathan_dict["size"] = random.randint(1, 6) + 4
     # use the size value to generate demon traits for each region
     for num in range(1, (leviathan_dict["size"] + 1)):
-        leviathan_dict[f"region_{num}"] = rc(json_retreiver("Leviathan/leviathan_demon_traits.json"))
+        leviathan_dict[f"region_{num}"] = rc(
+            json_retreiver("Leviathan/leviathan_demon_traits.json")
+        )
     # generate treasures for leviathan
     leviathan_dict["treasure_index"] = round((leviathan_dict["size"] / 4) + 1)
     for num in range(1, (leviathan_dict["treasure_index"] + 1)):
-        leviathan_dict[f"treasure_{num}"] = rc(json_retreiver("Leviathan/leviathan_treasures.json"))
+        leviathan_dict[f"treasure_{num}"] = rc(
+            json_retreiver("Leviathan/leviathan_treasures.json")
+        )
     leviathan_dict["spawn"] = spawner()
     return leviathan_dict
 
 
-if __name__ == '__main__':
-    try:
-        chosen_activity = sys.argv[1]
-    except IndexError:
-        chosen_activity = 'both'
+if __name__ == "__main__":
+    chosen_activity = sys.argv[1]
     leviathan_dict = build_leviathan()
     print(print_leviathan(chosen_activity, leviathan_dict))
