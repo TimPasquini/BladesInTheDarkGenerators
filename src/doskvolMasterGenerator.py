@@ -3,6 +3,7 @@
 
 try:
     import pyperclip
+
     clipboard_support = True
 except ImportError:
     clipboard_support = False
@@ -10,6 +11,7 @@ except ImportError:
 import doskvolBuildingGenerator as building
 import doskvolDemonGenerator as demon
 import doskvolGhostgenerator as ghost
+import doskvolLeviathanGenerator as leviathan
 import doskvolPeopleGenerator as npc
 import doskvolStreetsGenerator as street
 import doskvolCultGenerator as cult
@@ -22,15 +24,18 @@ def main():
         generator = input(
             """
 Select generator:
-[1] Create common NPC
-[2] Create rare NPC
-[3] Create street description
-[4] Create common building desciption
-[5] Create rare building description
-[6] Create a demon
-[7] Create a ghost
-[8] Create a cult
-[9] Create a score
+[1]  Create common NPC
+[2]  Create rare NPC
+[3]  Create street description
+[4]  Create common building desciption
+[5]  Create rare building description
+[6]  Create a demon
+[7]  Create a ghost
+[8]  Create a cult
+[9]  Create a score
+[10] Create a leviathan doing banal activity
+[11] Create a leviathan doing surreal activity
+[12] Create a leviathan spawn
 [0] Quit
 
 """
@@ -74,6 +79,17 @@ Select generator:
         elif generator == "9":
             random_score = score.build_score()
             description = score.print_score(random_score)
+
+        elif generator == "10":
+            random_leviathan = leviathan.build_leviathan()
+            description = leviathan.print_leviathan("banal", random_leviathan)
+
+        elif generator == "11":
+            random_leviathan = leviathan.build_leviathan()
+            description = leviathan.print_leviathan("surreal", random_leviathan)
+
+        elif generator == "12":
+            description = leviathan.print_spawn()
 
         else:
             print("Invalid choice. Please try again.")
