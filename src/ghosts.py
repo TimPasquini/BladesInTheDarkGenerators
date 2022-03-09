@@ -27,6 +27,6 @@ There is/are (a/an) {self.ghost_effect.lower()} when this {self.ghost_trait.lowe
         return output
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     g = Ghost()
     print(g.describe_ghost())

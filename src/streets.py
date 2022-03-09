@@ -30,6 +30,6 @@ You can't help but notice {self.primary_detail} and {self.secondary_detail}."""
         return output
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     s = Street()
     print(s.describe_street())
