@@ -8,14 +8,14 @@ try:
 except ImportError:
     clipboard_support = False
 
-import doskvolBuildingGenerator as building
-import doskvolDemonGenerator as demon
-import doskvolGhostgenerator as ghost
-import doskvolLeviathanGenerator as leviathan
-import doskvolPeopleGenerator as npc
-import doskvolStreetsGenerator as street
-import doskvolCultGenerator as cult
-import doskvolScoresGenerator as score
+import buildings
+import demons
+import ghosts
+import leviathans
+import people
+import streets
+import cults
+import scores
 import utils
 
 
@@ -45,51 +45,52 @@ Select generator:
             break
 
         elif generator == "1":
-            common_person = npc.build_person()
-            description = npc.print_person("common", common_person)
+            common_person = people.Person('common')
+            description = common_person.describe_person()
 
         elif generator == "2":
-            rare_person = npc.build_person()
-            description = npc.print_person("rare", rare_person)
+            rare_person = people.Person('rare')
+            description = rare_person.describe_person()
 
         elif generator == "3":
-            random_street = street.build_street()
-            description = street.print_street(random_street)
+            random_street = streets.Street()
+            description = random_street.describe_street()
 
         elif generator == "4":
-            common_building = building.build_building()
-            description = building.print_building("common", common_building)
+            common_building = buildings.Building('common')
+            description = common_building.describe_building()
 
         elif generator == "5":
-            rare_building = building.build_building()
-            description = building.print_building("rare", rare_building)
+            rare_building = buildings.Building('rare')
+            description = common_building.describe_building()
 
         elif generator == "6":
-            random_demon = demon.build_demon()
-            description = demon.print_demon(random_demon)
+            random_demon = demons.Demon()
+            description = random_demon.describe_demon()
 
         elif generator == "7":
-            random_ghost = ghost.build_ghost()
-            description = ghost.print_ghost(random_ghost)
+            random_ghost = ghosts.Ghost()
+            description = random_ghost.describe_ghost()
 
         elif generator == "8":
-            random_cult = cult.build_cult()
-            description = cult.print_cult(random_cult)
+            random_cult = cults.Cult()
+            description = random_cult.describe_cult()
 
         elif generator == "9":
-            random_score = score.build_score()
-            description = score.print_score(random_score)
+            random_score = scores.Score()
+            description = random_score.describe_score()
 
         elif generator == "10":
-            random_leviathan = leviathan.build_leviathan()
-            description = leviathan.print_leviathan("banal", random_leviathan)
+            random_leviathan = leviathans.Leviathan('banal')
+            description = random_leviathan.describe_leviathan()
 
         elif generator == "11":
-            random_leviathan = leviathan.build_leviathan()
-            description = leviathan.print_leviathan("surreal", random_leviathan)
+            random_leviathan = leviathans.Leviathan('surreal')
+            description = random_leviathan.describe_leviathan()
 
         elif generator == "12":
-            description = leviathan.print_spawn()
+            random_spawn = leviathans.LeviathanSpawn()
+            description = random_spawn.describe_spawn()
 
         else:
             print("Invalid choice. Please try again.")

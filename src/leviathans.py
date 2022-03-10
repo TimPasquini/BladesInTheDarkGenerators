@@ -150,7 +150,7 @@ class LeviathanSpawn(object):
     def describe_spawn(self):
         """returns a string describing the spawn"""
         output = (
-            f"The leviathan releases a new spawn, it emits (a/an) {self.form.lower()}"
+            f"The leviathan releases a new spawn, it emits (a/an) {self.form}"
         )
         return output
 
