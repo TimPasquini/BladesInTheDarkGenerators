@@ -9,7 +9,9 @@ from utils import json_retreiver
 
 
 class Building(object):
-    """A randomly generated building in the city of Doskvol."""
+    """A randomly generated building in the city of Doskvol. Uses both common
+    and rare building purposes by default, 'rare' or 'common' can be passed to
+    use the respective lists."""
 
     def __init__(self, purpose="both"):
         self.material = rc(json_retreiver("Buildings/material.json"))
