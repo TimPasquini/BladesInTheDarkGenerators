@@ -12,9 +12,9 @@ from utils import json_retreiver
 class Person(object):
     """A randomly generated person in Doskvol"""
 
-    def __init__(self, profession="both"):
+    def __init__(self, profession="both", heritage=None):
         self.profession = profession
-        self.heritage = None
+        self.heritage = heritage
         self.gender = rc(json_retreiver("People/gender.json"))
         self.appearance = rc(json_retreiver("People/appearance.json"))
         self.goals = rc(json_retreiver("People/goals.json"))
@@ -50,8 +50,11 @@ class Person(object):
         return self._heritage
 
     @heritage.setter
-    def heritage(self, dummy_arg):
-        h = rcs(json_retreiver("People/heritage.json"), weights=[50, 10, 5, 5, 5, 5])[0]
+    def heritage(self, default_heritage):
+        if default_heritage is None:
+            h = rcs(json_retreiver("People/heritage.json"), weights=[50, 10, 5, 5, 5, 5])[0]
+        else:
+            h = default_heritage
         if h.lower() != "tycherosi":
             self._heritage = h
         else:

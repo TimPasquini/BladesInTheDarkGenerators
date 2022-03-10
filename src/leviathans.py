@@ -12,15 +12,15 @@ from utils import json_retreiver
 class Leviathan(object):
     """A randomly generated leviathan"""
 
-    def __init__(self, activity="both"):
+    def __init__(self, activity="both", size=None, treasure_index=None):
         self.activity = activity
         self.name = rc(json_retreiver("Leviathan/leviathan_names.json"))
         self.epithet = rc(json_retreiver("Leviathan/epithet.json"))
         self.head_shape = self._grab_shape()
         self.body_shape = self._grab_shape()
         self.limb_shape = self._grab_shape()
-        self.size = None
-        self.treasure_index = None
+        self.size = size
+        self.treasure_index = treasure_index
         self.spawn = LeviathanSpawn().form
 
     @property
@@ -48,9 +48,12 @@ class Leviathan(object):
         return self._size
 
     @size.setter
-    def size(self, dummy_arg):
-        leviathan_size = ri(1, 6) + 4
-        self._size = leviathan_size
+    def size(self, default_size):
+        if default_size is None:
+            leviathan_size = ri(1, 6) + 4
+            self._size = leviathan_size
+        else:
+            self._size = default_size
         leviathan_regions = {}
         for num in range(1, self.size + 1):
             leviathan_regions[f"Region_{num}"] = rc(
@@ -63,8 +66,11 @@ class Leviathan(object):
         return self._treasure_index
 
     @treasure_index.setter
-    def treasure_index(self, dummy_arg):
-        self._treasure_index = round(self.size / 4) + 1
+    def treasure_index(self, default_index):
+        if default_index is None:
+            self._treasure_index = round(self.size / 4) + 1
+        else:
+            self._treasure_index = default_index
         leviathan_treasures = {}
         for num in range(1, self.treasure_index + 1):
             leviathan_treasures[f"treasure_{num}"] = rc(

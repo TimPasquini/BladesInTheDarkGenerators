@@ -62,7 +62,7 @@ Select generator:
 
         elif generator == "5":
             rare_building = buildings.Building('rare')
-            description = common_building.describe_building()
+            description = rare_building.describe_building()
 
         elif generator == "6":
             random_demon = demons.Demon()

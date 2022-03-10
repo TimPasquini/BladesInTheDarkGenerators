@@ -9,9 +9,9 @@ from utils import json_retreiver
 class Score(object):
     """A randomly generated score for a crew in Doskvol to run"""
 
-    def __init__(self):
-        self.client = None
-        self.target = None
+    def __init__(self, client=None, target=None):
+        self.client = client
+        self.target = target
         self.job = rc(json_retreiver("Scores/score_type.json"))
         self.twist = rc(json_retreiver("Scores/complication.json"))
         self.connection = rc(json_retreiver("Scores/connection.json"))
@@ -22,8 +22,11 @@ class Score(object):
         return self._client
 
     @client.setter
-    def client(self, dummy_arg):
-        first_client = rc(json_retreiver("Scores/client_target.json"))
+    def client(self, default_profession):
+        if default_profession is None:
+            first_client = rc(json_retreiver("Scores/client_target.json"))
+        else:
+            first_client = default_profession
         if first_client != "Ghost of":
             self._client = first_client
         else:
@@ -37,8 +40,11 @@ class Score(object):
         return self._target
 
     @target.setter
-    def target(self, dummy_arg):
-        first_target = rc(json_retreiver("Scores/client_target.json"))
+    def target(self, default_profession):
+        if default_profession is None:
+            first_target = rc(json_retreiver("Scores/client_target.json"))
+        else:
+            first_target = default_profession
         if first_target != "Ghost of":
             self._target = first_target
         else:
