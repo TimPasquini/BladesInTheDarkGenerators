@@ -10,8 +10,8 @@ class Cult(object):
     """A randomly generated Cult operating in the city of Doskvol"""
 
     def __init__(self):
-        self.god = rc(json_retreiver("Cults/forgotten_gods.json"))
-        self.practice = rc(json_retreiver("Cults/cult_practices.json"))
+        self.god = rc(json_retreiver("../data/Cults/forgotten_gods.json"))
+        self.practice = rc(json_retreiver("../data/Cults/cult_practices.json"))
 
     def describe_cult(self):
         """returns a string that describes a cult based on its attributes"""

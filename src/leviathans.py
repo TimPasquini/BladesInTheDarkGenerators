@@ -14,8 +14,8 @@ class Leviathan(object):
 
     def __init__(self, activity="both", size=None, treasure_index=None):
         self.activity = activity
-        self.name = rc(json_retreiver("Leviathan/leviathan_names.json"))
-        self.epithet = rc(json_retreiver("Leviathan/epithet.json"))
+        self.name = rc(json_retreiver("../data/Leviathan/leviathan_names.json"))
+        self.epithet = rc(json_retreiver("../data/Leviathan/epithet.json"))
         self.head_shape = self._grab_shape()
         self.body_shape = self._grab_shape()
         self.limb_shape = self._grab_shape()
@@ -30,13 +30,15 @@ class Leviathan(object):
     @activity.setter
     def activity(self, leviathan_activity):
         if leviathan_activity.lower() == "banal":
-            self._activity = rc(json_retreiver("Leviathan/banal_activity.json"))
+            self._activity = rc(json_retreiver("../data/Leviathan/banal_activity.json"))
         elif leviathan_activity.lower() == "surreal":
-            self._activity = rc(json_retreiver("Leviathan/surreal_activity.json"))
+            self._activity = rc(
+                json_retreiver("../data/Leviathan/surreal_activity.json")
+            )
         elif leviathan_activity.lower() == "both":
             self._activity = rc(
-                json_retreiver("Leviathan/banal_activity.json")
-                + json_retreiver("Leviathan/surreal_activity.json")
+                json_retreiver("../data/Leviathan/banal_activity.json")
+                + json_retreiver("../data/Leviathan/surreal_activity.json")
             )
         else:
             raise AttributeError(
@@ -57,7 +59,7 @@ class Leviathan(object):
         leviathan_regions = {}
         for num in range(1, self.size + 1):
             leviathan_regions[f"Region_{num}"] = rc(
-                json_retreiver("Leviathan/leviathan_demon_traits.json")
+                json_retreiver("../data/Leviathan/leviathan_demon_traits.json")
             )
         self.regions = leviathan_regions
 
@@ -74,12 +76,12 @@ class Leviathan(object):
         leviathan_treasures = {}
         for num in range(1, self.treasure_index + 1):
             leviathan_treasures[f"treasure_{num}"] = rc(
-                json_retreiver("Leviathan/leviathan_treasures.json")
+                json_retreiver("../data/Leviathan/leviathan_treasures.json")
             )
         self.treasures = leviathan_treasures
 
     def _grab_shape(self):
-        return rc(json_retreiver("Leviathan/shapes.json"))
+        return rc(json_retreiver("../data/Leviathan/shapes.json"))
 
     def describe_leviathan(self):
         intro = f"A leviathan is {self.activity.lower()} before you in the water.\n"
@@ -116,7 +118,7 @@ class LeviathanSpawn(object):
     """A randomly generated spawn of a Leviathan"""
 
     def __init__(self):
-        self.form = rc(json_retreiver("Leviathan/leviathan_spawn.json"))
+        self.form = rc(json_retreiver("../data/Leviathan/leviathan_spawn.json"))
 
     @property
     def form(self):
@@ -139,25 +141,23 @@ class LeviathanSpawn(object):
         self._form = spawn_form
 
     def _grab_shape(self):
-        return rc(json_retreiver("Leviathan/shapes.json"))
+        return rc(json_retreiver("../data/Leviathan/shapes.json"))
 
     def _grab_ghost(self):
-        trait = rc(json_retreiver("Ghosts/ghost_traits.json"))
-        effect = rc(json_retreiver("Ghosts/ghostly_effect.json"))
+        trait = rc(json_retreiver("../data/Ghosts/ghost_traits.json"))
+        effect = rc(json_retreiver("../data/Ghosts/ghostly_effect.json"))
         return f"{effect.lower()} when these {trait.lower()} "
 
     def _grab_demon(self):
-        feature = rc(json_retreiver("Demons/demon_features.json"))
-        aspect = rc(json_retreiver("Demons/demonic_aspect.json"))
-        affinity = rc(json_retreiver("Demons/demonic_affinity.json"))
+        feature = rc(json_retreiver("../data/Demons/demon_features.json"))
+        aspect = rc(json_retreiver("../data/Demons/demonic_aspect.json"))
+        affinity = rc(json_retreiver("../data/Demons/demonic_affinity.json"))
         demon = f"{aspect.lower()} {affinity.lower()} demon with {feature.lower()}"
         return demon
 
     def describe_spawn(self):
         """returns a string describing the spawn"""
-        output = (
-            f"The leviathan releases a new spawn, it emits (a/an) {self.form}"
-        )
+        output = f"The leviathan releases a new spawn, it emits (a/an) {self.form}"
         return output
 
 

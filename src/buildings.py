@@ -14,10 +14,16 @@ class Building(object):
     use the respective lists."""
 
     def __init__(self, purpose="both"):
-        self.material = rc(json_retreiver("Buildings/material.json"))
-        self.exterior_detail = rc(json_retreiver("Buildings/exterior_details.json"))
-        self.interior_detail_1 = rc(json_retreiver("Buildings/exterior_details.json"))
-        self.interior_detail_2 = rc(json_retreiver("Buildings/exterior_details.json"))
+        self.material = rc(json_retreiver("../data/Buildings/material.json"))
+        self.exterior_detail = rc(
+            json_retreiver("../data/Buildings/exterior_details.json")
+        )
+        self.interior_detail_1 = rc(
+            json_retreiver("../data/Buildings/exterior_details.json")
+        )
+        self.interior_detail_2 = rc(
+            json_retreiver("../data/Buildings/exterior_details.json")
+        )
         self.purpose = purpose
 
     @property
@@ -27,13 +33,13 @@ class Building(object):
     @purpose.setter
     def purpose(self, usage):
         if usage.lower() == "rare":
-            self._purpose = rc(json_retreiver("Buildings/rare_use.json"))
+            self._purpose = rc(json_retreiver("../data/Buildings/rare_use.json"))
         elif usage.lower() == "common":
-            self._purpose = rc(json_retreiver("Buildings/common_use.json"))
+            self._purpose = rc(json_retreiver("../data/Buildings/common_use.json"))
         elif usage.lower() == "both":
             self._purpose = rc(
-                json_retreiver("Buildings/common_use.json")
-                + json_retreiver("Buildings/rare_use.json")
+                json_retreiver("../data/Buildings/common_use.json")
+                + json_retreiver("../data/Buildings/rare_use.json")
             )
         else:
             raise AttributeError("Purpose must be 'common', 'rare', or 'both'")

@@ -12,11 +12,11 @@ class Ghost(object):
     the deathlands"""
 
     def __init__(self):
-        self.first_name = rc(json_retreiver("Ghosts/first_names.json"))
-        self.family_name = rc(json_retreiver("Ghosts/family_names.json"))
-        self.alias = rc(json_retreiver("Ghosts/aliases.json"))
-        self.ghost_trait = rc(json_retreiver("Ghosts/ghost_traits.json"))
-        self.ghost_effect = rc(json_retreiver("Ghosts/ghostly_effect.json"))
+        self.first_name = rc(json_retreiver("../data/Ghosts/first_names.json"))
+        self.family_name = rc(json_retreiver("../data/Ghosts/family_names.json"))
+        self.alias = rc(json_retreiver("../data/Ghosts/aliases.json"))
+        self.ghost_trait = rc(json_retreiver("../data/Ghosts/ghost_traits.json"))
+        self.ghost_effect = rc(json_retreiver("../data/Ghosts/ghostly_effect.json"))
 
     def describe_ghost(self):
         """Returns a string that describes a ghost based on its attributes"""

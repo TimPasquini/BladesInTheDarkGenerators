@@ -11,14 +11,16 @@ class Street(object):
     """A description of a randomly generated street in the city of Doskvol"""
 
     def __init__(self):
-        self.mood = rc(json_retreiver("Streets/moods.json"))
-        self.sight = rc(json_retreiver("Streets/sights.json"))
-        self.sound = rc(json_retreiver("Streets/sounds.json"))
-        self.smell = rc(json_retreiver("Streets/smells.json"))
-        self.use = rc(json_retreiver("Streets/use.json"))
-        self.infastructure_type = rc(json_retreiver("Streets/infastructure_type.json"))
-        self.primary_detail = rc(json_retreiver("Streets/details.json"))
-        self.secondary_detail = rc(json_retreiver("Streets/details.json"))
+        self.mood = rc(json_retreiver("../data/Streets/moods.json"))
+        self.sight = rc(json_retreiver("../data/Streets/sights.json"))
+        self.sound = rc(json_retreiver("../data/Streets/sounds.json"))
+        self.smell = rc(json_retreiver("../data/Streets/smells.json"))
+        self.use = rc(json_retreiver("../data/Streets/use.json"))
+        self.infastructure_type = rc(
+            json_retreiver("../data/Streets/infastructure_type.json")
+        )
+        self.primary_detail = rc(json_retreiver("../data/Streets/details.json"))
+        self.secondary_detail = rc(json_retreiver("../data/Streets/details.json"))
 
     def describe_street(self):
         """returns a string describing a street using its attributes"""

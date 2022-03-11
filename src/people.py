@@ -15,17 +15,17 @@ class Person(object):
     def __init__(self, profession="both", heritage=None):
         self.profession = profession
         self.heritage = heritage
-        self.gender = rc(json_retreiver("People/gender.json"))
-        self.appearance = rc(json_retreiver("People/appearance.json"))
-        self.goals = rc(json_retreiver("People/goals.json"))
-        self.methods = rc(json_retreiver("People/methods.json"))
-        self.style = rc(json_retreiver("People/style.json"))
-        self.trait = rc(json_retreiver("People/traits.json"))
-        self.interest = rc(json_retreiver("People/interests.json"))
-        self.quirk = rc(json_retreiver("People/quirks.json"))
-        self.first_name = rc(json_retreiver("People/first_names.json"))
-        self.family_name = rc(json_retreiver("People/family_names.json"))
-        self.alias = rc(json_retreiver("People/aliases.json"))
+        self.gender = rc(json_retreiver("../data/People/gender.json"))
+        self.appearance = rc(json_retreiver("../data/People/appearance.json"))
+        self.goals = rc(json_retreiver("../data/People/goals.json"))
+        self.methods = rc(json_retreiver("../data/People/methods.json"))
+        self.style = rc(json_retreiver("../data/People/style.json"))
+        self.trait = rc(json_retreiver("../data/People/traits.json"))
+        self.interest = rc(json_retreiver("../data/People/interests.json"))
+        self.quirk = rc(json_retreiver("../data/People/quirks.json"))
+        self.first_name = rc(json_retreiver("../data/People/first_names.json"))
+        self.family_name = rc(json_retreiver("../data/People/family_names.json"))
+        self.alias = rc(json_retreiver("../data/People/aliases.json"))
 
     @property
     def profession(self):
@@ -34,13 +34,15 @@ class Person(object):
     @profession.setter
     def profession(self, rarity):
         if rarity.lower() == "rare":
-            self._profession = rc(json_retreiver("People/rare_profession.json"))
+            self._profession = rc(json_retreiver("../data/People/rare_profession.json"))
         elif rarity.lower() == "common":
-            self._profession = rc(json_retreiver("People/common_profession.json"))
+            self._profession = rc(
+                json_retreiver("../data/People/common_profession.json")
+            )
         elif rarity.lower() == "both":
             self._profession = rc(
-                json_retreiver("People/common_profession.json")
-                + json_retreiver("People/rare_profession.json")
+                json_retreiver("../data/People/common_profession.json")
+                + json_retreiver("../data/People/rare_profession.json")
             )
         else:
             raise AttributeError("Purpose must be 'common', 'rare', or 'both'")
@@ -52,14 +54,19 @@ class Person(object):
     @heritage.setter
     def heritage(self, default_heritage):
         if default_heritage is None:
-            h = rcs(json_retreiver("People/heritage.json"), weights=[50, 10, 5, 5, 5, 5])[0]
+            h = rcs(
+                json_retreiver("../data/People/heritage.json"),
+                weights=[50, 10, 5, 5, 5, 5],
+            )[0]
         else:
             h = default_heritage
         if h.lower() != "tycherosi":
             self._heritage = h
         else:
             self._heritage = h
-            self.demonic_feature = rc(json_retreiver("Demons/demon_features.json"))
+            self.demonic_feature = rc(
+                json_retreiver("../data/Demons/demon_features.json")
+            )
 
     def describe_person(self):
         """Returns a string that describes the building based on its attributes"""

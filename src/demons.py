@@ -11,12 +11,14 @@ class Demon(object):
     deathlands"""
 
     def __init__(self):
-        self.name = rc(json_retreiver("Demons/demon_names.json"))
-        self.primary_feature = rc(json_retreiver("Demons/demon_features.json"))
-        self.secondary_feature = rc(json_retreiver("Demons/demon_features.json"))
-        self.aspect = rc(json_retreiver("Demons/demonic_aspect.json"))
-        self.affinity = rc(json_retreiver("Demons/demonic_affinity.json"))
-        self.desire = rc(json_retreiver("Demons/demon_desire.json"))
+        self.name = rc(json_retreiver("../data/Demons/demon_names.json"))
+        self.primary_feature = rc(json_retreiver("../data/Demons/demon_features.json"))
+        self.secondary_feature = rc(
+            json_retreiver("../data/Demons/demon_features.json")
+        )
+        self.aspect = rc(json_retreiver("../data/Demons/demonic_aspect.json"))
+        self.affinity = rc(json_retreiver("../data/Demons/demonic_affinity.json"))
+        self.desire = rc(json_retreiver("../data/Demons/demon_desire.json"))
 
     def describe_demon(self):
         """Returns a description of the demon based on its attributes"""

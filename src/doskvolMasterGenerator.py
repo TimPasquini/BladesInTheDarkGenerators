@@ -45,11 +45,11 @@ Select generator:
             break
 
         elif generator == "1":
-            common_person = people.Person('common')
+            common_person = people.Person("common")
             description = common_person.describe_person()
 
         elif generator == "2":
-            rare_person = people.Person('rare')
+            rare_person = people.Person("rare")
             description = rare_person.describe_person()
 
         elif generator == "3":
@@ -57,11 +57,11 @@ Select generator:
             description = random_street.describe_street()
 
         elif generator == "4":
-            common_building = buildings.Building('common')
+            common_building = buildings.Building("common")
             description = common_building.describe_building()
 
         elif generator == "5":
-            rare_building = buildings.Building('rare')
+            rare_building = buildings.Building("rare")
             description = rare_building.describe_building()
 
         elif generator == "6":
@@ -81,11 +81,11 @@ Select generator:
             description = random_score.describe_score()
 
         elif generator == "10":
-            random_leviathan = leviathans.Leviathan('banal')
+            random_leviathan = leviathans.Leviathan("banal")
             description = random_leviathan.describe_leviathan()
 
         elif generator == "11":
-            random_leviathan = leviathans.Leviathan('surreal')
+            random_leviathan = leviathans.Leviathan("surreal")
             description = random_leviathan.describe_leviathan()
 
         elif generator == "12":
