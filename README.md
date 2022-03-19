@@ -34,7 +34,7 @@ to your clipboard for easy pasting into a VTT, chat, or your notes. The Master
 Generator will also print your generated descriptions to a text file log.
 
 Each generator exists as individual module that can be run from a
-terminal instance. Several of them require arguements to run correctly.
+terminal instance. A few have optional arguments that can be given.
 
 For ease of modification of the various table contents, each table from 
 the book is its own .json file which gets imported as a python list.
@@ -51,13 +51,12 @@ the Blades in the Dark sourcebook.
 
 Buildings:
 Get a random building description using the information from page 301. 
-Use the arguments "rare" or "common" in the terminal to decide which 
-table to roll from.
+Optionally accepts the argument of "rare" or "common" during instantiation.
 
 People:
-Get a random NPC from the data on pages 302 and 303. Use the arguments
-"rare" or "common" in the terminal to decide which profession table to 
-roll from.
+Get a random NPC from the data on pages 302 and 303. 
+Optionally accepts the arguments "rare" or "common" for the profession 
+argument and will also accept a heritage argument during instantiation.
 
 Demons:
 Creates a random demon out of the data on page 304. 
@@ -70,8 +69,10 @@ Cults:
 Create a cult to a random forgotten god and assign a random religious practice to it using data on page 305.
 
 Scores:
-Create a random score using the data for pages 306 and 307.
+Create a random score using the data for pages 306 and 307. Optionally accepts target and
+client arguments during instantiation.
 
 Leviathans:
 Uses the Leviathan Song supplement, [available free here](https://bladesinthedark.com/blades-supplements), to create leviathans and spawn.
-Requires the arguments "banal" or "surreal" to decide the leviathan's initial activity.
+Optionally accepts an argument for activity which should be  "banal" or "surreal" to decide the leviathan's initial activity. Also optionally accepts a size and treasure index value to define the
+number of regions on the leviathan and amount of treasure items, respectively, during instantiation.
