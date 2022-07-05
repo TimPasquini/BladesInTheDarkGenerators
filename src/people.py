@@ -6,46 +6,57 @@ import sys
 from random import choice as rc
 from random import choices as rcs
 
-from utils import json_retreiver
+from utils import *
 
 
 class Person(object):
     """A randomly generated person in Doskvol"""
 
-    def __init__(self, profession="both", heritage=None):
-        self.profession = profession
+    def __init__(
+        self,
+        profession=None,
+        heritage=None,
+        gender=None,
+        appearance=None,
+        goals=None,
+        methods=None,
+        style=None,
+        trait=None,
+        interest=None,
+        quirk=None,
+        first_name=None,
+        family_name=None,
+        alias=None,
+    ):
+        self.profession = two_choice_attribute_setter(
+            profession,
+            "rare",
+            "common",
+            "People/rare_profession.json",
+            "People/common_profession.json",
+        )
         self.heritage = heritage
-        self.gender = rc(json_retreiver("../data/People/gender.json"))
-        self.appearance = rc(json_retreiver("../data/People/appearance.json"))
-        self.goals = rc(json_retreiver("../data/People/goals.json"))
-        self.methods = rc(json_retreiver("../data/People/methods.json"))
-        self.style = rc(json_retreiver("../data/People/style.json"))
-        self.trait = rc(json_retreiver("../data/People/traits.json"))
-        self.interest = rc(json_retreiver("../data/People/interests.json"))
-        self.quirk = rc(json_retreiver("../data/People/quirks.json"))
-        self.first_name = rc(json_retreiver("../data/People/first_names.json"))
-        self.family_name = rc(json_retreiver("../data/People/family_names.json"))
-        self.alias = rc(json_retreiver("../data/People/aliases.json"))
+        self.gender = simple_attribute_setter(gender, "People/gender.json")
+        self.appearance = simple_attribute_setter(appearance, "People/appearance.json")
+        self.goals = simple_attribute_setter(goals, "People/goals.json")
+        self.methods = simple_attribute_setter(methods, "People/methods.json")
+        self.style = simple_attribute_setter(style, "People/style.json")
+        self.trait = simple_attribute_setter(trait, "People/traits.json")
+        self.interest = simple_attribute_setter(interest, "People/interests.json")
+        self.quirk = simple_attribute_setter(quirk, "People/quirks.json")
+        self.first_name = simple_attribute_setter(first_name, "People/first_names.json")
+        self.family_name = simple_attribute_setter(
+            family_name, "People/family_names.json"
+        )
+        self.alias = simple_attribute_setter(alias, "People/aliases.json")
 
-    @property
-    def profession(self):
-        return self._profession
+    def __str__(self):
+        return (
+            f"{self.first_name} '{self.alias}' {self.family_name}, a {self.profession}"
+        )
 
-    @profession.setter
-    def profession(self, rarity):
-        if rarity.lower() == "rare":
-            self._profession = rc(json_retreiver("../data/People/rare_profession.json"))
-        elif rarity.lower() == "common":
-            self._profession = rc(
-                json_retreiver("../data/People/common_profession.json")
-            )
-        elif rarity.lower() == "both":
-            self._profession = rc(
-                json_retreiver("../data/People/common_profession.json")
-                + json_retreiver("../data/People/rare_profession.json")
-            )
-        else:
-            raise AttributeError("Purpose must be 'common', 'rare', or 'both'")
+    def __repr__(self):
+        return f"{self.__class__.__qualname__}('{self.profession}', '{self.heritage}', '{self.gender}', '{self.appearance}', '{self.goals}', '{self.methods}', '{self.style}', '{self.trait}', '{self.interest}', '{self.quirk}', '{self.first_name}', '{self.family_name}', '{self.alias}')"
 
     @property
     def heritage(self):
@@ -68,7 +79,7 @@ class Person(object):
                 json_retreiver("../data/Demons/demon_features.json")
             )
 
-    def describe_person(self):
+    def describe(self):
         """Returns a string that describes the building based on its attributes"""
         name = f"{self.first_name.capitalize()} '{self.alias.capitalize()}' {self.family_name.capitalize()}\n"
         description = f"A/An {self.appearance.lower()} {self.gender.lower()} {self.heritage.capitalize()}\n"
@@ -89,4 +100,4 @@ if __name__ == "__main__":
     except IndexError:  # no profession specified
         profession = "both"
     p = Person(profession)
-    print(p.describe_person())
+    print(p.describe())

@@ -3,9 +3,8 @@
 the rolling tables from the end of the Blades in the Dark rule book."""
 
 import sys
-from random import choice as rc
 
-from utils import json_retreiver
+from utils import *
 
 
 class Building(object):
@@ -13,38 +12,33 @@ class Building(object):
     and rare building purposes by default, 'rare' or 'common' can be passed to
     use the respective lists."""
 
-    def __init__(self, purpose="both"):
-        self.material = rc(json_retreiver("../data/Buildings/material.json"))
-        self.exterior_detail = rc(
-            json_retreiver("../data/Buildings/exterior_details.json")
+    def __init__(
+        self,
+        purpose=None,
+        material=None,
+        exterior_detail=None,
+        interior_detail_1=None,
+        interior_detail_2=None,
+    ):
+        self.purpose = two_choice_attribute_setter(purpose, "rare", "common", "Buildings/rare_use.json", "Buildings/common_use.json")
+        self.material = simple_attribute_setter(material, "Buildings/material.json")
+        self.exterior_detail = simple_attribute_setter(
+            exterior_detail, "Buildings/exterior_details.json"
         )
-        self.interior_detail_1 = rc(
-            json_retreiver("../data/Buildings/exterior_details.json")
+        self.interior_detail_1 = simple_attribute_setter(
+            interior_detail_1, "Buildings/exterior_details.json"
         )
-        self.interior_detail_2 = rc(
-            json_retreiver("../data/Buildings/exterior_details.json")
+        self.interior_detail_2 = simple_attribute_setter(
+            interior_detail_2, "Buildings/exterior_details.json"
         )
-        self.purpose = purpose
 
-    @property
-    def purpose(self):
-        return self._purpose
+    def __str__(self):
+        return f"a {self.material} {self.purpose}"
 
-    @purpose.setter
-    def purpose(self, usage):
-        if usage.lower() == "rare":
-            self._purpose = rc(json_retreiver("../data/Buildings/rare_use.json"))
-        elif usage.lower() == "common":
-            self._purpose = rc(json_retreiver("../data/Buildings/common_use.json"))
-        elif usage.lower() == "both":
-            self._purpose = rc(
-                json_retreiver("../data/Buildings/common_use.json")
-                + json_retreiver("../data/Buildings/rare_use.json")
-            )
-        else:
-            raise AttributeError("Purpose must be 'common', 'rare', or 'both'")
+    def __repr__(self):
+        return f"{self.__class__.__qualname__}('{self.purpose}', '{self.material}', '{self.exterior_detail}', '{self.interior_detail_1}', '{self.interior_detail_2}')"
 
-    def describe_building(self):
+    def describe(self):
         """Returns a string that describes the building based on its attributes"""
         output = (
             f"This {self.material.lower()} {self.purpose.lower()} "
@@ -59,6 +53,6 @@ if __name__ == "__main__":
     try:
         rarity = sys.argv[1]
     except IndexError:  # no building specified
-        rarity = "both"
+        rarity = None
     b = Building(rarity)
-    print(b.describe_building())
+    print(b.describe())

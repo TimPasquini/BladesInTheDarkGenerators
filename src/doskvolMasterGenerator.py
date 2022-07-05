@@ -2,7 +2,7 @@
 # A menu interface capable of calling the individual Doskvol generators
 
 try:
-    import pyperclip
+    import pyperclip  # type: ignore
 
     clipboard_support = True
 except ImportError:
@@ -46,51 +46,51 @@ Select generator:
 
         elif generator == "1":
             common_person = people.Person("common")
-            description = common_person.describe_person()
+            description = common_person.describe()
 
         elif generator == "2":
             rare_person = people.Person("rare")
-            description = rare_person.describe_person()
+            description = rare_person.describe()
 
         elif generator == "3":
             random_street = streets.Street()
-            description = random_street.describe_street()
+            description = random_street.describe()
 
         elif generator == "4":
             common_building = buildings.Building("common")
-            description = common_building.describe_building()
+            description = common_building.describe()
 
         elif generator == "5":
             rare_building = buildings.Building("rare")
-            description = rare_building.describe_building()
+            description = rare_building.describe()
 
         elif generator == "6":
             random_demon = demons.Demon()
-            description = random_demon.describe_demon()
+            description = random_demon.describe()
 
         elif generator == "7":
             random_ghost = ghosts.Ghost()
-            description = random_ghost.describe_ghost()
+            description = random_ghost.describe()
 
         elif generator == "8":
             random_cult = cults.Cult()
-            description = random_cult.describe_cult()
+            description = random_cult.describe()
 
         elif generator == "9":
             random_score = scores.Score()
-            description = random_score.describe_score()
+            description = random_score.describe()
 
         elif generator == "10":
             random_leviathan = leviathans.Leviathan("banal")
-            description = random_leviathan.describe_leviathan()
+            description = random_leviathan.describe()
 
         elif generator == "11":
             random_leviathan = leviathans.Leviathan("surreal")
-            description = random_leviathan.describe_leviathan()
+            description = random_leviathan.describe()
 
         elif generator == "12":
             random_spawn = leviathans.LeviathanSpawn()
-            description = random_spawn.describe_spawn()
+            description = random_spawn.describe()
 
         else:
             print("Invalid choice. Please try again.")

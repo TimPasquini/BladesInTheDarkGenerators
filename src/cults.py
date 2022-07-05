@@ -2,18 +2,23 @@
 """The cults class creates a randomly generated cult instance utilizing
 the rolling tables from the end of the Blades in the Dark rule book."""
 
-from random import choice as rc
-from utils import json_retreiver
+from utils import *
 
 
 class Cult(object):
     """A randomly generated Cult operating in the city of Doskvol"""
 
-    def __init__(self):
-        self.god = rc(json_retreiver("../data/Cults/forgotten_gods.json"))
-        self.practice = rc(json_retreiver("../data/Cults/cult_practices.json"))
+    def __init__(self, god=None, practice=None):
+        self.god = simple_attribute_setter(god, "Cults/forgotten_gods.json")
+        self.practice = simple_attribute_setter(practice, "Cults/cult_practices.json")
 
-    def describe_cult(self):
+    def __str__(self):
+        return f"a cult of {self.god}"
+
+    def __repr__(self):
+        return f"{self.__class__.__qualname__}('{self.god}', '{self.practice}')"
+
+    def describe(self):
         """returns a string that describes a cult based on its attributes"""
         output = f"""
 This is the cult of {self.god.title()}.
@@ -25,4 +30,4 @@ Their cultists follow an edict of:
 
 if __name__ == "__main__":
     c = Cult()
-    print(c.describe_cult())
+    print(c.describe())

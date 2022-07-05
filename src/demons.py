@@ -2,25 +2,42 @@
 """Uses the tables at the end of Blades in the Dark to generate a description
 for a random demon."""
 
-from random import choice as rc
-from utils import json_retreiver
+from utils import *
 
 
 class Demon(object):
     """A randomly generated demon, the likes of which would haunt doskvol or the
     deathlands"""
 
-    def __init__(self):
-        self.name = rc(json_retreiver("../data/Demons/demon_names.json"))
-        self.primary_feature = rc(json_retreiver("../data/Demons/demon_features.json"))
-        self.secondary_feature = rc(
-            json_retreiver("../data/Demons/demon_features.json")
+    def __init__(
+        self,
+        name=None,
+        primary_feature=None,
+        secondary_feature=None,
+        aspect=None,
+        affinity=None,
+        desire=None,
+    ):
+        self.name = simple_attribute_setter(name, "Demons/demon_names.json")
+        self.primary_feature = simple_attribute_setter(
+            primary_feature, "Demons/demon_features.json"
         )
-        self.aspect = rc(json_retreiver("../data/Demons/demonic_aspect.json"))
-        self.affinity = rc(json_retreiver("../data/Demons/demonic_affinity.json"))
-        self.desire = rc(json_retreiver("../data/Demons/demon_desire.json"))
+        self.secondary_feature = simple_attribute_setter(
+            secondary_feature, "Demons/demon_features.json"
+        )
+        self.aspect = simple_attribute_setter(aspect, "Demons/demonic_aspect.json")
+        self.affinity = simple_attribute_setter(
+            affinity, "Demons/demonic_affinity.json"
+        )
+        self.desire = simple_attribute_setter(desire, "Demons/demon_desire.json")
 
-    def describe_demon(self):
+    def __str__(self):
+        return f"{self.name}, a {self.aspect} {self.affinity} demon"
+
+    def __repr__(self):
+        return f"{self.__class__.__qualname__}('{self.name}', '{self.primary_feature}', '{self.secondary_feature}', '{self.aspect}', '{self.affinity}', '{self.desire}')"
+
+    def describe(self):
         """Returns a description of the demon based on its attributes"""
         output = f"""
 Tremble at the sight of {self.name.capitalize()}!
@@ -33,4 +50,4 @@ This demon desires {self.desire.lower()} above all else!
 
 if __name__ == "__main__":
     d = Demon()
-    print(d.describe_demon())
+    print(d.describe())

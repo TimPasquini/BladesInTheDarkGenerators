@@ -6,44 +6,45 @@ import sys
 from random import randint as ri
 from random import choice as rc
 
-from utils import json_retreiver
+from utils import *
 
 
 class Leviathan(object):
     """A randomly generated leviathan"""
 
-    def __init__(self, activity="both", size=None, treasure_index=None):
-        self.activity = activity
-        self.name = rc(json_retreiver("../data/Leviathan/leviathan_names.json"))
-        self.epithet = rc(json_retreiver("../data/Leviathan/epithet.json"))
-        self.head_shape = self._grab_shape()
-        self.body_shape = self._grab_shape()
-        self.limb_shape = self._grab_shape()
+    def __init__(
+        self,
+        activity=None,
+        name=None,
+        epithet=None,
+        head_shape=None,
+        body_shape=None,
+        limb_shape=None,
+        size=None,
+        treasure_index=None,
+        spawn=None,
+    ):
+        self.activity = two_choice_attribute_setter(
+            activity,
+            "banal",
+            "surreal",
+            "Leviathan/banal_activity.json",
+            "Leviathan/surreal_activity.json",
+        )
+        self.name = simple_attribute_setter(name, "Leviathan/leviathan_names.json")
+        self.epithet = simple_attribute_setter(epithet, "Leviathan/epithet.json")
+        self.head_shape = simple_attribute_setter(head_shape, "Leviathan/shapes.json")
+        self.body_shape = simple_attribute_setter(body_shape, "Leviathan/shapes.json")
+        self.limb_shape = simple_attribute_setter(limb_shape, "Leviathan/shapes.json")
         self.size = size
         self.treasure_index = treasure_index
         self.spawn = LeviathanSpawn().form
 
-    @property
-    def activity(self):
-        return self._activity
+    def __str__(self):
+        return f"{self.name}, {self.epithet} leviathan"
 
-    @activity.setter
-    def activity(self, leviathan_activity):
-        if leviathan_activity.lower() == "banal":
-            self._activity = rc(json_retreiver("../data/Leviathan/banal_activity.json"))
-        elif leviathan_activity.lower() == "surreal":
-            self._activity = rc(
-                json_retreiver("../data/Leviathan/surreal_activity.json")
-            )
-        elif leviathan_activity.lower() == "both":
-            self._activity = rc(
-                json_retreiver("../data/Leviathan/banal_activity.json")
-                + json_retreiver("../data/Leviathan/surreal_activity.json")
-            )
-        else:
-            raise AttributeError(
-                "Leviathan acivity must be 'banal', 'surreal', or 'both'"
-            )
+    def __repr__(self):
+        return f"{self.__class__.__qualname__}('{self.activity}', '{self.name}', '{self.epithet}', '{self.head_shape}', '{self.body_shape}', '{self.limb_shape}', '{self.size}', '{self.treasure_index}', '{self.spawn}')"
 
     @property
     def size(self):
@@ -80,10 +81,7 @@ class Leviathan(object):
             )
         self.treasures = leviathan_treasures
 
-    def _grab_shape(self):
-        return rc(json_retreiver("../data/Leviathan/shapes.json"))
-
-    def describe_leviathan(self):
+    def describe(self):
         intro = f"A leviathan is {self.activity.lower()} before you in the water.\n"
         name = f"It is none other than {self.name.capitalize()}, '{self.epithet.title()}.'\n"
         form = f"This leviathan has the head of a {self.head_shape}, the body of a {self.body_shape} and moves on the limbs of a {self.limb_shape}.\n"
@@ -117,8 +115,14 @@ class Leviathan(object):
 class LeviathanSpawn(object):
     """A randomly generated spawn of a Leviathan"""
 
-    def __init__(self):
-        self.form = rc(json_retreiver("../data/Leviathan/leviathan_spawn.json"))
+    def __init__(self, form=None):
+        self.form = simple_attribute_setter(form, "Leviathan/leviathan_spawn.json")
+
+    def __str__(self):
+        return f"{self.form}, spawned by a leviathan."
+
+    def __repr__(self):
+        return f"{self.__class__.__qualname__}('{self.form}')"
 
     @property
     def form(self):
@@ -155,7 +159,7 @@ class LeviathanSpawn(object):
         demon = f"{aspect.lower()} {affinity.lower()} demon with {feature.lower()}"
         return demon
 
-    def describe_spawn(self):
+    def describe(self):
         """returns a string describing the spawn"""
         output = f"The leviathan releases a new spawn, it emits (a/an) {self.form}"
         return output
@@ -165,6 +169,6 @@ if __name__ == "__main__":
     try:
         leviathan_activity = sys.argv[1]
     except IndexError:  # no activity specified
-        leviathan_activity = "both"
+        leviathan_activity = None
     lev = Leviathan(leviathan_activity)
-    print(lev.describe_leviathan())
+    print(lev.describe())
