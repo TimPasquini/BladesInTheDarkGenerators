@@ -53,7 +53,7 @@ def history_log(output):
         f.write("\n\n")
 
 
-def simple_attribute_setter(attribute: str | None, path: str) -> str:
+def simple_attribute_setter(attribute: str | None, path: str) -> str | None:
     """Used by setters to pull from .json if None is passed.
 
     If you don't define an optional attribute for instantiation, this
@@ -78,7 +78,7 @@ def simple_attribute_setter(attribute: str | None, path: str) -> str:
 
 def two_choice_attribute_setter(
     attribute: str | None, option_1: str, option_2: str, path_1: str, path_2: str
-) -> str:
+) -> str | None:
     """Used by setters when there are two potential .json files to use.
 
     If you don't want to define an optional attribute for instationation

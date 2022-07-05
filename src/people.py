@@ -10,7 +10,49 @@ from utils import *
 
 
 class Person(object):
-    """A randomly generated person in Doskvol"""
+    """A randomly generated person in Doskvol
+
+    By default, all attributes are randomly created from the source lists. If
+    a specific person with specific attributes is needed, any attribute can
+    be overridden with a string.
+
+    ...
+
+    Attributes
+    ----------
+    profession: str or None
+        The paid occupation of this Person, pulls from rare and common lists if
+        passed None, can pass str of "common" or "rare" to use respective list
+    heritage: str or None
+        Ethnic origin within the Shattered Isles
+    gender: str or None
+        The chosen gender this Person presents as
+    appearance: str or None
+        An adjective describing a major visual feature of this Person
+    goals: str or None
+        A motivating force for this Person
+    methods: str or None
+        The preferred technique this Person uses to further their goals
+    style: str or None
+        A notable piece of clothing or accessory worn by this Person
+    trait: str or None
+        An adjective describing a major personality feature
+    interest: str or None
+        A curosity, focus, or concern of this Person
+    quirk: str or None
+        An additional feature to make this Person more interesting
+    first_name: str or None
+        A Person's given name
+    family_name: str or None
+        A Person's surname
+    alias: str or None
+        A nickname, familiar name, assumed identity, or nom de gurre
+
+    Methods
+    -------
+    describe()
+        Returns a formatted string using attributes to describe a Person
+    """
 
     def __init__(
         self,
@@ -98,6 +140,6 @@ if __name__ == "__main__":
     try:
         profession = sys.argv[1]
     except IndexError:  # no profession specified
-        profession = "both"
+        profession = None
     p = Person(profession)
     print(p.describe())

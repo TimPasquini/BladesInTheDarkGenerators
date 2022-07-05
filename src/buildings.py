@@ -8,9 +8,33 @@ from utils import *
 
 
 class Building(object):
-    """A randomly generated building in the city of Doskvol. Uses both common
-    and rare building purposes by default, 'rare' or 'common' can be passed to
-    use the respective lists."""
+    """A randomly generated building in the city of Doskvol.
+
+    By default, all attributes are randomly created from the source lists. If
+    a specific building with specific attributes is needed, any attribute can
+    be overridden with a string.
+
+    ...
+
+    Attributes
+    ----------
+    purpose: str or None
+        What the building is used for, pulls from rare and common lists when
+        passed None, can pass str of "common" or "rare" to use respective list
+    material: str or None
+        What the building is made of
+    exterior_detail: str or None
+        A defining feature of the outside of the building
+    interior_detail_1: str or None
+        The first notable detail about the interior of the building
+    interior_detail_2: str or None
+        The second notable detail about the interior of the building
+
+    Methods
+    -------
+    describe()
+        Returns a formatted string describing the building
+    """
 
     def __init__(
         self,
@@ -20,7 +44,13 @@ class Building(object):
         interior_detail_1=None,
         interior_detail_2=None,
     ):
-        self.purpose = two_choice_attribute_setter(purpose, "rare", "common", "Buildings/rare_use.json", "Buildings/common_use.json")
+        self.purpose = two_choice_attribute_setter(
+            purpose,
+            "rare",
+            "common",
+            "Buildings/rare_use.json",
+            "Buildings/common_use.json",
+        )
         self.material = simple_attribute_setter(material, "Buildings/material.json")
         self.exterior_detail = simple_attribute_setter(
             exterior_detail, "Buildings/exterior_details.json"

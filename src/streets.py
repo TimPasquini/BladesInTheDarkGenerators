@@ -6,7 +6,39 @@ from utils import *
 
 
 class Street(object):
-    """A description of a randomly generated street in the city of Doskvol"""
+    """A description of a randomly generated street in the city of Doskvol
+
+    By default, all attributes are randomly created from the source lists. If
+    a specific street with specific attributes is needed, any attribute can
+    be overridden with a string.
+
+    ...
+
+    Attributes
+    ----------
+    mood: str or None
+        The general ambiance of the street
+    sight: str or None
+        A defining visual feature of the street
+    sound: str or None
+        A defining audible feature of the street
+    smell: str or None
+        A defining aromatic feature of the street
+    use: str or None
+        What the street is generally used for, zoning purpose
+    infastructure_type: str or None
+        The type of street in terms of infastructure design (street, alley,
+        waterway, plaza, etc)
+    primary_detail: str or None
+        An feature to make the street more interesting
+    secondary_detail: str or None
+        A second feature to make the street more interesting
+
+    Methods
+    -------
+    describe()
+        Returns a formatted string describing the street
+    """
 
     def __init__(
         self,

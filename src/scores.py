@@ -7,7 +7,37 @@ from utils import *
 
 
 class Score(object):
-    """A randomly generated score for a crew in Doskvol to run"""
+    """A randomly generated score for a crew in Doskvol to run
+
+    By default, all attributes are randomly created from the source lists. If
+    a specific Score with specific attributes is needed, any attribute can
+    be overridden with a string.
+
+    ...
+
+    Attributes
+    ----------
+    client: str or None
+        The person giving the job
+    target: str or None
+        The victim of the score
+    job: str or None
+        The type of score, the method of enacting it
+    twist: str or None
+        An unforseen side-effect of the score
+    connection: str or None
+        The relationship that connects the crew to the score
+    faction: str or None
+        A faction complicating the score
+
+    Methods
+    -------
+    _ghostcheck()
+        If the client or target is initially assigned "Ghost of" this completes
+        the process and adds another client/target to the end of "Ghost of"
+    describe()
+        Returns a formatted string describing the score
+    """
 
     def __init__(
         self,

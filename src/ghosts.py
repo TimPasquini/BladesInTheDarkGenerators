@@ -7,7 +7,32 @@ from utils import *
 
 class Ghost(object):
     """A randomly generated ghost, the likes of which would haunt doskvol or
-    the deathlands"""
+    the deathlands
+
+    By default, all attributes are randomly created from the source lists. If
+    a specific ghost with specific attributes is needed, any attribute can
+    be overridden with a string.
+
+    ...
+
+    Attributes
+    ----------
+    first_name: str or None
+        The given name the ghost had in life
+    family_name: str or None
+        The surname the ghost had in life
+    alias: str or None
+        The alias the ghost used in life
+    ghostly_trait: str or None
+        The primary personality trait of the ghost
+    ghostly_effect: str or None
+        A strange effect that occurs around the ghost when it manifests
+
+    Methods
+    -------
+    describe()
+        Returns a formatted string describing the ghost
+    """
 
     def __init__(
         self,

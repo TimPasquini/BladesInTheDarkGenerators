@@ -6,7 +6,26 @@ from utils import *
 
 
 class Cult(object):
-    """A randomly generated Cult operating in the city of Doskvol"""
+    """A randomly generated Cult operating in the city of Doskvol.
+
+    By default, all attributes are randomly created from the source lists. If
+    a specific cult with specific attributes is needed, any attribute can
+    be overridden with a string.
+
+    ...
+
+    Attributes
+    ----------
+    god: str or None
+        What Forgotten God the cult follows
+    practice: str or None
+        The method in which the cult shows their devotion to their god
+
+    Methods
+    -------
+    describe()
+        Returns a formatted string describing the cult
+    """
 
     def __init__(self, god=None, practice=None):
         self.god = simple_attribute_setter(god, "Cults/forgotten_gods.json")

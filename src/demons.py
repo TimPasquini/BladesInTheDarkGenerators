@@ -7,7 +7,34 @@ from utils import *
 
 class Demon(object):
     """A randomly generated demon, the likes of which would haunt doskvol or the
-    deathlands"""
+    deathlands.
+
+    By default, all attributes are randomly created from the source lists. If
+    a specific demon with specific attributes is needed, any attribute can
+    be overridden with a string.
+
+    ...
+
+    Attributes
+    ----------
+    name: str or None
+        The name the demon goes by
+    primary_feature: str or None
+        All demons have features that make it clear they are not human
+    secondary_feature: str or None
+        All demons have features that make it clear they are not human
+    aspect: str or None
+        The physical way in which a demon manifests itself
+    affinity: str or None
+        The primal force or element the demon is connected to
+    desire: str or None
+        Demons are the embodiment of a dark obsession
+
+    Methods
+    -------
+    describe()
+        Returns a formatted string describing the demon
+    """
 
     def __init__(
         self,

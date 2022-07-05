@@ -1,6 +1,16 @@
 # leviathans.py
 """Uses the tables in the Leviathan Song Supplement to generate a description
-for a leviathan and leviathan spawn."""
+for a leviathan and leviathan spawn.
+
+...
+
+Classes
+-------
+Leviathan
+    The base class for all the leviathans in Doskvol
+LeviathanSpawn
+    The base class for leviathan spawn
+"""
 
 import sys
 from random import randint as ri
@@ -10,7 +20,43 @@ from utils import *
 
 
 class Leviathan(object):
-    """A randomly generated leviathan"""
+    """A randomly generated leviathan that inhabits the Void Sea.
+
+    By default, all attributes are randomly created from the source lists. If
+    a specific Leviathan with specific attributes is needed, any attribute can
+    be overridden with a string.
+
+    ...
+
+    Attributes
+    ----------
+    activity: str or None
+        What a leviathan is doing when it is first spotted, pulls from banal and
+        surreal lists when passed None, can pass str of "banal" or "surreal" to
+        use respective list
+    name: str or None
+        The supposed name of the leviathan
+    epithet: str or None
+        The nickname or title of the leviathan
+    head_shape: str or None
+        The form its head resembles, usually a sea creature
+    body_shape: str or None
+        The form its body resembles, usually a sea creature
+    limb_shape: str or None
+        How the leviathan moves around, limbs usually a sea creature's
+    size: str or None
+        Size defines how many distinct regions the leviathan has
+    treasure_index: int or None
+        Defines how many valuable treasures are on/in the leviathan
+    spawn: str or LeviathanSpawn.form
+        The type of Spawn the leviathan is generally known to produce
+
+    Methods
+    -------
+    describe()
+        Returns a formatted string using attributes to describe the
+        leviathan and its associated spawn.
+    """
 
     def __init__(
         self,
@@ -113,7 +159,31 @@ class Leviathan(object):
 
 
 class LeviathanSpawn(object):
-    """A randomly generated spawn of a Leviathan"""
+    """A randomly generated spawn of a Leviathan
+
+    By default, all attributes are randomly created from the source lists. If
+    a specific Leviathan Spawn with specific attributes is needed, any attribute
+    can be overridden with a string.
+
+    ...
+
+    Attributes
+    ----------
+    form: str or None
+        The physical description of a leviathan spawn
+
+    Methods
+    -------
+    _grab_shape()
+        Returns an overall sea-creature shape for hybrid spawn
+    _grab_ghost()
+        Returns a formatted string of a ghost trait and effect for ghostly spawn
+    _grab_demon()
+        Returns a formatted string with a demonic feature, aspect, and affinity
+        for a demonic spawn
+    describe()
+        Returns a formatted string describing the leviathan spawn
+    """
 
     def __init__(self, form=None):
         self.form = simple_attribute_setter(form, "Leviathan/leviathan_spawn.json")
