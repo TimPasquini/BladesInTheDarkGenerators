@@ -3,6 +3,7 @@
 for a random ghost."""
 
 from utils import *
+from dataSets import *
 
 
 class Ghost(object):
@@ -42,17 +43,11 @@ class Ghost(object):
         ghost_trait=None,
         ghost_effect=None,
     ):
-        self.first_name = simple_attribute_setter(first_name, "People/first_names.json")
-        self.family_name = simple_attribute_setter(
-            family_name, "People/family_names.json"
-        )
-        self.alias = simple_attribute_setter(alias, "People/aliases.json")
-        self.ghost_trait = simple_attribute_setter(
-            ghost_trait, "Ghosts/ghost_traits.json"
-        )
-        self.ghost_effect = simple_attribute_setter(
-            ghost_effect, "Ghosts/ghostly_effect.json"
-        )
+        self.first_name = simple_attribute_setter(first_name, FIRST_NAMES)
+        self.family_name = simple_attribute_setter(family_name, FAMILY_NAMES)
+        self.alias = simple_attribute_setter(alias, ALIASES)
+        self.ghost_trait = simple_attribute_setter(ghost_trait, GHOST_TRAITS)
+        self.ghost_effect = simple_attribute_setter(ghost_effect, GHOST_EFFECTS)
 
     def __str__(self):
         return f"{self.first_name} '{self.alias}' {self.family_name}, a ghost"

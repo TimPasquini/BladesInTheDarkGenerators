@@ -3,6 +3,7 @@
 for a random streetscape."""
 
 from utils import *
+from dataSets import *
 
 
 class Street(object):
@@ -51,20 +52,16 @@ class Street(object):
         primary_detail=None,
         secondary_detail=None,
     ):
-        self.mood = simple_attribute_setter(mood, "Streets/moods.json")
-        self.sight = simple_attribute_setter(sight, "Streets/sights.json")
-        self.sound = simple_attribute_setter(sound, "Streets/sounds.json")
-        self.smell = simple_attribute_setter(smell, "Streets/smells.json")
-        self.use = simple_attribute_setter(use, "Streets/use.json")
+        self.mood = simple_attribute_setter(mood, STREET_MOODS)
+        self.sight = simple_attribute_setter(sight, STREET_SIGHTS)
+        self.sound = simple_attribute_setter(sound, STREET_SOUNDS)
+        self.smell = simple_attribute_setter(smell, STREET_SMELLS)
+        self.use = simple_attribute_setter(use, STREET_USES)
         self.infastructure_type = simple_attribute_setter(
-            infastructure_type, "Streets/infastructure_type.json"
+            infastructure_type, STREET_INFASTRUCTURE_TYPES
         )
-        self.primary_detail = simple_attribute_setter(
-            primary_detail, "Streets/details.json"
-        )
-        self.secondary_detail = simple_attribute_setter(
-            secondary_detail, "Streets/details.json"
-        )
+        self.primary_detail = simple_attribute_setter(primary_detail, STREET_DETAILS)
+        self.secondary_detail = simple_attribute_setter(secondary_detail, STREET_DETAILS)
 
     def __str__(self):
         return f"a {self.infastructure_type} used for {self.use}"

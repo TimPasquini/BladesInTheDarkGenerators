@@ -72,7 +72,7 @@ def simple_attribute_setter(attribute: str | None, path: str) -> str | None:
             "[Class]/[ChildClass]/[attribute.json]"
     """
     if attribute is None:
-        attribute = choice(json_retreiver(f"../data/{path}"))
+        attribute = choice(json_retreiver(path))
     return attribute
 
 
@@ -111,10 +111,10 @@ def two_choice_attribute_setter(
     """
     if attribute is None:
         attribute = choice(
-            json_retreiver(f"../data/{path_1}") + json_retreiver(f"../data/{path_2}")
+            json_retreiver(path_1) + json_retreiver(path_2)
         )
     elif attribute.lower() == f"{option_1.lower()}":
-        attribute = choice(json_retreiver(f"../data/{path_1}"))
+        attribute = choice(json_retreiver(path_1))
     elif attribute.lower() == f"{option_2.lower()}":
-        attribute = choice(json_retreiver(f"../data/{path_2}"))
+        attribute = choice(json_retreiver(path_2))
     return attribute

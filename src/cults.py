@@ -3,6 +3,7 @@
 the rolling tables from the end of the Blades in the Dark rule book."""
 
 from utils import *
+from dataSets import *
 
 
 class Cult(object):
@@ -28,8 +29,8 @@ class Cult(object):
     """
 
     def __init__(self, god=None, practice=None):
-        self.god = simple_attribute_setter(god, "Cults/forgotten_gods.json")
-        self.practice = simple_attribute_setter(practice, "Cults/cult_practices.json")
+        self.god = simple_attribute_setter(god, FORGOTTEN_GODS)
+        self.practice = simple_attribute_setter(practice, CULT_PRACTICES)
 
     def __str__(self):
         return f"a cult of {self.god}"

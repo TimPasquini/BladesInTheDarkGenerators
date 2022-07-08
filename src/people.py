@@ -7,6 +7,7 @@ from random import choice as rc
 from random import choices as rcs
 
 from utils import *
+from dataSets import *
 
 
 class Person(object):
@@ -74,23 +75,21 @@ class Person(object):
             profession,
             "rare",
             "common",
-            "People/rare_profession.json",
-            "People/common_profession.json",
+            RARE_PROFESSIONS,
+            COMMON_PROFESSIONS,
         )
         self.heritage = heritage
-        self.gender = simple_attribute_setter(gender, "People/gender.json")
-        self.appearance = simple_attribute_setter(appearance, "People/appearance.json")
-        self.goals = simple_attribute_setter(goals, "People/goals.json")
-        self.methods = simple_attribute_setter(methods, "People/methods.json")
-        self.style = simple_attribute_setter(style, "People/style.json")
-        self.trait = simple_attribute_setter(trait, "People/traits.json")
-        self.interest = simple_attribute_setter(interest, "People/interests.json")
-        self.quirk = simple_attribute_setter(quirk, "People/quirks.json")
-        self.first_name = simple_attribute_setter(first_name, "People/first_names.json")
-        self.family_name = simple_attribute_setter(
-            family_name, "People/family_names.json"
-        )
-        self.alias = simple_attribute_setter(alias, "People/aliases.json")
+        self.gender = simple_attribute_setter(gender, GENDERS)
+        self.appearance = simple_attribute_setter(appearance, APPEARANCES)
+        self.goals = simple_attribute_setter(goals, GOALS)
+        self.methods = simple_attribute_setter(methods, METHODS)
+        self.style = simple_attribute_setter(style, STYLES)
+        self.trait = simple_attribute_setter(trait, TRAITS)
+        self.interest = simple_attribute_setter(interest, INTERESTS)
+        self.quirk = simple_attribute_setter(quirk, QUIRKS)
+        self.first_name = simple_attribute_setter(first_name, FIRST_NAMES)
+        self.family_name = simple_attribute_setter(family_name, FAMILY_NAMES)
+        self.alias = simple_attribute_setter(alias, ALIASES)
 
     def __str__(self):
         return (
@@ -107,19 +106,14 @@ class Person(object):
     @heritage.setter
     def heritage(self, default_heritage):
         if default_heritage is None:
-            h = rcs(
-                json_retreiver("../data/People/heritage.json"),
-                weights=[50, 10, 5, 5, 5, 5],
-            )[0]
+            h = rcs(json_retreiver(HERITAGES), weights=[50, 10, 5, 5, 5, 5])[0]
         else:
             h = default_heritage
         if h.lower() != "tycherosi":
             self._heritage = h
         else:
             self._heritage = h
-            self.demonic_feature = rc(
-                json_retreiver("../data/Demons/demon_features.json")
-            )
+            self.demonic_feature = rc(json_retreiver(DEMON_FEATURES))
 
     def describe(self):
         """Returns a string that describes the building based on its attributes"""

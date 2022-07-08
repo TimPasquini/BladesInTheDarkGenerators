@@ -4,6 +4,7 @@ for a random score."""
 
 from random import choice as rc
 from utils import *
+from dataSets import *
 
 
 class Score(object):
@@ -50,10 +51,10 @@ class Score(object):
     ):
         self.client = client
         self.target = target
-        self.job = simple_attribute_setter(job, "Scores/score_type.json")
-        self.twist = simple_attribute_setter(twist, "Scores/complication.json")
-        self.connection = simple_attribute_setter(connection, "Scores/connection.json")
-        self.faction = simple_attribute_setter(faction, "Scores/factions.json")
+        self.job = simple_attribute_setter(job, SCORE_JOBS)
+        self.twist = simple_attribute_setter(twist, SCORE_TWISTS)
+        self.connection = simple_attribute_setter(connection, SCORE_CONNECTIONS)
+        self.faction = simple_attribute_setter(faction, SCORE_FACTIONS)
 
     def __str__(self):
         return f"{self.client} wants to {self.job} a {self.target}"
@@ -67,9 +68,7 @@ class Score(object):
 
     @client.setter
     def client(self, profession):
-        client_profession = simple_attribute_setter(
-            profession, "Scores/client_target.json"
-        )
+        client_profession = simple_attribute_setter(profession, SCORE_CLIENTS_TARGETS)
         self._client = self._ghostcheck(client_profession)
 
     @property
@@ -78,9 +77,7 @@ class Score(object):
 
     @target.setter
     def target(self, profession):
-        target_profession = simple_attribute_setter(
-            profession, "Scores/client_target.json"
-        )
+        target_profession = simple_attribute_setter(profession, SCORE_CLIENTS_TARGETS)
         self._target = self._ghostcheck(target_profession)
 
     def _ghostcheck(self, profession):
@@ -89,11 +86,9 @@ class Score(object):
         if profession != "Ghost of":
             return profession
         else:
-            second_profession = rc(json_retreiver("../data/Scores/client_target.json"))
+            second_profession = rc(json_retreiver(SCORE_CLIENTS_TARGETS))
             while second_profession == "Ghost of":
-                second_profession = rc(
-                    json_retreiver("../data/Scores/client_target.json")
-                )
+                second_profession = rc(json_retreiver(SCORE_CLIENTS_TARGETS))
             output = profession + " " + second_profession
             return output
 

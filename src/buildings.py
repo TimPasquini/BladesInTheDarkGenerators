@@ -5,6 +5,7 @@ the rolling tables from the end of the Blades in the Dark rule book."""
 import sys
 
 from utils import *
+from dataSets import *
 
 
 class Building(object):
@@ -48,18 +49,18 @@ class Building(object):
             purpose,
             "rare",
             "common",
-            "Buildings/rare_use.json",
-            "Buildings/common_use.json",
+            BUILDING_RARE_PURPOSES,
+            BUILDING_COMMON_PURPOSES,
         )
-        self.material = simple_attribute_setter(material, "Buildings/material.json")
+        self.material = simple_attribute_setter(material, BUILDING_MATERIALS)
         self.exterior_detail = simple_attribute_setter(
-            exterior_detail, "Buildings/exterior_details.json"
+            exterior_detail, BUILDING_EXTERIORS
         )
         self.interior_detail_1 = simple_attribute_setter(
-            interior_detail_1, "Buildings/exterior_details.json"
+            interior_detail_1, BUILDING_INTERIORS
         )
         self.interior_detail_2 = simple_attribute_setter(
-            interior_detail_2, "Buildings/exterior_details.json"
+            interior_detail_2, BUILDING_INTERIORS
         )
 
     def __str__(self):

@@ -3,6 +3,7 @@
 for a random demon."""
 
 from utils import *
+from dataSets import *
 
 
 class Demon(object):
@@ -45,18 +46,16 @@ class Demon(object):
         affinity=None,
         desire=None,
     ):
-        self.name = simple_attribute_setter(name, "Demons/demon_names.json")
+        self.name = simple_attribute_setter(name, DEMON_NAMES)
         self.primary_feature = simple_attribute_setter(
-            primary_feature, "Demons/demon_features.json"
+            primary_feature, DEMON_FEATURES
         )
         self.secondary_feature = simple_attribute_setter(
-            secondary_feature, "Demons/demon_features.json"
+            secondary_feature, DEMON_FEATURES
         )
-        self.aspect = simple_attribute_setter(aspect, "Demons/demonic_aspect.json")
-        self.affinity = simple_attribute_setter(
-            affinity, "Demons/demonic_affinity.json"
-        )
-        self.desire = simple_attribute_setter(desire, "Demons/demon_desire.json")
+        self.aspect = simple_attribute_setter(aspect, DEMON_ASPECTS)
+        self.affinity = simple_attribute_setter(affinity, DEMON_AFFINITYS)
+        self.desire = simple_attribute_setter(desire, DEMON_DESIRES)
 
     def __str__(self):
         return f"{self.name}, a {self.aspect} {self.affinity} demon"

@@ -17,6 +17,7 @@ from random import randint as ri
 from random import choice as rc
 
 from utils import *
+from dataSets import *
 
 
 class Leviathan(object):
@@ -43,7 +44,7 @@ class Leviathan(object):
     body_shape: str or None
         The form its body resembles, usually a sea creature
     limb_shape: str or None
-        How the leviathan moves around, limbs usually a sea creature's
+        How the leviathan moves around, limbs, usually a sea creature's
     size: str or None
         Size defines how many distinct regions the leviathan has
     treasure_index: int or None
@@ -74,14 +75,14 @@ class Leviathan(object):
             activity,
             "banal",
             "surreal",
-            "Leviathan/banal_activity.json",
-            "Leviathan/surreal_activity.json",
+            LEVIATHAN_BANAL_ACTIVITIES,
+            LEVIATHAN_SURREAL_ACTIVITIES,
         )
-        self.name = simple_attribute_setter(name, "Leviathan/leviathan_names.json")
-        self.epithet = simple_attribute_setter(epithet, "Leviathan/epithet.json")
-        self.head_shape = simple_attribute_setter(head_shape, "Leviathan/shapes.json")
-        self.body_shape = simple_attribute_setter(body_shape, "Leviathan/shapes.json")
-        self.limb_shape = simple_attribute_setter(limb_shape, "Leviathan/shapes.json")
+        self.name = simple_attribute_setter(name, LEVIATHAN_NAMES)
+        self.epithet = simple_attribute_setter(epithet, LEVIATHAN_EPITHETS)
+        self.head_shape = simple_attribute_setter(head_shape, LEVIATHAN_SHAPES)
+        self.body_shape = simple_attribute_setter(body_shape, LEVIATHAN_SHAPES)
+        self.limb_shape = simple_attribute_setter(limb_shape, LEVIATHAN_SHAPES)
         self.size = size
         self.treasure_index = treasure_index
         self.spawn = LeviathanSpawn().form
@@ -106,7 +107,7 @@ class Leviathan(object):
         leviathan_regions = {}
         for num in range(1, self.size + 1):
             leviathan_regions[f"Region_{num}"] = rc(
-                json_retreiver("../data/Leviathan/leviathan_demon_traits.json")
+                json_retreiver(LEVIATHAN_DEMONIC_TRAITS)
             )
         self.regions = leviathan_regions
 
@@ -123,7 +124,7 @@ class Leviathan(object):
         leviathan_treasures = {}
         for num in range(1, self.treasure_index + 1):
             leviathan_treasures[f"treasure_{num}"] = rc(
-                json_retreiver("../data/Leviathan/leviathan_treasures.json")
+                json_retreiver(LEVIATHAN_TREASURES)
             )
         self.treasures = leviathan_treasures
 
@@ -186,7 +187,7 @@ class LeviathanSpawn(object):
     """
 
     def __init__(self, form=None):
-        self.form = simple_attribute_setter(form, "Leviathan/leviathan_spawn.json")
+        self.form = simple_attribute_setter(form, LEVIATHAN_SPAWN_FORMS)
 
     def __str__(self):
         return f"{self.form}, spawned by a leviathan."
@@ -215,17 +216,17 @@ class LeviathanSpawn(object):
         self._form = spawn_form
 
     def _grab_shape(self):
-        return rc(json_retreiver("../data/Leviathan/shapes.json"))
+        return rc(json_retreiver(LEVIATHAN_SHAPES))
 
     def _grab_ghost(self):
-        trait = rc(json_retreiver("../data/Ghosts/ghost_traits.json"))
-        effect = rc(json_retreiver("../data/Ghosts/ghostly_effect.json"))
+        trait = rc(json_retreiver(GHOST_TRAITS))
+        effect = rc(json_retreiver(GHOST_EFFECTS))
         return f"{effect.lower()} when these {trait.lower()} "
 
     def _grab_demon(self):
-        feature = rc(json_retreiver("../data/Demons/demon_features.json"))
-        aspect = rc(json_retreiver("../data/Demons/demonic_aspect.json"))
-        affinity = rc(json_retreiver("../data/Demons/demonic_affinity.json"))
+        feature = rc(json_retreiver(DEMON_FEATURES))
+        aspect = rc(json_retreiver(DEMON_ASPECTS))
+        affinity = rc(json_retreiver(DEMON_AFFINITYS))
         demon = f"{aspect.lower()} {affinity.lower()} demon with {feature.lower()}"
         return demon
 
