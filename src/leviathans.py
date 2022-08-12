@@ -68,7 +68,9 @@ class Leviathan(object):
         body_shape=None,
         limb_shape=None,
         size=None,
+        regions=None,
         treasure_index=None,
+        treasures=None,
         spawn=None,
     ):
         self.activity = two_choice_attribute_setter(
@@ -84,14 +86,16 @@ class Leviathan(object):
         self.body_shape = simple_attribute_setter(body_shape, LEVIATHAN_SHAPES)
         self.limb_shape = simple_attribute_setter(limb_shape, LEVIATHAN_SHAPES)
         self.size = size
+        self.regions = regions
         self.treasure_index = treasure_index
+        self.treasures = treasures
         self.spawn = LeviathanSpawn().form
 
     def __str__(self):
         return f"{self.name}, {self.epithet} leviathan"
 
     def __repr__(self):
-        return f"{self.__class__.__qualname__}('{self.activity}', '{self.name}', '{self.epithet}', '{self.head_shape}', '{self.body_shape}', '{self.limb_shape}', '{self.size}', '{self.treasure_index}', '{self.spawn}')"
+        return f"{self.__class__.__qualname__}('{self.activity}', '{self.name}', '{self.epithet}', '{self.head_shape}', '{self.body_shape}', '{self.limb_shape}', '{self.size}', '{self.regions}', '{self.treasure_index}', '{self.treasures}', '{self.spawn}')"
 
     @property
     def size(self):
@@ -104,12 +108,22 @@ class Leviathan(object):
             self._size = leviathan_size
         else:
             self._size = default_size
-        leviathan_regions = {}
-        for num in range(1, self.size + 1):
-            leviathan_regions[f"Region_{num}"] = rc(
-                json_retreiver(LEVIATHAN_DEMONIC_TRAITS)
-            )
-        self.regions = leviathan_regions
+
+    @property
+    def regions(self):
+        return self._regions
+
+    @regions.setter
+    def regions(self, default_regions):
+        if default_regions is None:
+            leviathan_regions = {}
+            for num in range(1, self.size + 1):
+                leviathan_regions[f"Region_{num}"] = rc(
+                    json_retreiver(LEVIATHAN_DEMONIC_TRAITS)
+                )
+            self._regions = leviathan_regions
+        else:
+            self._regions = default_regions
 
     @property
     def treasure_index(self):
@@ -121,12 +135,22 @@ class Leviathan(object):
             self._treasure_index = round(self.size / 4) + 1
         else:
             self._treasure_index = default_index
-        leviathan_treasures = {}
-        for num in range(1, self.treasure_index + 1):
-            leviathan_treasures[f"treasure_{num}"] = rc(
-                json_retreiver(LEVIATHAN_TREASURES)
-            )
-        self.treasures = leviathan_treasures
+
+    @property
+    def treasures(self):
+        return self._treasures
+
+    @treasures.setter
+    def treasures(self, default_treasure):
+        if default_treasure is None:
+            leviathan_treasures = {}
+            for num in range(1, self.treasure_index + 1):
+                leviathan_treasures[f"treasure_{num}"] = rc(
+                    json_retreiver(LEVIATHAN_TREASURES)
+                )
+            self._treasures = leviathan_treasures
+        else:
+            self._treasures = default_treasure
 
     def describe(self):
         intro = f"A leviathan is {self.activity.lower()} before you in the water.\n"
