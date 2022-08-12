@@ -118,7 +118,7 @@ class Person(object):
     def describe(self):
         """Returns a string that describes the building based on its attributes"""
         name = f"{self.first_name.capitalize()} '{self.alias.capitalize()}' {self.family_name.capitalize()}\n"
-        description = f"A/An {self.appearance.lower()} {self.gender.lower()} {self.heritage.capitalize()}\n"
+        description = f"A/An {self.appearance.lower()} {self.gender.lower()} {self.heritage.capitalize()} wearing (a/an) {self.style}\n"
         quirk = f"Overall, they seem {self.trait.lower()} but are also {self.quirk.lower()}\n"
         interest = f"They are interested in {self.interest.lower()}\n"
         profession = f"They work as a {self.profession} and use {self.methods.lower()} to try and gain/cause {self.goals.lower()}.\n"
