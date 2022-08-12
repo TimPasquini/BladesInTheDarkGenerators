@@ -69,7 +69,10 @@ class Score(object):
     @client.setter
     def client(self, profession):
         client_profession = simple_attribute_setter(profession, SCORE_CLIENTS_TARGETS)
-        self._client = self._ghostcheck(client_profession)
+        checked_profession = self._ghostcheck(client_profession)
+        checked_profession = self._possessedcheck(checked_profession)
+        self._client = checked_profession
+
 
     @property
     def target(self):
@@ -78,7 +81,9 @@ class Score(object):
     @target.setter
     def target(self, profession):
         target_profession = simple_attribute_setter(profession, SCORE_CLIENTS_TARGETS)
-        self._target = self._ghostcheck(target_profession)
+        checked_profession = self._ghostcheck(target_profession)
+        checked_profession = self._possessedcheck(checked_profession)
+        self._target = checked_profession
 
     def _ghostcheck(self, profession):
         """If the client_target.json call returned 'Ghost of' this helper builds
@@ -87,7 +92,19 @@ class Score(object):
             return profession
         else:
             second_profession = rc(json_retreiver(SCORE_CLIENTS_TARGETS))
-            while second_profession == "Ghost of":
+            while (second_profession == "Ghost of") or (second_profession == "Possessed"):
+                second_profession = rc(json_retreiver(SCORE_CLIENTS_TARGETS))
+            output = profession + " " + second_profession
+            return output
+
+    def _possessedcheck(self, profession):
+        """If the client_target.json call returned 'Possessed' this helper builds
+        the rest of the string"""
+        if profession != "Possessed":
+            return profession
+        else:
+            second_profession = rc(json_retreiver(SCORE_CLIENTS_TARGETS))
+            while (second_profession == "Ghost of") or (second_profession == "Possessed"):
                 second_profession = rc(json_retreiver(SCORE_CLIENTS_TARGETS))
             output = profession + " " + second_profession
             return output
