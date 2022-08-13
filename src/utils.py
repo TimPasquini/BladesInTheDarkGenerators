@@ -13,6 +13,8 @@ simple_attribute_setter: str or None
     used by setters to pull from .json if None is passed
 two_choice_attribute_setter: string or None
     used by setters when there are two potential .json files to use
+_second_roll_check:
+    used when there are recursive/reroll elements in a dataSet
 """
 
 import json
@@ -118,3 +120,17 @@ def two_choice_attribute_setter(
     elif attribute.lower() == f"{option_2.lower()}":
         attribute = choice(json_retreiver(path_2))
     return attribute
+
+
+def second_roll_check(first_roll, triggers, forbidden, dataSet):
+    """If the variable pulled for first_roll is in the triggers, it will
+    start rolling for a second output from dataSet until it gets one that is
+    not forbidden"""
+    if first_roll not in triggers:
+        return first_roll
+    else:
+        second_roll = choice(json_retreiver(dataSet))
+        while second_roll in forbidden:
+            second_roll = choice(json_retreiver(dataSet))
+        output = first_roll + " " + second_roll
+        return output

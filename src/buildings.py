@@ -37,6 +37,10 @@ class Building(object):
         Returns a formatted string describing the building
     """
 
+    # reroll information
+    interior_detail_rerolls = ["Threadbare", "Tattered", "Lush", "Comfortable", "Drafty", "Cold", "Stout", "Quiet", "Cozy", "Warm", "Vaulted", "Spacious", "Low", "Cramped", "Rickety", "Ramshackle", "Antique"]
+    interior_detail_forbidden_rerolls = ["Threadbare", "Tattered", "Lush", "Comfortable", "Drafty", "Cold", "Stout", "Quiet", "Cozy", "Warm", "Vaulted", "Spacious", "Low", "Cramped", "Rickety", "Ramshackle", "Antique", "Dripping Water", "Creaking Floorboards", "Roaring Fires", "Smoky Lamps", "Buzzing Electric Lights", "Plants", "Flowers", "Artwork", "Elegant Finery", "Rough-Spun Simplicity", "Spartan Austerity"]
+
     def __init__(
         self,
         purpose=None,
@@ -56,9 +60,7 @@ class Building(object):
         self.exterior_detail = simple_attribute_setter(
             exterior_detail, BUILDING_EXTERIORS
         )
-        self.interior_detail_1 = simple_attribute_setter(
-            interior_detail_1, BUILDING_INTERIORS
-        )
+        self.interior_detail_1 = interior_detail_1
         self.interior_detail_2 = simple_attribute_setter(
             interior_detail_2, BUILDING_INTERIORS
         )
@@ -78,6 +80,26 @@ class Building(object):
             f"and {self.interior_detail_2.lower()}"
         )
         return output
+
+    @property
+    def interior_detail_1(self):
+        return self._interior_detail_1
+
+    @interior_detail_1.setter
+    def interior_detail_1(self, detail):
+        building_detail = simple_attribute_setter(detail, BUILDING_INTERIORS)
+        checked_detail = second_roll_check(building_detail, Building.interior_detail_rerolls, Building.interior_detail_forbidden_rerolls, BUILDING_INTERIORS)
+        self._interior_detail_1 = checked_detail
+
+    @property
+    def interior_detail_2(self):
+        return self._interior_detail_2
+
+    @interior_detail_2.setter
+    def interior_detail_2(self, detail):
+        building_detail = simple_attribute_setter(detail, BUILDING_INTERIORS)
+        checked_detail = second_roll_check(building_detail, Building.interior_detail_rerolls, Building.interior_detail_forbidden_rerolls, BUILDING_INTERIORS)
+        self._interior_detail_2 = checked_detail
 
 
 if __name__ == "__main__":
