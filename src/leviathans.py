@@ -13,11 +13,11 @@ LeviathanSpawn
 """
 
 import sys
-from random import randint as ri
 from random import choice as rc
+from random import randint as ri
 
-from utils import *
 from dataSets import *
+from utils import *
 
 
 class Leviathan(object):
@@ -119,7 +119,7 @@ class Leviathan(object):
             leviathan_regions = {}
             for num in range(1, self.size + 1):
                 leviathan_regions[f"Region_{num}"] = rc(
-                    json_retreiver(LEVIATHAN_DEMONIC_TRAITS)
+                    json_retriever(LEVIATHAN_DEMONIC_TRAITS)
                 )
             self._regions = leviathan_regions
         else:
@@ -146,7 +146,7 @@ class Leviathan(object):
             leviathan_treasures = {}
             for num in range(1, self.treasure_index + 1):
                 leviathan_treasures[f"treasure_{num}"] = rc(
-                    json_retreiver(LEVIATHAN_TREASURES)
+                    json_retriever(LEVIATHAN_TREASURES)
                 )
             self._treasures = leviathan_treasures
         else:
@@ -234,23 +234,26 @@ class LeviathanSpawn(object):
         elif spawn_form == "trigger shape flying":
             spawn_form = f"flying {self._grab_shape()}"
         elif spawn_form == "trigger ghosts":
-            spawn_form = f"multitude of ghosts. There is/are (a/an) {self._grab_ghost()}dead sailors and other spectral eminations appear"
+            spawn_form = f"multitude of ghosts. There is/are (a/an) {self._grab_ghost()}dead sailors and other spectral emanations appear"
         elif spawn_form == "trigger demon":
             spawn_form = f"{self._grab_demon()}"
         self._form = spawn_form
 
-    def _grab_shape(self):
-        return rc(json_retreiver(LEVIATHAN_SHAPES))
+    @staticmethod
+    def _grab_shape():
+        return rc(json_retriever(LEVIATHAN_SHAPES))
 
-    def _grab_ghost(self):
-        trait = rc(json_retreiver(GHOST_TRAITS))
-        effect = rc(json_retreiver(GHOST_EFFECTS))
+    @staticmethod
+    def _grab_ghost():
+        trait = rc(json_retriever(GHOST_TRAITS))
+        effect = rc(json_retriever(GHOST_EFFECTS))
         return f"{effect.lower()} when these {trait.lower()} "
 
-    def _grab_demon(self):
-        feature = rc(json_retreiver(DEMON_FEATURES))
-        aspect = rc(json_retreiver(DEMON_ASPECTS))
-        affinity = rc(json_retreiver(DEMON_AFFINITYS))
+    @staticmethod
+    def _grab_demon():
+        feature = rc(json_retriever(DEMON_FEATURES))
+        aspect = rc(json_retriever(DEMON_ASPECTS))
+        affinity = rc(json_retriever(DEMON_AFFINITIES))
         demon = f"{aspect.lower()} {affinity.lower()} demon with {feature.lower()}"
         return demon
 

@@ -2,8 +2,8 @@
 """Uses the tables at the end of Blades in the Dark to generate a description
 for a random score."""
 
-from utils import *
 from dataSets import *
+from utils import *
 
 
 class Score(object):
@@ -24,7 +24,7 @@ class Score(object):
     job: str or None
         The type of score, the method of enacting it
     twist: str or None
-        An unforseen side-effect of the score
+        An unforeseen side effect of the score
     connection: str or None
         The relationship that connects the crew to the score
     faction: str or None
@@ -32,16 +32,19 @@ class Score(object):
 
     Methods
     -------
-    _ghostcheck()
-        If the client or target is initially assigned "Ghost of" this completes
-        the process and adds another client/target to the end of "Ghost of"
     describe()
         Returns a formatted string describing the score
     """
 
-    # reroll information
+    # re-roll information
     client_target_rerolls = ["Ghost of", "Possessed"]
-    client_target_forbidden_rerolls = ["Ghost of", "Possessed", "Vampire", "Demon (disguised)", "Hollow"]
+    client_target_forbidden_rerolls = [
+        "Ghost of",
+        "Possessed",
+        "Vampire",
+        "Demon (disguised)",
+        "Hollow",
+    ]
 
     def __init__(
         self,
@@ -72,7 +75,12 @@ class Score(object):
     @client.setter
     def client(self, profession):
         client_profession = simple_attribute_setter(profession, SCORE_CLIENTS_TARGETS)
-        checked_profession = second_roll_check(client_profession, Score.client_target_rerolls, Score.client_target_forbidden_rerolls, SCORE_CLIENTS_TARGETS)
+        checked_profession = second_roll_check(
+            client_profession,
+            Score.client_target_rerolls,
+            Score.client_target_forbidden_rerolls,
+            SCORE_CLIENTS_TARGETS,
+        )
         self._client = checked_profession
 
     @property
@@ -82,7 +90,12 @@ class Score(object):
     @target.setter
     def target(self, profession):
         target_profession = simple_attribute_setter(profession, SCORE_CLIENTS_TARGETS)
-        checked_profession = second_roll_check(target_profession, Score.client_target_rerolls, Score.client_target_forbidden_rerolls, SCORE_CLIENTS_TARGETS)
+        checked_profession = second_roll_check(
+            target_profession,
+            Score.client_target_rerolls,
+            Score.client_target_forbidden_rerolls,
+            SCORE_CLIENTS_TARGETS,
+        )
         self._target = checked_profession
 
     def describe(self):

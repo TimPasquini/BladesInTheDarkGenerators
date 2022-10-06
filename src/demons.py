@@ -47,14 +47,12 @@ class Demon(object):
         desire=None,
     ):
         self.name = simple_attribute_setter(name, DEMON_NAMES)
-        self.primary_feature = simple_attribute_setter(
-            primary_feature, DEMON_FEATURES
-        )
+        self.primary_feature = simple_attribute_setter(primary_feature, DEMON_FEATURES)
         self.secondary_feature = simple_attribute_setter(
             secondary_feature, DEMON_FEATURES
         )
         self.aspect = simple_attribute_setter(aspect, DEMON_ASPECTS)
-        self.affinity = simple_attribute_setter(affinity, DEMON_AFFINITYS)
+        self.affinity = simple_attribute_setter(affinity, DEMON_AFFINITIES)
         self.desire = simple_attribute_setter(desire, DEMON_DESIRES)
 
     def __str__(self):

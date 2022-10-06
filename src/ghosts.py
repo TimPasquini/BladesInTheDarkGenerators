@@ -24,9 +24,9 @@ class Ghost(object):
         The surname the ghost had in life
     alias: str or None
         The alias the ghost used in life
-    ghostly_trait: str or None
+    ghost_trait: str or None
         The primary personality trait of the ghost
-    ghostly_effect: str or None
+    ghost_effect: str or None
         A strange effect that occurs around the ghost when it manifests
 
     Methods

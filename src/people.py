@@ -6,8 +6,8 @@ import sys
 from random import choice as rc
 from random import choices as rcs
 
-from utils import *
 from dataSets import *
+from utils import *
 
 
 class Person(object):
@@ -39,7 +39,7 @@ class Person(object):
     trait: str or None
         An adjective describing a major personality feature
     interest: str or None
-        A curosity, focus, or concern of this Person
+        A curiosity, focus, or concern of this Person
     quirk: str or None
         An additional feature to make this Person more interesting
     first_name: str or None
@@ -106,14 +106,14 @@ class Person(object):
     @heritage.setter
     def heritage(self, default_heritage):
         if default_heritage is None:
-            h = rcs(json_retreiver(HERITAGES), weights=[50, 10, 5, 5, 5, 5])[0]
+            h = rcs(json_retriever(HERITAGES), weights=[50, 10, 5, 5, 5, 5])[0]
         else:
             h = default_heritage
         if h.lower() != "tycherosi":
             self._heritage = h
         else:
             self._heritage = h
-            self.demonic_feature = rc(json_retreiver(DEMON_FEATURES))
+            self.demonic_feature = rc(json_retriever(DEMON_FEATURES))
 
     def describe(self):
         """Returns a string that describes the building based on its attributes"""

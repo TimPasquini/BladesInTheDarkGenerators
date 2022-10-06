@@ -27,7 +27,7 @@ class Street(object):
         A defining aromatic feature of the street
     use: str or None
         What the street is generally used for, zoning purpose
-    infastructure_type: str or None
+    infrastructure_type: str or None
         The type of street in terms of infastructure design (street, alley,
         waterway, plaza, etc)
     primary_detail: str or None
@@ -48,7 +48,7 @@ class Street(object):
         sound=None,
         smell=None,
         use=None,
-        infastructure_type=None,
+        infrastructure_type=None,
         primary_detail=None,
         secondary_detail=None,
     ):
@@ -57,22 +57,24 @@ class Street(object):
         self.sound = simple_attribute_setter(sound, STREET_SOUNDS)
         self.smell = simple_attribute_setter(smell, STREET_SMELLS)
         self.use = simple_attribute_setter(use, STREET_USES)
-        self.infastructure_type = simple_attribute_setter(
-            infastructure_type, STREET_INFASTRUCTURE_TYPES
+        self.infrastructure_type = simple_attribute_setter(
+            infrastructure_type, STREET_INFRASTRUCTURE_TYPES
         )
         self.primary_detail = simple_attribute_setter(primary_detail, STREET_DETAILS)
-        self.secondary_detail = simple_attribute_setter(secondary_detail, STREET_DETAILS)
+        self.secondary_detail = simple_attribute_setter(
+            secondary_detail, STREET_DETAILS
+        )
 
     def __str__(self):
-        return f"a {self.infastructure_type} used for {self.use}"
+        return f"a {self.infrastructure_type} used for {self.use}"
 
     def __repr__(self):
-        return f"{self.__class__.__qualname__}('{self.mood}', '{self.sight}', '{self.sound}', '{self.smell}', '{self.use}', '{self.infastructure_type}', '{self.primary_detail}', '{self.secondary_detail}')"
+        return f"{self.__class__.__qualname__}('{self.mood}', '{self.sight}', '{self.sound}', '{self.smell}', '{self.use}', '{self.infrastructure_type}', '{self.primary_detail}', '{self.secondary_detail}')"
 
     def describe(self):
         """returns a string describing a street using its attributes"""
         output = f"""
-This {self.mood} {self.infastructure_type} is primarily used for {self.use} purposes.
+This {self.mood} {self.infrastructure_type} is primarily used for {self.use} purposes.
 (A/An) {self.sight} catch(es) your eye.
 You hear {self.sound} and smell {self.smell} on the air.
 You can't help but notice {self.primary_detail} and {self.secondary_detail}."""

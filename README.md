@@ -13,7 +13,7 @@ require a bit of creative interpretation.
 Feel free to make suggestions or report errors!
 
 Stand-alone Instructions:
-The easiest way to use these generators is via it's discord bot implementation, [Sparkwright](https://discord.com/oauth2/authorize?client_id=896105913960788029&permissions=2147543104&scope=bot%20applications.commands). Sparkwright now supports slash commands so just type '/' to see your options. 
+The easiest way to use these generators is via its discord bot implementation, [Sparkwright](https://discord.com/oauth2/authorize?client_id=896105913960788029&permissions=2147543104&scope=bot%20applications.commands). Sparkwright now supports slash commands so just type '/' to see your options. 
 There are several forks that use their own implementations like a web interface 
 or .exe with gui. If you want to use this program as-is you'll need python. See
 instructions below. 
@@ -74,5 +74,5 @@ client arguments during instantiation.
 
 Leviathans:
 Uses the Leviathan Song supplement, [available free here](https://bladesinthedark.com/blades-supplements), to create leviathans and spawn.
-Optionally accepts an argument for activity which should be  "banal" or "surreal" to decide the leviathan's initial activity. Also optionally accepts a size and treasure index value to define the
+Optionally accepts an argument for activity which should be  "banal" or "surreal" to decide the leviathan's initial activity. Also, optionally accepts a size and treasure index value to define the
 number of regions on the leviathan and amount of treasure items, respectively, during instantiation.

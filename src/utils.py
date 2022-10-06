@@ -5,7 +5,7 @@ General utility functions used by the generators.
 
 Functions
 ---------
-json_retreiver: str
+json_retriever: str
     Used to assign the contents of a .json to a variable
 history_log: str
     writes any output string to an external text document
@@ -13,8 +13,8 @@ simple_attribute_setter: str or None
     used by setters to pull from .json if None is passed
 two_choice_attribute_setter: string or None
     used by setters when there are two potential .json files to use
-_second_roll_check:
-    used when there are recursive/reroll elements in a dataSet
+second_roll_check:
+    used when there are recursive/re-roll elements in a dataset
 """
 
 import json
@@ -22,7 +22,7 @@ import json
 from random import choice
 
 
-def json_retreiver(json_filepath: str):
+def json_retriever(json_filepath: str):
     """Use to assign the contents of a .json to a variable.
 
     This is a quick way to pull the contents of a .json file into the
@@ -74,7 +74,7 @@ def simple_attribute_setter(attribute: str | None, path: str) -> str | None:
             "[Class]/[ChildClass]/[attribute.json]"
     """
     if attribute is None:
-        attribute = choice(json_retreiver(path))
+        attribute = choice(json_retriever(path))
     return attribute
 
 
@@ -83,7 +83,7 @@ def two_choice_attribute_setter(
 ) -> str | None:
     """Used by setters when there are two potential .json files to use.
 
-    If you don't want to define an optional attribute for instationation
+    If you don't want to define an optional attribute for instantiation
     this function will make a random selection from two lists stored in
     .json files. Or you can pick from one of the lists by using option_1
     or option_2 as the attribute argument.
@@ -91,7 +91,7 @@ def two_choice_attribute_setter(
     Arguments
     ---------
     attribute: str or None
-        None will pick randomly from both lists provided in the paths or
+        None will pick randomly from both lists provided in the paths, or
         you can pass a string of option_1 or option_2 to make a random
         choice from the related path.
     option_1: str
@@ -112,25 +112,23 @@ def two_choice_attribute_setter(
             "[Class]/[ChildClass]/[attribute.json]"
     """
     if attribute is None:
-        attribute = choice(
-            json_retreiver(path_1) + json_retreiver(path_2)
-        )
+        attribute = choice(json_retriever(path_1) + json_retriever(path_2))
     elif attribute.lower() == f"{option_1.lower()}":
-        attribute = choice(json_retreiver(path_1))
+        attribute = choice(json_retriever(path_1))
     elif attribute.lower() == f"{option_2.lower()}":
-        attribute = choice(json_retreiver(path_2))
+        attribute = choice(json_retriever(path_2))
     return attribute
 
 
-def second_roll_check(first_roll, triggers, forbidden, dataSet):
+def second_roll_check(first_roll, triggers, forbidden, dataset):
     """If the variable pulled for first_roll is in the triggers, it will
     start rolling for a second output from dataSet until it gets one that is
     not forbidden"""
     if first_roll not in triggers:
         return first_roll
     else:
-        second_roll = choice(json_retreiver(dataSet))
+        second_roll = choice(json_retriever(dataset))
         while second_roll in forbidden:
-            second_roll = choice(json_retreiver(dataSet))
+            second_roll = choice(json_retriever(dataset))
         output = first_roll + " " + second_roll
         return output

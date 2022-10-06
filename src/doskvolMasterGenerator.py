@@ -27,7 +27,7 @@ Select generator:
 [1]  Create common NPC
 [2]  Create rare NPC
 [3]  Create street description
-[4]  Create common building desciption
+[4]  Create common building description
 [5]  Create rare building description
 [6]  Create a demon
 [7]  Create a ghost

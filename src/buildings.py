@@ -4,8 +4,8 @@ the rolling tables from the end of the Blades in the Dark rule book."""
 
 import sys
 
-from utils import *
 from dataSets import *
+from utils import *
 
 
 class Building(object):
@@ -37,9 +37,56 @@ class Building(object):
         Returns a formatted string describing the building
     """
 
-    # reroll information
-    interior_detail_rerolls = ["Threadbare", "Tattered", "Lush", "Comfortable", "Drafty", "Cold", "Stout", "Quiet", "Cozy", "Warm", "Vaulted", "Spacious", "Low", "Cramped", "Rickety", "Ramshackle", "Antique"]
-    interior_detail_forbidden_rerolls = ["Threadbare", "Tattered", "Lush", "Comfortable", "Drafty", "Cold", "Stout", "Quiet", "Cozy", "Warm", "Vaulted", "Spacious", "Low", "Cramped", "Rickety", "Ramshackle", "Antique", "Dripping Water", "Creaking Floorboards", "Roaring Fires", "Smoky Lamps", "Buzzing Electric Lights", "Plants", "Flowers", "Artwork", "Elegant Finery", "Rough-Spun Simplicity", "Spartan Austerity"]
+    # re-roll information
+    interior_detail_rerolls = [
+        "Threadbare",
+        "Tattered",
+        "Lush",
+        "Comfortable",
+        "Drafty",
+        "Cold",
+        "Stout",
+        "Quiet",
+        "Cozy",
+        "Warm",
+        "Vaulted",
+        "Spacious",
+        "Low",
+        "Cramped",
+        "Rickety",
+        "Ramshackle",
+        "Antique",
+    ]
+    interior_detail_forbidden_rerolls = [
+        "Threadbare",
+        "Tattered",
+        "Lush",
+        "Comfortable",
+        "Drafty",
+        "Cold",
+        "Stout",
+        "Quiet",
+        "Cozy",
+        "Warm",
+        "Vaulted",
+        "Spacious",
+        "Low",
+        "Cramped",
+        "Rickety",
+        "Ramshackle",
+        "Antique",
+        "Dripping Water",
+        "Creaking Floorboards",
+        "Roaring Fires",
+        "Smoky Lamps",
+        "Buzzing Electric Lights",
+        "Plants",
+        "Flowers",
+        "Artwork",
+        "Elegant Finery",
+        "Rough-Spun Simplicity",
+        "Spartan Austerity",
+    ]
 
     def __init__(
         self,
@@ -88,7 +135,12 @@ class Building(object):
     @interior_detail_1.setter
     def interior_detail_1(self, detail):
         building_detail = simple_attribute_setter(detail, BUILDING_INTERIORS)
-        checked_detail = second_roll_check(building_detail, Building.interior_detail_rerolls, Building.interior_detail_forbidden_rerolls, BUILDING_INTERIORS)
+        checked_detail = second_roll_check(
+            building_detail,
+            Building.interior_detail_rerolls,
+            Building.interior_detail_forbidden_rerolls,
+            BUILDING_INTERIORS,
+        )
         self._interior_detail_1 = checked_detail
 
     @property
@@ -98,7 +150,12 @@ class Building(object):
     @interior_detail_2.setter
     def interior_detail_2(self, detail):
         building_detail = simple_attribute_setter(detail, BUILDING_INTERIORS)
-        checked_detail = second_roll_check(building_detail, Building.interior_detail_rerolls, Building.interior_detail_forbidden_rerolls, BUILDING_INTERIORS)
+        checked_detail = second_roll_check(
+            building_detail,
+            Building.interior_detail_rerolls,
+            Building.interior_detail_forbidden_rerolls,
+            BUILDING_INTERIORS,
+        )
         self._interior_detail_2 = checked_detail
 
 
