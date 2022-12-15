@@ -16,11 +16,11 @@ import sys
 from random import choice as rc
 from random import randint as ri
 
-from dataSets import *
-from utils import *
+from dataSets import LEVIATHAN, DEMON, GHOST
+from generator import Generator
 
 
-class Leviathan(object):
+class Leviathan(Generator):
     """A randomly generated leviathan that inhabits the Void Sea.
 
     By default, all attributes are randomly created from the source lists. If
@@ -49,7 +49,7 @@ class Leviathan(object):
         Size defines how many distinct regions the leviathan has
     treasure_index: int or None
         Defines how many valuable treasures are on/in the leviathan
-    spawn: str or LeviathanSpawn.form
+    spawn: str or LeviathanSpawn object
         The type of Spawn the leviathan is generally known to produce
 
     Methods
@@ -73,23 +73,23 @@ class Leviathan(object):
         treasures=None,
         spawn=None,
     ):
-        self.activity = two_choice_attribute_setter(
+        self.activity = self.two_choice_attribute_setter(
             activity,
             "banal",
             "surreal",
-            LEVIATHAN_BANAL_ACTIVITIES,
-            LEVIATHAN_SURREAL_ACTIVITIES,
+            LEVIATHAN["BANAL_ACTIVITIES"],
+            LEVIATHAN["SURREAL_ACTIVITIES"],
         )
-        self.name = simple_attribute_setter(name, LEVIATHAN_NAMES)
-        self.epithet = simple_attribute_setter(epithet, LEVIATHAN_EPITHETS)
-        self.head_shape = simple_attribute_setter(head_shape, LEVIATHAN_SHAPES)
-        self.body_shape = simple_attribute_setter(body_shape, LEVIATHAN_SHAPES)
-        self.limb_shape = simple_attribute_setter(limb_shape, LEVIATHAN_SHAPES)
+        self.name = self.simple_attribute_setter(name, LEVIATHAN["NAMES"])
+        self.epithet = self.simple_attribute_setter(epithet, LEVIATHAN["EPITHETS"])
+        self.head_shape = self.simple_attribute_setter(head_shape, LEVIATHAN["SHAPES"])
+        self.body_shape = self.simple_attribute_setter(body_shape, LEVIATHAN["SHAPES"])
+        self.limb_shape = self.simple_attribute_setter(limb_shape, LEVIATHAN["SHAPES"])
         self.size = size
         self.regions = regions
         self.treasure_index = treasure_index
         self.treasures = treasures
-        self.spawn = LeviathanSpawn().form
+        self.spawn = spawn
 
     def __str__(self):
         return f"{self.name}, {self.epithet} leviathan"
@@ -119,7 +119,7 @@ class Leviathan(object):
             leviathan_regions = {}
             for num in range(1, self.size + 1):
                 leviathan_regions[f"Region_{num}"] = rc(
-                    json_retriever(LEVIATHAN_DEMONIC_TRAITS)
+                    self.json_retriever(LEVIATHAN["DEMONIC_TRAITS"])
                 )
             self._regions = leviathan_regions
         else:
@@ -146,14 +146,24 @@ class Leviathan(object):
             leviathan_treasures = {}
             for num in range(1, self.treasure_index + 1):
                 leviathan_treasures[f"treasure_{num}"] = rc(
-                    json_retriever(LEVIATHAN_TREASURES)
+                    self.json_retriever(LEVIATHAN["TREASURES"])
                 )
             self._treasures = leviathan_treasures
         else:
             self._treasures = default_treasure
 
+    @property
+    def spawn(self):
+        return self._spawn
+
+    @spawn.setter
+    def spawn(self, default_spawn):
+        if default_spawn is None:
+            default_spawn = LeviathanSpawn()
+        self._spawn = default_spawn.form
+
     def describe(self):
-        intro = f"A leviathan is {self.activity.lower()} before you in the water.\n"
+        intro = f"A leviathan is {self.activity} before you in the water.\n"
         name = f"It is none other than {self.name.capitalize()}, '{self.epithet.title()}.'\n"
         form = f"This leviathan has the head of a {self.head_shape}, the body of a {self.body_shape} and moves on the limbs of a {self.limb_shape}.\n"
         size = f"There are {self.size} distinct regions on this leviathans body:\n"
@@ -171,9 +181,10 @@ class Leviathan(object):
             active_treasure = self.treasures[f"treasure_{num}"]
             treasure_description = f"{active_treasure}.\n"
             treasure_description_list.append(treasure_description)
-        spawn = f"This leviathan is known to spawn (a/an) {self.spawn}."
+        spawn = f"This leviathan is known to spawn {self.spawn}."
         output_string = (
             intro
+            + name
             + form
             + size
             + "".join(region_description_list)
@@ -183,7 +194,7 @@ class Leviathan(object):
         return output_string
 
 
-class LeviathanSpawn(object):
+class LeviathanSpawn(Generator):
     """A randomly generated spawn of a Leviathan
 
     By default, all attributes are randomly created from the source lists. If
@@ -211,7 +222,7 @@ class LeviathanSpawn(object):
     """
 
     def __init__(self, form=None):
-        self.form = simple_attribute_setter(form, LEVIATHAN_SPAWN_FORMS)
+        self.form = self.simple_attribute_setter(form, LEVIATHAN["SPAWN_FORMS"])
 
     def __str__(self):
         return f"{self.form}, spawned by a leviathan."
@@ -226,40 +237,37 @@ class LeviathanSpawn(object):
     @form.setter
     def form(self, spawn_form):
         if spawn_form == "trigger three shapes":
-            spawn_form = f"hybrid of a {self._grab_shape()}, a {self._grab_shape()}, and a {self._grab_shape()}"
+            spawn_form = f"a hybrid of a {self._grab_shape()}, {self._grab_shape()}, and {self._grab_shape()}"
         elif spawn_form == "trigger shape humanoid":
-            spawn_form = f"humanoid {self._grab_shape()}"
+            spawn_form = f"a humanoid {self._grab_shape()}"
         elif spawn_form == "trigger shape inside-out":
-            spawn_form = f"{self._grab_shape()} turned inside-out"
+            spawn_form = f"a {self._grab_shape()} turned inside-out"
         elif spawn_form == "trigger shape flying":
-            spawn_form = f"flying {self._grab_shape()}"
+            spawn_form = f"a flying {self._grab_shape()}"
         elif spawn_form == "trigger ghosts":
-            spawn_form = f"multitude of ghosts. There is/are (a/an) {self._grab_ghost()}dead sailors and other spectral emanations appear"
+            spawn_form = f"a multitude of ghosts. There is {self._grab_ghost()} dead sailors and other spectral emanations appear"
         elif spawn_form == "trigger demon":
-            spawn_form = f"{self._grab_demon()}"
+            spawn_form = f"a {self._grab_demon()}"
         self._form = spawn_form
 
-    @staticmethod
-    def _grab_shape():
-        return rc(json_retriever(LEVIATHAN_SHAPES))
+    def _grab_shape(self):
+        return rc(self.json_retriever(LEVIATHAN["SHAPES"]))
 
-    @staticmethod
-    def _grab_ghost():
-        trait = rc(json_retriever(GHOST_TRAITS))
-        effect = rc(json_retriever(GHOST_EFFECTS))
-        return f"{effect.lower()} when these {trait.lower()} "
+    def _grab_ghost(self):
+        trait = rc(self.json_retriever(GHOST["TRAITS"]))
+        effect = rc(self.json_retriever(GHOST["EFFECTS"]))
+        return f"{effect} when these {trait}"
 
-    @staticmethod
-    def _grab_demon():
-        feature = rc(json_retriever(DEMON_FEATURES))
-        aspect = rc(json_retriever(DEMON_ASPECTS))
-        affinity = rc(json_retriever(DEMON_AFFINITIES))
-        demon = f"{aspect.lower()} {affinity.lower()} demon with {feature.lower()}"
+    def _grab_demon(self):
+        feature = rc(self.json_retriever(DEMON["FEATURES"]))
+        aspect = rc(self.json_retriever(DEMON["ASPECTS"]))
+        affinity = rc(self.json_retriever(DEMON["AFFINITIES"]))
+        demon = f"{aspect} {affinity} demon with {feature}"
         return demon
 
     def describe(self):
         """returns a string describing the spawn"""
-        output = f"The leviathan releases a new spawn, it emits (a/an) {self.form}"
+        output = f"The leviathan releases a new spawn, it emits {self.form}"
         return output
 
 

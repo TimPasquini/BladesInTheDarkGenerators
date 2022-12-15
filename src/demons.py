@@ -2,11 +2,11 @@
 """Uses the tables at the end of Blades in the Dark to generate a description
 for a random demon."""
 
-from utils import *
-from dataSets import *
+from generator import Generator
+from dataSets import DEMON
 
 
-class Demon(object):
+class Demon(Generator):
     """A randomly generated demon, the likes of which would haunt doskvol or the
     deathlands.
 
@@ -46,14 +46,14 @@ class Demon(object):
         affinity=None,
         desire=None,
     ):
-        self.name = simple_attribute_setter(name, DEMON_NAMES)
-        self.primary_feature = simple_attribute_setter(primary_feature, DEMON_FEATURES)
-        self.secondary_feature = simple_attribute_setter(
-            secondary_feature, DEMON_FEATURES
+        self.name = self.simple_attribute_setter(name, DEMON["NAMES"])
+        self.primary_feature = self.simple_attribute_setter(primary_feature, DEMON["FEATURES"])
+        self.secondary_feature = self.simple_attribute_setter(
+            secondary_feature, DEMON["FEATURES"]
         )
-        self.aspect = simple_attribute_setter(aspect, DEMON_ASPECTS)
-        self.affinity = simple_attribute_setter(affinity, DEMON_AFFINITIES)
-        self.desire = simple_attribute_setter(desire, DEMON_DESIRES)
+        self.aspect = self.simple_attribute_setter(aspect, DEMON["ASPECTS"])
+        self.affinity = self.simple_attribute_setter(affinity, DEMON["AFFINITIES"])
+        self.desire = self.simple_attribute_setter(desire, DEMON["DESIRES"])
 
     def __str__(self):
         return f"{self.name}, a {self.aspect} {self.affinity} demon"
@@ -65,9 +65,9 @@ class Demon(object):
         """Returns a description of the demon based on its attributes"""
         output = f"""
 Tremble at the sight of {self.name.capitalize()}!
-Behold, {self.primary_feature.lower()} and {self.secondary_feature.lower()}.
-This {self.affinity.lower()} demon has a {self.aspect.lower()} aspect.
-This demon desires {self.desire.lower()} above all else!
+Behold, its {self.primary_feature} and {self.secondary_feature}.
+This {self.affinity} demon has a {self.aspect} aspect.
+This demon desires {self.desire} above all else!
         """
         return output
 

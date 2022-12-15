@@ -16,7 +16,6 @@ import people
 import streets
 import cults
 import scores
-import utils
 
 
 def main():
@@ -47,50 +46,62 @@ Select generator:
         elif generator == "1":
             common_person = people.Person("common")
             description = common_person.describe()
+            common_person.history_log(description)
 
         elif generator == "2":
             rare_person = people.Person("rare")
             description = rare_person.describe()
+            rare_person.history_log(description)
 
         elif generator == "3":
             random_street = streets.Street()
             description = random_street.describe()
+            random_street.history_log(description)
 
         elif generator == "4":
             common_building = buildings.Building("common")
             description = common_building.describe()
+            common_building.history_log(description)
 
         elif generator == "5":
             rare_building = buildings.Building("rare")
             description = rare_building.describe()
+            rare_building.history_log(description)
 
         elif generator == "6":
             random_demon = demons.Demon()
             description = random_demon.describe()
+            random_demon.history_log(description)
 
         elif generator == "7":
             random_ghost = ghosts.Ghost()
             description = random_ghost.describe()
+            random_ghost.history_log(description)
 
         elif generator == "8":
             random_cult = cults.Cult()
             description = random_cult.describe()
+            random_cult.history_log(description)
 
         elif generator == "9":
             random_score = scores.Score()
             description = random_score.describe()
+            random_score.history_log(description)
 
         elif generator == "10":
             random_leviathan = leviathans.Leviathan("banal")
             description = random_leviathan.describe()
+            random_leviathan.history_log(description)
 
         elif generator == "11":
             random_leviathan = leviathans.Leviathan("surreal")
             description = random_leviathan.describe()
+            random_leviathan.history_log(description)
 
         elif generator == "12":
             random_spawn = leviathans.LeviathanSpawn()
             description = random_spawn.describe()
+            random_spawn.history_log(description)
 
         else:
             print("Invalid choice. Please try again.")
@@ -99,7 +110,6 @@ Select generator:
         print(description)
         if clipboard_support:
             pyperclip.copy(description)
-        utils.history_log(description)
 
 
 if __name__ == "__main__":

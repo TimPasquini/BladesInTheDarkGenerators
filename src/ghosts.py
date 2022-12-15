@@ -2,11 +2,11 @@
 """Uses the tables at the end of Blades in the Dark to generate a description
 for a random ghost."""
 
-from utils import *
-from dataSets import *
+from generator import Generator
+from dataSets import GHOST, PEOPLE
 
 
-class Ghost(object):
+class Ghost(Generator):
     """A randomly generated ghost, the likes of which would haunt doskvol or
     the deathlands
 
@@ -43,11 +43,11 @@ class Ghost(object):
         ghost_trait=None,
         ghost_effect=None,
     ):
-        self.first_name = simple_attribute_setter(first_name, FIRST_NAMES)
-        self.family_name = simple_attribute_setter(family_name, FAMILY_NAMES)
-        self.alias = simple_attribute_setter(alias, ALIASES)
-        self.ghost_trait = simple_attribute_setter(ghost_trait, GHOST_TRAITS)
-        self.ghost_effect = simple_attribute_setter(ghost_effect, GHOST_EFFECTS)
+        self.first_name = self.simple_attribute_setter(first_name, PEOPLE["FIRST_NAMES"])
+        self.family_name = self.simple_attribute_setter(family_name, PEOPLE["FAMILY_NAMES"])
+        self.alias = self.simple_attribute_setter(alias, PEOPLE["ALIASES"])
+        self.ghost_trait = self.simple_attribute_setter(ghost_trait, GHOST["TRAITS"])
+        self.ghost_effect = self.simple_attribute_setter(ghost_effect, GHOST["EFFECTS"])
 
     def __str__(self):
         return f"{self.first_name} '{self.alias}' {self.family_name}, a ghost"
@@ -59,7 +59,7 @@ class Ghost(object):
         """Returns a string that describes a ghost based on its attributes"""
         output = f"""
 The ghost of {self.first_name.capitalize()} '{self.alias.capitalize()}' {self.family_name.capitalize()}.
-There is/are (a/an) {self.ghost_effect.lower()} when this {self.ghost_trait.lower()} spirit appears!
+There is {self.ghost_effect} when this {self.ghost_trait} spirit appears!
     """
         return output
 

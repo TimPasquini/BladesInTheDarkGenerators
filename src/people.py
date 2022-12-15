@@ -6,11 +6,11 @@ import sys
 from random import choice as rc
 from random import choices as rcs
 
-from dataSets import *
-from utils import *
+from dataSets import PEOPLE, DEMON
+from generator import Generator
 
 
-class Person(object):
+class Person(Generator):
     """A randomly generated person in Doskvol
 
     By default, all attributes are randomly created from the source lists. If
@@ -47,7 +47,7 @@ class Person(object):
     family_name: str or None
         A Person's surname
     alias: str or None
-        A nickname, familiar name, assumed identity, or nom de gurre
+        A nickname, familiar name, assumed identity, or nom de guerre
 
     Methods
     -------
@@ -71,25 +71,25 @@ class Person(object):
         family_name=None,
         alias=None,
     ):
-        self.profession = two_choice_attribute_setter(
+        self.profession = self.two_choice_attribute_setter(
             profession,
             "rare",
             "common",
-            RARE_PROFESSIONS,
-            COMMON_PROFESSIONS,
+            PEOPLE["RARE_PROFESSIONS"],
+            PEOPLE["COMMON_PROFESSIONS"],
         )
         self.heritage = heritage
-        self.gender = simple_attribute_setter(gender, GENDERS)
-        self.appearance = simple_attribute_setter(appearance, APPEARANCES)
-        self.goals = simple_attribute_setter(goals, GOALS)
-        self.methods = simple_attribute_setter(methods, METHODS)
-        self.style = simple_attribute_setter(style, STYLES)
-        self.trait = simple_attribute_setter(trait, TRAITS)
-        self.interest = simple_attribute_setter(interest, INTERESTS)
-        self.quirk = simple_attribute_setter(quirk, QUIRKS)
-        self.first_name = simple_attribute_setter(first_name, FIRST_NAMES)
-        self.family_name = simple_attribute_setter(family_name, FAMILY_NAMES)
-        self.alias = simple_attribute_setter(alias, ALIASES)
+        self.gender = self.simple_attribute_setter(gender, PEOPLE["GENDERS"])
+        self.appearance = self.simple_attribute_setter(appearance, PEOPLE["APPEARANCES"])
+        self.goals = self.simple_attribute_setter(goals, PEOPLE["GOALS"])
+        self.methods = self.simple_attribute_setter(methods, PEOPLE["METHODS"])
+        self.style = self.simple_attribute_setter(style, PEOPLE["STYLES"])
+        self.trait = self.simple_attribute_setter(trait, PEOPLE["TRAITS"])
+        self.interest = self.simple_attribute_setter(interest, PEOPLE["INTERESTS"])
+        self.quirk = self.simple_attribute_setter(quirk, PEOPLE["QUIRKS"])
+        self.first_name = self.simple_attribute_setter(first_name, PEOPLE["FIRST_NAMES"])
+        self.family_name = self.simple_attribute_setter(family_name, PEOPLE["FAMILY_NAMES"])
+        self.alias = self.simple_attribute_setter(alias, PEOPLE["ALIASES"])
 
     def __str__(self):
         return (
@@ -106,20 +106,20 @@ class Person(object):
     @heritage.setter
     def heritage(self, default_heritage):
         if default_heritage is None:
-            h = rcs(json_retriever(HERITAGES), weights=[50, 10, 5, 5, 5, 5])[0]
+            h = rcs(self.json_retriever(PEOPLE["HERITAGES"]), weights=[50, 10, 5, 5, 5, 5])[0]
         else:
             h = default_heritage
         if h.lower() != "tycherosi":
             self._heritage = h
         else:
             self._heritage = h
-            self.demonic_feature = rc(json_retriever(DEMON_FEATURES))
+            self.demonic_feature = rc(self.json_retriever(DEMON["FEATURES"]))
 
     def describe(self):
         """Returns a string that describes the building based on its attributes"""
         name = f"{self.first_name.capitalize()} '{self.alias.capitalize()}' {self.family_name.capitalize()}\n"
-        description = f"A/An {self.appearance.lower()} {self.gender.lower()} {self.heritage.capitalize()} wearing (a/an) {self.style}\n"
-        quirk = f"Overall, they seem {self.trait.lower()} but are also {self.quirk.lower()}\n"
+        description = f"This {self.appearance} {self.gender} {self.heritage.capitalize()} is {self.style}\n"
+        quirk = f"Overall, they seem {self.trait.lower()} but also {self.quirk.lower()}.\n"
         interest = f"They are interested in {self.interest.lower()}\n"
         profession = f"They work as a {self.profession} and use {self.methods.lower()} to try and gain/cause {self.goals.lower()}.\n"
         if self.heritage.lower() == "tycherosi":
@@ -132,8 +132,8 @@ class Person(object):
 
 if __name__ == "__main__":
     try:
-        profession = sys.argv[1]
+        employment = sys.argv[1]
     except IndexError:  # no profession specified
-        profession = None
-    p = Person(profession)
+        employment = None
+    p = Person(employment)
     print(p.describe())

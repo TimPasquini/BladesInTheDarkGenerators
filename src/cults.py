@@ -2,11 +2,11 @@
 """The cults class creates a randomly generated cult instance utilizing
 the rolling tables from the end of the Blades in the Dark rule book."""
 
-from utils import *
-from dataSets import *
+from generator import Generator
+from dataSets import CULT
 
 
-class Cult(object):
+class Cult(Generator):
     """A randomly generated Cult operating in the city of Doskvol.
 
     By default, all attributes are randomly created from the source lists. If
@@ -29,8 +29,8 @@ class Cult(object):
     """
 
     def __init__(self, god=None, practice=None):
-        self.god = simple_attribute_setter(god, FORGOTTEN_GODS)
-        self.practice = simple_attribute_setter(practice, CULT_PRACTICES)
+        self.god = self.simple_attribute_setter(god, CULT["FORGOTTEN_GODS"])
+        self.practice = self.simple_attribute_setter(practice, CULT["PRACTICES"])
 
     def __str__(self):
         return f"a cult of {self.god}"

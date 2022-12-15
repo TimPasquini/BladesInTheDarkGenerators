@@ -2,11 +2,11 @@
 """Uses the tables at the end of Blades in the Dark to generate a description
 for a random score."""
 
-from dataSets import *
-from utils import *
+from dataSets import SCORE
+from generator import Generator
 
 
-class Score(object):
+class Score(Generator):
     """A randomly generated score for a crew in Doskvol to run
 
     By default, all attributes are randomly created from the source lists. If
@@ -57,10 +57,10 @@ class Score(object):
     ):
         self.client = client
         self.target = target
-        self.job = simple_attribute_setter(job, SCORE_JOBS)
-        self.twist = simple_attribute_setter(twist, SCORE_TWISTS)
-        self.connection = simple_attribute_setter(connection, SCORE_CONNECTIONS)
-        self.faction = simple_attribute_setter(faction, SCORE_FACTIONS)
+        self.job = self.simple_attribute_setter(job, SCORE["JOBS"])
+        self.twist = self.simple_attribute_setter(twist, SCORE["TWISTS"])
+        self.connection = self.simple_attribute_setter(connection, SCORE["CONNECTIONS"])
+        self.faction = self.simple_attribute_setter(faction, SCORE["FACTIONS"])
 
     def __str__(self):
         return f"{self.client} wants to {self.job} a {self.target}"
@@ -74,12 +74,12 @@ class Score(object):
 
     @client.setter
     def client(self, profession):
-        client_profession = simple_attribute_setter(profession, SCORE_CLIENTS_TARGETS)
-        checked_profession = second_roll_check(
+        client_profession = self.simple_attribute_setter(profession, SCORE["CLIENTS_TARGETS"])
+        checked_profession = self.second_roll_check(
             client_profession,
             Score.client_target_rerolls,
             Score.client_target_forbidden_rerolls,
-            SCORE_CLIENTS_TARGETS,
+            SCORE["CLIENTS_TARGETS"],
         )
         self._client = checked_profession
 
@@ -89,22 +89,30 @@ class Score(object):
 
     @target.setter
     def target(self, profession):
-        target_profession = simple_attribute_setter(profession, SCORE_CLIENTS_TARGETS)
-        checked_profession = second_roll_check(
+        target_profession = self.simple_attribute_setter(profession, SCORE["CLIENTS_TARGETS"])
+        checked_profession = self.second_roll_check(
             target_profession,
             Score.client_target_rerolls,
             Score.client_target_forbidden_rerolls,
-            SCORE_CLIENTS_TARGETS,
+            SCORE["CLIENTS_TARGETS"],
         )
         self._target = checked_profession
 
     def describe(self):
         """Returns a string that lays out a score based on its attributes"""
+        client = self._reformat_ghost(self.client)
+        target = self._reformat_ghost(self.target)
         output = f"""
-A/An {self.client.lower()} wants the crew to {self.job.lower()} a/an {self.target.lower()}.
-It's more complex because... {self.twist}.
-A {self.connection.lower()} can tell you more, but {self.faction.title()} are also involved!"""
+{client.capitalize()} wants the crew to {self.job} {target}.
+It's more complex because... {self.twist.lower()}.
+A {self.connection} can tell you more about {self.faction.title()} involvement!"""
         return output
+
+    @staticmethod
+    def _reformat_ghost(client_target):
+        if "Ghost of" in client_target:
+            client_target = "a " + client_target
+        return client_target
 
 
 if __name__ == "__main__":

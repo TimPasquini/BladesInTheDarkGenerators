@@ -2,11 +2,11 @@
 """Uses the tables at the end of Blades in the Dark to generate a description
 for a random streetscape."""
 
-from utils import *
-from dataSets import *
+from generator import Generator
+from dataSets import STREET
 
 
-class Street(object):
+class Street(Generator):
     """A description of a randomly generated street in the city of Doskvol
 
     By default, all attributes are randomly created from the source lists. If
@@ -28,7 +28,7 @@ class Street(object):
     use: str or None
         What the street is generally used for, zoning purpose
     infrastructure_type: str or None
-        The type of street in terms of infastructure design (street, alley,
+        The type of street in terms of infrastructure design (street, alley,
         waterway, plaza, etc)
     primary_detail: str or None
         An feature to make the street more interesting
@@ -52,17 +52,17 @@ class Street(object):
         primary_detail=None,
         secondary_detail=None,
     ):
-        self.mood = simple_attribute_setter(mood, STREET_MOODS)
-        self.sight = simple_attribute_setter(sight, STREET_SIGHTS)
-        self.sound = simple_attribute_setter(sound, STREET_SOUNDS)
-        self.smell = simple_attribute_setter(smell, STREET_SMELLS)
-        self.use = simple_attribute_setter(use, STREET_USES)
-        self.infrastructure_type = simple_attribute_setter(
-            infrastructure_type, STREET_INFRASTRUCTURE_TYPES
+        self.mood = self.simple_attribute_setter(mood, STREET["MOODS"])
+        self.sight = self.simple_attribute_setter(sight, STREET["SIGHTS"])
+        self.sound = self.simple_attribute_setter(sound, STREET["SOUNDS"])
+        self.smell = self.simple_attribute_setter(smell, STREET["SMELLS"])
+        self.use = self.simple_attribute_setter(use, STREET["USES"])
+        self.infrastructure_type = Street.simple_attribute_setter(
+            infrastructure_type, STREET["INFRASTRUCTURE_TYPES"]
         )
-        self.primary_detail = simple_attribute_setter(primary_detail, STREET_DETAILS)
-        self.secondary_detail = simple_attribute_setter(
-            secondary_detail, STREET_DETAILS
+        self.primary_detail = self.simple_attribute_setter(primary_detail, STREET["DETAILS"])
+        self.secondary_detail = self.simple_attribute_setter(
+            secondary_detail, STREET["DETAILS"]
         )
 
     def __str__(self):
@@ -75,7 +75,7 @@ class Street(object):
         """returns a string describing a street using its attributes"""
         output = f"""
 This {self.mood} {self.infrastructure_type} is primarily used for {self.use} purposes.
-(A/An) {self.sight} catch(es) your eye.
+{self.sight.capitalize()} catches your eye.
 You hear {self.sound} and smell {self.smell} on the air.
 You can't help but notice {self.primary_detail} and {self.secondary_detail}."""
         return output

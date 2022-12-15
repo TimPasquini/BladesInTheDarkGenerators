@@ -4,11 +4,11 @@ the rolling tables from the end of the Blades in the Dark rule book."""
 
 import sys
 
-from dataSets import *
-from utils import *
+from dataSets import BUILDING
+from generator import Generator
 
 
-class Building(object):
+class Building(Generator):
     """A randomly generated building in the city of Doskvol.
 
     By default, all attributes are randomly created from the source lists. If
@@ -96,20 +96,20 @@ class Building(object):
         interior_detail_1=None,
         interior_detail_2=None,
     ):
-        self.purpose = two_choice_attribute_setter(
+        self.purpose = self.two_choice_attribute_setter(
             purpose,
             "rare",
             "common",
-            BUILDING_RARE_PURPOSES,
-            BUILDING_COMMON_PURPOSES,
+            BUILDING["RARE_PURPOSES"],
+            BUILDING["COMMON_PURPOSES"],
         )
-        self.material = simple_attribute_setter(material, BUILDING_MATERIALS)
-        self.exterior_detail = simple_attribute_setter(
-            exterior_detail, BUILDING_EXTERIORS
+        self.material = self.simple_attribute_setter(material, BUILDING["MATERIALS"])
+        self.exterior_detail = self.simple_attribute_setter(
+            exterior_detail, BUILDING["EXTERIORS"]
         )
         self.interior_detail_1 = interior_detail_1
-        self.interior_detail_2 = simple_attribute_setter(
-            interior_detail_2, BUILDING_INTERIORS
+        self.interior_detail_2 = self.simple_attribute_setter(
+            interior_detail_2, BUILDING["INTERIORS"]
         )
 
     def __str__(self):
@@ -121,10 +121,10 @@ class Building(object):
     def describe(self):
         """Returns a string that describes the building based on its attributes"""
         output = (
-            f"This {self.material.lower()} {self.purpose.lower()} "
-            f"building is decorated with {self.exterior_detail.lower()}.\n"
-            f"It is notable for its {self.interior_detail_1.lower()} "
-            f"and {self.interior_detail_2.lower()}"
+            f"A {self.material} {self.purpose} building.\n"
+            f"The building exterior is decorated with {self.exterior_detail}.\n"
+            f"It is notable for its {self.interior_detail_1} "
+            f"and {self.interior_detail_2}"
         )
         return output
 
@@ -134,12 +134,12 @@ class Building(object):
 
     @interior_detail_1.setter
     def interior_detail_1(self, detail):
-        building_detail = simple_attribute_setter(detail, BUILDING_INTERIORS)
-        checked_detail = second_roll_check(
+        building_detail = self.simple_attribute_setter(detail, BUILDING["INTERIORS"])
+        checked_detail = self.second_roll_check(
             building_detail,
             Building.interior_detail_rerolls,
             Building.interior_detail_forbidden_rerolls,
-            BUILDING_INTERIORS,
+            BUILDING["INTERIORS"],
         )
         self._interior_detail_1 = checked_detail
 
@@ -149,12 +149,12 @@ class Building(object):
 
     @interior_detail_2.setter
     def interior_detail_2(self, detail):
-        building_detail = simple_attribute_setter(detail, BUILDING_INTERIORS)
-        checked_detail = second_roll_check(
+        building_detail = self.simple_attribute_setter(detail, BUILDING["INTERIORS"])
+        checked_detail = self.second_roll_check(
             building_detail,
             Building.interior_detail_rerolls,
             Building.interior_detail_forbidden_rerolls,
-            BUILDING_INTERIORS,
+            BUILDING["INTERIORS"],
         )
         self._interior_detail_2 = checked_detail
 

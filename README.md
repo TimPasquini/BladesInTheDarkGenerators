@@ -47,7 +47,7 @@ terms of case/tense/pronoun/etc.
 
 Streets:
 Get a random street description using the information from page 300 of 
-the Blades in the Dark sourcebook.
+the Blades in the Dark source book.
 
 Buildings:
 Get a random building description using the information from page 301. 
