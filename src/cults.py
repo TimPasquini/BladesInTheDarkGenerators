@@ -28,17 +28,17 @@ class Cult(Generator):
         Returns a formatted string describing the cult
     """
 
-    def __init__(self, god=None, practice=None):
+    def __init__(self, god: str | None = None, practice: str | None = None):
         self.god = self.simple_attribute_setter(god, CULT["FORGOTTEN_GODS"])
         self.practice = self.simple_attribute_setter(practice, CULT["PRACTICES"])
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"a cult of {self.god}"
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"{self.__class__.__qualname__}('{self.god}', '{self.practice}')"
 
-    def describe(self):
+    def describe(self) -> str:
         """returns a string that describes a cult based on its attributes"""
         output = f"""
 This is the cult of {self.god.title()}.

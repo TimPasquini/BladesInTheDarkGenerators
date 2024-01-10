@@ -3,7 +3,6 @@
 the rolling tables from the end of the Blades in the Dark rule book."""
 
 import sys
-from random import choice as rc
 from random import choices as rcs
 
 from dataSets import PEOPLE, DEMON
@@ -57,19 +56,19 @@ class Person(Generator):
 
     def __init__(
         self,
-        profession=None,
-        heritage=None,
-        gender=None,
-        appearance=None,
-        goals=None,
-        methods=None,
-        style=None,
-        trait=None,
-        interest=None,
-        quirk=None,
-        first_name=None,
-        family_name=None,
-        alias=None,
+        profession: str | None = None,
+        heritage: str | None = None,
+        gender: str | None = None,
+        appearance: str | None = None,
+        goals: str | None = None,
+        methods: str | None = None,
+        style: str | None = None,
+        trait: str | None = None,
+        interest: str | None = None,
+        quirk: str | None = None,
+        first_name: str | None = None,
+        family_name: str | None = None,
+        alias: str | None = None,
     ):
         self.profession = self.two_choice_attribute_setter(
             profession,
@@ -80,15 +79,21 @@ class Person(Generator):
         )
         self.heritage = heritage
         self.gender = self.simple_attribute_setter(gender, PEOPLE["GENDERS"])
-        self.appearance = self.simple_attribute_setter(appearance, PEOPLE["APPEARANCES"])
+        self.appearance = self.simple_attribute_setter(
+            appearance, PEOPLE["APPEARANCES"]
+        )
         self.goals = self.simple_attribute_setter(goals, PEOPLE["GOALS"])
         self.methods = self.simple_attribute_setter(methods, PEOPLE["METHODS"])
         self.style = self.simple_attribute_setter(style, PEOPLE["STYLES"])
         self.trait = self.simple_attribute_setter(trait, PEOPLE["TRAITS"])
         self.interest = self.simple_attribute_setter(interest, PEOPLE["INTERESTS"])
         self.quirk = self.simple_attribute_setter(quirk, PEOPLE["QUIRKS"])
-        self.first_name = self.simple_attribute_setter(first_name, PEOPLE["FIRST_NAMES"])
-        self.family_name = self.simple_attribute_setter(family_name, PEOPLE["FAMILY_NAMES"])
+        self.first_name = self.simple_attribute_setter(
+            first_name, PEOPLE["FIRST_NAMES"]
+        )
+        self.family_name = self.simple_attribute_setter(
+            family_name, PEOPLE["FAMILY_NAMES"]
+        )
         self.alias = self.simple_attribute_setter(alias, PEOPLE["ALIASES"])
 
     def __str__(self):
@@ -104,26 +109,27 @@ class Person(Generator):
         return self._heritage
 
     @heritage.setter
-    def heritage(self, default_heritage):
-        if default_heritage is None:
-            h = rcs(self.json_retriever(PEOPLE["HERITAGES"]), weights=[50, 10, 5, 5, 5, 5])[0]
-        else:
-            h = default_heritage
-        if h.lower() != "tycherosi":
-            self._heritage = h
-        else:
-            self._heritage = h
-            self.demonic_feature = rc(self.json_retriever(DEMON["FEATURES"]))
+    def heritage(self, default_heritage: str | None):
+        if not isinstance(default_heritage, str):
+            default_heritage = rcs(
+                self.json_retriever(PEOPLE["HERITAGES"]), weights=[50, 10, 5, 5, 5, 5]
+            )[0]
+        self._heritage = default_heritage
+        self._set_demonic_feature_if_tycherosi()
 
-    def describe(self):
+    def _set_demonic_feature_if_tycherosi(self):
+        if self._heritage.lower() == "tycherosi":
+            self.demonic_feature = self.simple_attribute_setter(None, DEMON["FEATURES"])
+
+    def describe(self) -> str:
         """Returns a string that describes the building based on its attributes"""
         name = f"{self.first_name.capitalize()} '{self.alias.capitalize()}' {self.family_name.capitalize()}\n"
         description = f"This {self.appearance} {self.gender} {self.heritage.capitalize()} is {self.style}\n"
-        quirk = f"Overall, they seem {self.trait.lower()} but also {self.quirk.lower()}.\n"
-        interest = f"They are interested in {self.interest.lower()}\n"
-        profession = f"They work as a {self.profession} and use {self.methods.lower()} to try and gain/cause {self.goals.lower()}.\n"
+        quirk = f"Overall, they seem {self.trait} but also {self.quirk}.\n"
+        interest = f"They are interested in {self.interest}\n"
+        profession = f"They work as a {self.profession} and use {self.methods} to try and gain/cause {self.goals}.\n"
         if self.heritage.lower() == "tycherosi":
-            demonic = f"Their Tycherosi heritage manifests as {self.demonic_feature.lower()}.\n"
+            demonic = f"Their Tycherosi heritage manifests as {self.demonic_feature}.\n"
             output = name + description + demonic + profession + quirk + interest
         else:
             output = name + description + profession + quirk + interest

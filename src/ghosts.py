@@ -37,14 +37,18 @@ class Ghost(Generator):
 
     def __init__(
         self,
-        first_name=None,
-        family_name=None,
-        alias=None,
-        ghost_trait=None,
-        ghost_effect=None,
+        first_name: str | None = None,
+        family_name: str | None = None,
+        alias: str | None = None,
+        ghost_trait: str | None = None,
+        ghost_effect: str | None = None,
     ):
-        self.first_name = self.simple_attribute_setter(first_name, PEOPLE["FIRST_NAMES"])
-        self.family_name = self.simple_attribute_setter(family_name, PEOPLE["FAMILY_NAMES"])
+        self.first_name = self.simple_attribute_setter(
+            first_name, PEOPLE["FIRST_NAMES"]
+        )
+        self.family_name = self.simple_attribute_setter(
+            family_name, PEOPLE["FAMILY_NAMES"]
+        )
         self.alias = self.simple_attribute_setter(alias, PEOPLE["ALIASES"])
         self.ghost_trait = self.simple_attribute_setter(ghost_trait, GHOST["TRAITS"])
         self.ghost_effect = self.simple_attribute_setter(ghost_effect, GHOST["EFFECTS"])
@@ -55,7 +59,7 @@ class Ghost(Generator):
     def __repr__(self):
         return f"{self.__class__.__qualname__}('{self.first_name}', '{self.family_name}', '{self.alias}', '{self.ghost_trait}', '{self.ghost_effect}')"
 
-    def describe(self):
+    def describe(self) -> str:
         """Returns a string that describes a ghost based on its attributes"""
         output = f"""
 The ghost of {self.first_name.capitalize()} '{self.alias.capitalize()}' {self.family_name.capitalize()}.

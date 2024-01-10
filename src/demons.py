@@ -39,18 +39,19 @@ class Demon(Generator):
 
     def __init__(
         self,
-        name=None,
-        primary_feature=None,
-        secondary_feature=None,
-        aspect=None,
-        affinity=None,
-        desire=None,
+        name: str | None = None,
+        primary_feature: str | None = None,
+        secondary_feature: str | None = None,
+        aspect: str | None = None,
+        affinity: str | None = None,
+        desire: str | None = None,
     ):
         self.name = self.simple_attribute_setter(name, DEMON["NAMES"])
-        self.primary_feature = self.simple_attribute_setter(primary_feature, DEMON["FEATURES"])
-        self.secondary_feature = self.simple_attribute_setter(
-            secondary_feature, DEMON["FEATURES"]
+        self.primary_feature = self.simple_attribute_setter(
+            primary_feature, DEMON["FEATURES"]
         )
+        # use secondary roll check to ensure we get something different
+        self.secondary_feature = secondary_feature
         self.aspect = self.simple_attribute_setter(aspect, DEMON["ASPECTS"])
         self.affinity = self.simple_attribute_setter(affinity, DEMON["AFFINITIES"])
         self.desire = self.simple_attribute_setter(desire, DEMON["DESIRES"])
@@ -61,7 +62,24 @@ class Demon(Generator):
     def __repr__(self):
         return f"{self.__class__.__qualname__}('{self.name}', '{self.primary_feature}', '{self.secondary_feature}', '{self.aspect}', '{self.affinity}', '{self.desire}')"
 
-    def describe(self):
+    @property
+    def secondary_feature(self):
+        return self._secondary_feature
+
+    @secondary_feature.setter
+    def secondary_feature(self, detail: str | None):
+        # check if None and roll something if it is
+        initial_detail = self.simple_attribute_setter(detail, DEMON["FEATURES"])
+
+        # use second_roll_check to ensure it's different from the primary feature
+        self._secondary_feature = self.second_roll_check(
+            initial_detail,
+            [self.primary_feature],  # make the primary a trigger
+            [self.primary_feature],  # make the primary forbidden
+            DEMON["FEATURES"],
+        )
+
+    def describe(self) -> str:
         """Returns a description of the demon based on its attributes"""
         output = f"""
 Tremble at the sight of {self.name.capitalize()}!

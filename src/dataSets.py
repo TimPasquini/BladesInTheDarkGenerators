@@ -1,8 +1,11 @@
 # dataSets.py
 """
 This file contains variables that reference the filepath of every data set in
-the project's data folder. These should be imported using * and treated as
-constants.
+the project's data folder as well as some useful directory references. These
+should be imported as needed by various generators. They are mostly grouped by
+the generator that primarily uses them, but occasional sets are used by multiple
+generators. For example, Leviathans can spawn ghostly or demonic spawn, so it
+imports all three related data set references.
 """
 
 from pathlib import Path
@@ -26,13 +29,13 @@ BUILDING = {
     "COMMON_PURPOSES": DATA_DIRECTORY / "Buildings/common_use.json",
     "MATERIALS": DATA_DIRECTORY / "Buildings/material.json",
     "EXTERIORS": DATA_DIRECTORY / "Buildings/exterior_details.json",
-    "INTERIORS": DATA_DIRECTORY / "Buildings/interior_details.json"
-    }
+    "INTERIORS": DATA_DIRECTORY / "Buildings/interior_details.json",
+}
 
 CULT = {
     "FORGOTTEN_GODS": DATA_DIRECTORY / "Cults/forgotten_gods.json",
-    "PRACTICES": DATA_DIRECTORY / "Cults/cult_practices.json"
-    }
+    "PRACTICES": DATA_DIRECTORY / "Cults/cult_practices.json",
+}
 
 DEMON = {
     "NAMES": DATA_DIRECTORY / "Demons/demon_names.json",
@@ -40,12 +43,12 @@ DEMON = {
     "ASPECTS": DATA_DIRECTORY / "Demons/demonic_aspect.json",
     "AFFINITIES": DATA_DIRECTORY / "Demons/demonic_affinity.json",
     "DESIRES": DATA_DIRECTORY / "Demons/demon_desire.json",
-    }
+}
 
 GHOST = {
     "TRAITS": DATA_DIRECTORY / "Ghosts/ghost_traits.json",
     "EFFECTS": DATA_DIRECTORY / "Ghosts/ghostly_effect.json",
-    }
+}
 
 PEOPLE = {
     "RARE_PROFESSIONS": DATA_DIRECTORY / "People/rare_profession.json",
@@ -62,7 +65,7 @@ PEOPLE = {
     "FAMILY_NAMES": DATA_DIRECTORY / "People/family_names.json",
     "ALIASES": DATA_DIRECTORY / "People/aliases.json",
     "HERITAGES": DATA_DIRECTORY / "People/heritage.json",
-    }
+}
 
 LEVIATHAN = {
     "BANAL_ACTIVITIES": DATA_DIRECTORY / "Leviathan/banal_activity.json",
@@ -73,7 +76,7 @@ LEVIATHAN = {
     "DEMONIC_TRAITS": DATA_DIRECTORY / "Leviathan/leviathan_demon_traits.json",
     "TREASURES": DATA_DIRECTORY / "Leviathan/leviathan_treasures.json",
     "SPAWN_FORMS": DATA_DIRECTORY / "Leviathan/leviathan_spawn.json",
-    }
+}
 
 SCORE = {
     "CLIENTS_TARGETS": DATA_DIRECTORY / "Scores/client_target.json",
@@ -81,7 +84,7 @@ SCORE = {
     "TWISTS": DATA_DIRECTORY / "Scores/complication.json",
     "CONNECTIONS": DATA_DIRECTORY / "Scores/connection.json",
     "FACTIONS": DATA_DIRECTORY / "Scores/factions.json",
-    }
+}
 STREET = {
     "MOODS": DATA_DIRECTORY / "Streets/moods.json",
     "SIGHTS": DATA_DIRECTORY / "Streets/sights.json",
@@ -90,4 +93,4 @@ STREET = {
     "USES": DATA_DIRECTORY / "Streets/use.json",
     "INFRASTRUCTURE_TYPES": DATA_DIRECTORY / "Streets/infrastructure_type.json",
     "DETAILS": DATA_DIRECTORY / "Streets/details.json",
-    }
+}

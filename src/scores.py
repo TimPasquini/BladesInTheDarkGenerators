@@ -37,10 +37,8 @@ class Score(Generator):
     """
 
     # re-roll information
-    client_target_rerolls = ["Ghost of", "Possessed"]
-    client_target_forbidden_rerolls = [
-        "Ghost of",
-        "Possessed",
+    client_target_rerolls = ["a Ghost of", "Possessed"]
+    client_target_forbidden_rerolls = client_target_rerolls + [
         "Vampire",
         "Demon (disguised)",
         "Hollow",
@@ -48,12 +46,12 @@ class Score(Generator):
 
     def __init__(
         self,
-        client=None,
-        target=None,
-        job=None,
-        twist=None,
-        connection=None,
-        faction=None,
+        client: str | None = None,
+        target: str | None = None,
+        job: str | None = None,
+        twist: str | None = None,
+        connection: str | None = None,
+        faction: str | None = None,
     ):
         self.client = client
         self.target = target
@@ -74,14 +72,7 @@ class Score(Generator):
 
     @client.setter
     def client(self, profession):
-        client_profession = self.simple_attribute_setter(profession, SCORE["CLIENTS_TARGETS"])
-        checked_profession = self.second_roll_check(
-            client_profession,
-            Score.client_target_rerolls,
-            Score.client_target_forbidden_rerolls,
-            SCORE["CLIENTS_TARGETS"],
-        )
-        self._client = checked_profession
+        self._client = self._set_client_or_target(profession)
 
     @property
     def target(self):
@@ -89,22 +80,26 @@ class Score(Generator):
 
     @target.setter
     def target(self, profession):
-        target_profession = self.simple_attribute_setter(profession, SCORE["CLIENTS_TARGETS"])
-        checked_profession = self.second_roll_check(
-            target_profession,
+        self._target = self._set_client_or_target(profession)
+
+    def _set_client_or_target(self, profession: str) -> str:
+        initial_profession = self.simple_attribute_setter(
+            profession, SCORE["CLIENTS_TARGETS"]
+        )
+        return self.second_roll_check(
+            initial_profession,
             Score.client_target_rerolls,
             Score.client_target_forbidden_rerolls,
             SCORE["CLIENTS_TARGETS"],
         )
-        self._target = checked_profession
 
-    def describe(self):
+    def describe(self) -> str:
         """Returns a string that lays out a score based on its attributes"""
         client = self._reformat_ghost(self.client)
         target = self._reformat_ghost(self.target)
         output = f"""
 {client.capitalize()} wants the crew to {self.job} {target}.
-It's more complex because... {self.twist.lower()}.
+It's more complex because... {self.twist}.
 A {self.connection} can tell you more about {self.faction.title()} involvement!"""
         return output
 

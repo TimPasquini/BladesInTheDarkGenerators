@@ -57,24 +57,7 @@ class Building(Generator):
         "Ramshackle",
         "Antique",
     ]
-    interior_detail_forbidden_rerolls = [
-        "Threadbare",
-        "Tattered",
-        "Lush",
-        "Comfortable",
-        "Drafty",
-        "Cold",
-        "Stout",
-        "Quiet",
-        "Cozy",
-        "Warm",
-        "Vaulted",
-        "Spacious",
-        "Low",
-        "Cramped",
-        "Rickety",
-        "Ramshackle",
-        "Antique",
+    interior_detail_forbidden_rerolls = interior_detail_rerolls + [
         "Dripping Water",
         "Creaking Floorboards",
         "Roaring Fires",
@@ -90,11 +73,11 @@ class Building(Generator):
 
     def __init__(
         self,
-        purpose=None,
-        material=None,
-        exterior_detail=None,
-        interior_detail_1=None,
-        interior_detail_2=None,
+        purpose: str | None = None,
+        material: str | None = None,
+        exterior_detail: str | None = None,
+        interior_detail_1: str | None = None,
+        interior_detail_2: str | None = None,
     ):
         self.purpose = self.two_choice_attribute_setter(
             purpose,
@@ -118,7 +101,7 @@ class Building(Generator):
     def __repr__(self):
         return f"{self.__class__.__qualname__}('{self.purpose}', '{self.material}', '{self.exterior_detail}', '{self.interior_detail_1}', '{self.interior_detail_2}')"
 
-    def describe(self):
+    def describe(self) -> str:
         """Returns a string that describes the building based on its attributes"""
         output = (
             f"A {self.material} {self.purpose} building.\n"
@@ -133,30 +116,28 @@ class Building(Generator):
         return self._interior_detail_1
 
     @interior_detail_1.setter
-    def interior_detail_1(self, detail):
-        building_detail = self.simple_attribute_setter(detail, BUILDING["INTERIORS"])
-        checked_detail = self.second_roll_check(
-            building_detail,
-            Building.interior_detail_rerolls,
-            Building.interior_detail_forbidden_rerolls,
-            BUILDING["INTERIORS"],
-        )
-        self._interior_detail_1 = checked_detail
+    def interior_detail_1(self, detail: str | None):
+        self._interior_detail_1 = self._set_valid_interior_detail(detail)
 
     @property
     def interior_detail_2(self):
         return self._interior_detail_2
 
     @interior_detail_2.setter
-    def interior_detail_2(self, detail):
-        building_detail = self.simple_attribute_setter(detail, BUILDING["INTERIORS"])
-        checked_detail = self.second_roll_check(
-            building_detail,
+    def interior_detail_2(self, detail: str | None):
+        self._interior_detail_2 = self._set_valid_interior_detail(detail)
+
+    def _set_valid_interior_detail(self, detail: str | None) -> str:
+        """Called by the setters to return a valid and complete building detail"""
+        # validate that initial detail is not None, or generate a random choice if it is
+        initial_detail = self.simple_attribute_setter(detail, BUILDING["INTERIORS"])
+        # Check if the initial detail needs additional rolls to reach a "complete" detail
+        return self.second_roll_check(
+            initial_detail,
             Building.interior_detail_rerolls,
             Building.interior_detail_forbidden_rerolls,
             BUILDING["INTERIORS"],
         )
-        self._interior_detail_2 = checked_detail
 
 
 if __name__ == "__main__":

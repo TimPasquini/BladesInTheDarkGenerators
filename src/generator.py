@@ -14,7 +14,7 @@ simple_attribute_setter: str or None
 two_choice_attribute_setter: string or None
     used by setters when there are two potential .json files to use
 second_roll_check:
-    used when there are recursive/re-roll elements in a dataset
+    used when there are incompatable or compounding elements in a dataset
 """
 
 import json
@@ -28,6 +28,10 @@ class Generator(ABC):
 
     @abstractmethod
     def __init__(self):
+        pass
+
+    @abstractmethod
+    def describe(self):
         pass
 
     @staticmethod
@@ -46,7 +50,7 @@ class Generator(ABC):
             return json.load(f)
 
     @staticmethod
-    def history_log(output):
+    def history_log(output: str):
         """Writes any output string to an external text document.
 
         Dumps a string to file, history.txt and adds linebreaks so that it
@@ -88,7 +92,7 @@ class Generator(ABC):
 
     @staticmethod
     def two_choice_attribute_setter(
-            attribute: str | None, option_1: str, option_2: str, path_1: str, path_2: str
+        attribute: str | None, option_1: str, option_2: str, path_1: str, path_2: str
     ) -> str | None:
         """Used by setters when there are two potential .json files to use.
 
@@ -121,23 +125,30 @@ class Generator(ABC):
                 "[Class]/[ChildClass]/[attribute.json]"
         """
         if attribute is None:
-            attribute = choice(Generator.json_retriever(path_1) + Generator.json_retriever(path_2))
-        elif attribute.lower() == f"{option_1.lower()}":
+            attribute = choice(
+                Generator.json_retriever(path_1) + Generator.json_retriever(path_2)
+            )
+        elif attribute.lower() == f"{option_1}":
             attribute = choice(Generator.json_retriever(path_1))
-        elif attribute.lower() == f"{option_2.lower()}":
+        elif attribute.lower() == f"{option_2}":
             attribute = choice(Generator.json_retriever(path_2))
         return attribute
 
     @staticmethod
-    def second_roll_check(first_roll, triggers, forbidden, dataset):
+    def second_roll_check(
+        first_roll: str, triggers: list[str], forbidden: list[str], dataset: str
+    ) -> str:
         """If the variable pulled for first_roll is in the triggers, it will
         start rolling for a second output from dataSet until it gets one that is
         not forbidden"""
-        if first_roll not in triggers:
+        triggers_lower = [trigger_word.lower() for trigger_word in triggers]
+        forbidden_lower = [forbidden_word.lower() for forbidden_word in forbidden]
+        first_roll_lower = first_roll.lower()
+        if first_roll_lower not in triggers_lower:
             return first_roll
-        else:
+
+        second_roll = choice(Generator.json_retriever(dataset))
+        while second_roll.lower() in forbidden_lower:
             second_roll = choice(Generator.json_retriever(dataset))
-            while second_roll in forbidden:
-                second_roll = choice(Generator.json_retriever(dataset))
-            output = first_roll + " " + second_roll
-            return output
+
+        return first_roll + " " + second_roll

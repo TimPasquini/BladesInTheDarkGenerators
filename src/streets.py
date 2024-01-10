@@ -43,14 +43,14 @@ class Street(Generator):
 
     def __init__(
         self,
-        mood=None,
-        sight=None,
-        sound=None,
-        smell=None,
-        use=None,
-        infrastructure_type=None,
-        primary_detail=None,
-        secondary_detail=None,
+        mood: str | None = None,
+        sight: str | None = None,
+        sound: str | None = None,
+        smell: str | None = None,
+        use: str | None = None,
+        infrastructure_type: str | None = None,
+        primary_detail: str | None = None,
+        secondary_detail: str | None = None,
     ):
         self.mood = self.simple_attribute_setter(mood, STREET["MOODS"])
         self.sight = self.simple_attribute_setter(sight, STREET["SIGHTS"])
@@ -60,7 +60,9 @@ class Street(Generator):
         self.infrastructure_type = Street.simple_attribute_setter(
             infrastructure_type, STREET["INFRASTRUCTURE_TYPES"]
         )
-        self.primary_detail = self.simple_attribute_setter(primary_detail, STREET["DETAILS"])
+        self.primary_detail = self.simple_attribute_setter(
+            primary_detail, STREET["DETAILS"]
+        )
         self.secondary_detail = self.simple_attribute_setter(
             secondary_detail, STREET["DETAILS"]
         )
@@ -71,7 +73,7 @@ class Street(Generator):
     def __repr__(self):
         return f"{self.__class__.__qualname__}('{self.mood}', '{self.sight}', '{self.sound}', '{self.smell}', '{self.use}', '{self.infrastructure_type}', '{self.primary_detail}', '{self.secondary_detail}')"
 
-    def describe(self):
+    def describe(self) -> str:
         """returns a string describing a street using its attributes"""
         output = f"""
 This {self.mood} {self.infrastructure_type} is primarily used for {self.use} purposes.

@@ -13,8 +13,8 @@ LeviathanSpawn
 """
 
 import sys
-from random import choice as rc
-from random import randint as ri
+from typing import Union
+from random import randint
 
 from dataSets import LEVIATHAN, DEMON, GHOST
 from generator import Generator
@@ -45,11 +45,13 @@ class Leviathan(Generator):
         The form its body resembles, usually a sea creature
     limb_shape: str or None
         How the leviathan moves around, limbs, usually a sea creature's
-    size: str or None
+    size: int or None
         Size defines how many distinct regions the leviathan has
+    regions: dict or None
+        A dictonary that holds the types of regions present on the leviathan
     treasure_index: int or None
         Defines how many valuable treasures are on/in the leviathan
-    spawn: str or LeviathanSpawn object
+    spawn: LeviathanSpawn object or None
         The type of Spawn the leviathan is generally known to produce
 
     Methods
@@ -61,17 +63,17 @@ class Leviathan(Generator):
 
     def __init__(
         self,
-        activity=None,
-        name=None,
-        epithet=None,
-        head_shape=None,
-        body_shape=None,
-        limb_shape=None,
-        size=None,
-        regions=None,
-        treasure_index=None,
-        treasures=None,
-        spawn=None,
+        activity: str | None = None,
+        name: str | None = None,
+        epithet: str | None = None,
+        head_shape: str | None = None,
+        body_shape: str | None = None,
+        limb_shape: str | None = None,
+        size: int | None = None,
+        regions: dict | None = None,
+        treasure_index: int | None = None,
+        treasures: dict | None = None,
+        spawn: Union["LeviathanSpawn", None] = None,
     ):
         self.activity = self.two_choice_attribute_setter(
             activity,
@@ -85,10 +87,16 @@ class Leviathan(Generator):
         self.head_shape = self.simple_attribute_setter(head_shape, LEVIATHAN["SHAPES"])
         self.body_shape = self.simple_attribute_setter(body_shape, LEVIATHAN["SHAPES"])
         self.limb_shape = self.simple_attribute_setter(limb_shape, LEVIATHAN["SHAPES"])
-        self.size = size
-        self.regions = regions
-        self.treasure_index = treasure_index
-        self.treasures = treasures
+        self.size = size if size is not None else Leviathan._generate_random_size()
+        self.regions = regions if regions is not None else self._generate_regions()
+        self.treasure_index = (
+            treasure_index
+            if treasure_index is not None
+            else self._generate_treasure_index()
+        )
+        self.treasures = (
+            treasures if treasures is not None else self._generate_treasures()
+        )
         self.spawn = spawn
 
     def __str__(self):
@@ -98,71 +106,41 @@ class Leviathan(Generator):
         return f"{self.__class__.__qualname__}('{self.activity}', '{self.name}', '{self.epithet}', '{self.head_shape}', '{self.body_shape}', '{self.limb_shape}', '{self.size}', '{self.regions}', '{self.treasure_index}', '{self.treasures}', '{self.spawn}')"
 
     @property
-    def size(self):
-        return self._size
-
-    @size.setter
-    def size(self, default_size):
-        if default_size is None:
-            leviathan_size = ri(1, 6) + 4
-            self._size = leviathan_size
-        else:
-            self._size = default_size
-
-    @property
-    def regions(self):
-        return self._regions
-
-    @regions.setter
-    def regions(self, default_regions):
-        if default_regions is None:
-            leviathan_regions = {}
-            for num in range(1, self.size + 1):
-                leviathan_regions[f"Region_{num}"] = rc(
-                    self.json_retriever(LEVIATHAN["DEMONIC_TRAITS"])
-                )
-            self._regions = leviathan_regions
-        else:
-            self._regions = default_regions
-
-    @property
-    def treasure_index(self):
-        return self._treasure_index
-
-    @treasure_index.setter
-    def treasure_index(self, default_index):
-        if default_index is None:
-            self._treasure_index = round(self.size / 4) + 1
-        else:
-            self._treasure_index = default_index
-
-    @property
-    def treasures(self):
-        return self._treasures
-
-    @treasures.setter
-    def treasures(self, default_treasure):
-        if default_treasure is None:
-            leviathan_treasures = {}
-            for num in range(1, self.treasure_index + 1):
-                leviathan_treasures[f"treasure_{num}"] = rc(
-                    self.json_retriever(LEVIATHAN["TREASURES"])
-                )
-            self._treasures = leviathan_treasures
-        else:
-            self._treasures = default_treasure
-
-    @property
-    def spawn(self):
+    def spawn(self) -> Union["LeviathanSpawn", None]:
         return self._spawn
 
     @spawn.setter
-    def spawn(self, default_spawn):
+    def spawn(self, default_spawn: Union["LeviathanSpawn", None]):
         if default_spawn is None:
             default_spawn = LeviathanSpawn()
-        self._spawn = default_spawn.form
+        if isinstance(default_spawn, LeviathanSpawn):
+            default_spawn = default_spawn
+        self._spawn = default_spawn
 
-    def describe(self):
+    @staticmethod
+    def _generate_random_size() -> int:
+        return randint(1, 6) + 4
+
+    def _generate_treasure_index(self) -> int:
+        return int(round(self.size / 4) + 1)
+
+    def _generate_regions(self) -> dict:
+        leviathan_regions = {}
+        for num in range(1, self.size + 1):
+            leviathan_regions[f"Region_{num}"] = self.simple_attribute_setter(
+                None, LEVIATHAN["DEMONIC_TRAITS"]
+            )
+        return leviathan_regions
+
+    def _generate_treasures(self) -> dict:
+        leviathan_treasures = {}
+        for num in range(1, self.treasure_index + 1):
+            leviathan_treasures[f"treasure_{num}"] = self.simple_attribute_setter(
+                None, LEVIATHAN["TREASURES"]
+            )
+        return leviathan_treasures
+
+    def describe(self) -> str:
         intro = f"A leviathan is {self.activity} before you in the water.\n"
         name = f"It is none other than {self.name.capitalize()}, '{self.epithet.title()}.'\n"
         form = f"This leviathan has the head of a {self.head_shape}, the body of a {self.body_shape} and moves on the limbs of a {self.limb_shape}.\n"
@@ -181,7 +159,7 @@ class Leviathan(Generator):
             active_treasure = self.treasures[f"treasure_{num}"]
             treasure_description = f"{active_treasure}.\n"
             treasure_description_list.append(treasure_description)
-        spawn = f"This leviathan is known to spawn {self.spawn}."
+        spawn = f"This leviathan is known to spawn {self.spawn.form}."
         output_string = (
             intro
             + name
@@ -221,7 +199,7 @@ class LeviathanSpawn(Generator):
         Returns a formatted string describing the leviathan spawn
     """
 
-    def __init__(self, form=None):
+    def __init__(self, form: str | None = None):
         self.form = self.simple_attribute_setter(form, LEVIATHAN["SPAWN_FORMS"])
 
     def __str__(self):
@@ -235,37 +213,35 @@ class LeviathanSpawn(Generator):
         return self._form
 
     @form.setter
-    def form(self, spawn_form):
-        if spawn_form == "trigger three shapes":
-            spawn_form = f"a hybrid of a {self._grab_shape()}, {self._grab_shape()}, and {self._grab_shape()}"
-        elif spawn_form == "trigger shape humanoid":
-            spawn_form = f"a humanoid {self._grab_shape()}"
-        elif spawn_form == "trigger shape inside-out":
-            spawn_form = f"a {self._grab_shape()} turned inside-out"
-        elif spawn_form == "trigger shape flying":
-            spawn_form = f"a flying {self._grab_shape()}"
-        elif spawn_form == "trigger ghosts":
-            spawn_form = f"a multitude of ghosts. There is {self._grab_ghost()} dead sailors and other spectral emanations appear"
-        elif spawn_form == "trigger demon":
-            spawn_form = f"a {self._grab_demon()}"
-        self._form = spawn_form
+    def form(self, spawn_form: str | None):
+        # lambda blocks instantiation at dictionary creation, instantiation is handled at lookup
+        complex_forms = {
+            "trigger three shapes": lambda: f"a hybrid of a {self._grab_shape()}, {self._grab_shape()}, and {self._grab_shape()}",
+            "trigger shape humanoid": lambda: f"a humanoid {self._grab_shape()}",
+            "trigger shape inside-out": lambda: f"a {self._grab_shape()} turned inside-out",
+            "trigger shape flying": lambda: f"a flying {self._grab_shape()}",
+            "trigger ghosts": lambda: f"a multitude of ghosts. There is {self._grab_ghost()} dead sailors and other spectral emanations appear",
+            "trigger demon": lambda: self._grab_demon(),
+        }
+        # see if a complex form needs to be built or continue with the simple form
+        self._form = complex_forms.get(spawn_form, lambda: spawn_form)()
 
     def _grab_shape(self):
-        return rc(self.json_retriever(LEVIATHAN["SHAPES"]))
+        return self.simple_attribute_setter(None, LEVIATHAN["SHAPES"])
 
     def _grab_ghost(self):
-        trait = rc(self.json_retriever(GHOST["TRAITS"]))
-        effect = rc(self.json_retriever(GHOST["EFFECTS"]))
+        trait = self.simple_attribute_setter(None, GHOST["TRAITS"])
+        effect = self.simple_attribute_setter(None, GHOST["EFFECTS"])
         return f"{effect} when these {trait}"
 
     def _grab_demon(self):
-        feature = rc(self.json_retriever(DEMON["FEATURES"]))
-        aspect = rc(self.json_retriever(DEMON["ASPECTS"]))
-        affinity = rc(self.json_retriever(DEMON["AFFINITIES"]))
+        feature = self.simple_attribute_setter(None, DEMON["FEATURES"])
+        aspect = self.simple_attribute_setter(None, DEMON["ASPECTS"])
+        affinity = self.simple_attribute_setter(None, DEMON["AFFINITIES"])
         demon = f"{aspect} {affinity} demon with {feature}"
         return demon
 
-    def describe(self):
+    def describe(self) -> str:
         """returns a string describing the spawn"""
         output = f"The leviathan releases a new spawn, it emits {self.form}"
         return output
